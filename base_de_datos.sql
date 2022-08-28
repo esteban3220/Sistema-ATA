@@ -16,6 +16,86 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `cat_tra_remolques`
+--
+
+DROP TABLE IF EXISTS `cat_tra_remolques`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cat_tra_remolques` (
+  `no_economico` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `marca` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modelo` int(11) DEFAULT NULL,
+  `no_placas` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_tc` int(11) DEFAULT NULL,
+  `fo_verificacion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`no_economico`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cat_tra_remolques`
+--
+
+LOCK TABLES `cat_tra_remolques` WRITE;
+/*!40000 ALTER TABLE `cat_tra_remolques` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cat_tra_remolques` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cat_tra_tractores`
+--
+
+DROP TABLE IF EXISTS `cat_tra_tractores`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cat_tra_tractores` (
+  `no_economico` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `marca` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `modelo` int(11) DEFAULT NULL,
+  `no_placas` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_tc` int(11) DEFAULT NULL,
+  `fo_verificacion` int(11) DEFAULT NULL,
+  PRIMARY KEY (`no_economico`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cat_tra_tractores`
+--
+
+LOCK TABLES `cat_tra_tractores` WRITE;
+/*!40000 ALTER TABLE `cat_tra_tractores` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cat_tra_tractores` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `catalogo_clientes`
+--
+
+DROP TABLE IF EXISTS `catalogo_clientes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalogo_clientes` (
+  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `razon_social` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rfc` varchar(18) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `giro` varchar(70) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `domicilio` varchar(90) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `catalogo_clientes`
+--
+
+LOCK TABLES `catalogo_clientes` WRITE;
+/*!40000 ALTER TABLE `catalogo_clientes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `catalogo_clientes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `catalogo_contabilidad`
 --
 
@@ -305,6 +385,86 @@ INSERT INTO `catalogo_opciones` VALUES
 (531,177,'P.T.U.');
 /*!40000 ALTER TABLE `catalogo_opciones` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `catalogo_operador`
+--
+
+DROP TABLE IF EXISTS `catalogo_operador`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalogo_operador` (
+  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rfc` varchar(13) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `curp` varchar(18) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_licensia` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `fecha_ingreso` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `catalogo_operador`
+--
+
+LOCK TABLES `catalogo_operador` WRITE;
+/*!40000 ALTER TABLE `catalogo_operador` DISABLE KEYS */;
+/*!40000 ALTER TABLE `catalogo_operador` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `catalogo_productos`
+--
+
+DROP TABLE IF EXISTS `catalogo_productos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalogo_productos` (
+  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `unidad` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tarifa` double(9,2) DEFAULT NULL,
+  `otro` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `catalogo_productos`
+--
+
+LOCK TABLES `catalogo_productos` WRITE;
+/*!40000 ALTER TABLE `catalogo_productos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `catalogo_productos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `catalogo_rutas`
+--
+
+DROP TABLE IF EXISTS `catalogo_rutas`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalogo_rutas` (
+  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `origen` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `destino` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kms` int(11) DEFAULT NULL,
+  `kms_reparto` int(11) DEFAULT NULL,
+  `kms_cobro` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `catalogo_rutas`
+--
+
+LOCK TABLES `catalogo_rutas` WRITE;
+/*!40000 ALTER TABLE `catalogo_rutas` DISABLE KEYS */;
+/*!40000 ALTER TABLE `catalogo_rutas` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -315,4 +475,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-27 15:50:15
+-- Dump completed on 2022-08-27 20:16:07
