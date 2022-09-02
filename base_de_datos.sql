@@ -398,6 +398,7 @@ CREATE TABLE `catalogo_operador` (
   `nombre` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `rfc` varchar(13) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `curp` varchar(18) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_imss` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `no_licensia` varchar(10) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `fecha_ingreso` date DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -475,4 +476,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-08-27 20:16:07
+-- Dump completed on 2022-09-01 21:21:25
