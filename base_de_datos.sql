@@ -70,6 +70,32 @@ LOCK TABLES `cat_tra_tractores` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `catalogo_ayudantes`
+--
+
+DROP TABLE IF EXISTS `catalogo_ayudantes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalogo_ayudantes` (
+  `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `rfc` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `no_imss` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `otro` varchar(45) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `catalogo_ayudantes`
+--
+
+LOCK TABLES `catalogo_ayudantes` WRITE;
+/*!40000 ALTER TABLE `catalogo_ayudantes` DISABLE KEYS */;
+/*!40000 ALTER TABLE `catalogo_ayudantes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `catalogo_clientes`
 --
 
@@ -81,6 +107,9 @@ CREATE TABLE `catalogo_clientes` (
   `razon_social` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `rfc` varchar(18) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `giro` varchar(70) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `direccion` varchar(200) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `tarifa` double(9,2) DEFAULT NULL,
+  `tipo_cliente` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `domicilio` varchar(90) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -415,6 +444,31 @@ LOCK TABLES `catalogo_operador` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `catalogo_poblaciones`
+--
+
+DROP TABLE IF EXISTS `catalogo_poblaciones`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalogo_poblaciones` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `estado` varchar(145) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `distancia` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `catalogo_poblaciones`
+--
+
+LOCK TABLES `catalogo_poblaciones` WRITE;
+/*!40000 ALTER TABLE `catalogo_poblaciones` DISABLE KEYS */;
+/*!40000 ALTER TABLE `catalogo_poblaciones` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `catalogo_productos`
 --
 
@@ -451,6 +505,7 @@ CREATE TABLE `catalogo_rutas` (
   `id` int(10) unsigned zerofill NOT NULL AUTO_INCREMENT,
   `origen` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `destino` varchar(150) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `distancia` int(11) DEFAULT NULL,
   `kms` int(11) DEFAULT NULL,
   `kms_reparto` int(11) DEFAULT NULL,
   `kms_cobro` int(11) DEFAULT NULL,
@@ -466,6 +521,32 @@ LOCK TABLES `catalogo_rutas` WRITE;
 /*!40000 ALTER TABLE `catalogo_rutas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `catalogo_rutas` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `catalogo_tarifa`
+--
+
+DROP TABLE IF EXISTS `catalogo_tarifa`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalogo_tarifa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ta_tonelada` double(9,2) DEFAULT NULL,
+  `ta_litro` double(9,2) DEFAULT NULL,
+  `ta_viaje` double(9,2) DEFAULT NULL,
+  `otro` double(9,2) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `catalogo_tarifa`
+--
+
+LOCK TABLES `catalogo_tarifa` WRITE;
+/*!40000 ALTER TABLE `catalogo_tarifa` DISABLE KEYS */;
+/*!40000 ALTER TABLE `catalogo_tarifa` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -476,4 +557,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-01 21:21:25
+-- Dump completed on 2022-09-04 13:35:20
