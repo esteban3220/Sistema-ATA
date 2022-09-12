@@ -290,7 +290,7 @@
     <property name="can-focus">False</property>
     <property name="icon-name">document-properties</property>
   </object>
-  <object class="GtkWindow" id="window_config">
+  <object class="GtkWindow" id="windw_config">
     <property name="can-focus">False</property>
     <property name="default-width">640</property>
     <property name="default-height">380</property>
