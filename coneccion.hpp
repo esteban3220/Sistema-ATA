@@ -1,5 +1,5 @@
 #include <mysql.h>
-#include "herramienta_conf/leer_config.hpp"
+#include "herramienta_conf/leer_config.cpp"
 
 class coneccion
 {

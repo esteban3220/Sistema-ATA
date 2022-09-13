@@ -45,7 +45,6 @@ bool coneccion::verifica_actualizacion()
 	{
 		throw std::runtime_error(mysql_error(conn));
 		mysql_close(conn);
-		return;
 	}
 	else
 	{
@@ -53,14 +52,14 @@ bool coneccion::verifica_actualizacion()
 		{
 			throw std::runtime_error(mysql_error(conn));
 			mysql_close(conn);
-			return;
-		}
+		}else{
 		res = mysql_use_result(conn);
 		// version obtenida del servidor
-		while ((row = mysql_fetch_row(res)) != NULL)
-			ver = atof(row[0]);
+		while ((row = mysql_fetch_row(res)) != NULL){ver = atof(row[0]);}
 		mysql_close(conn);
+		mysql_free_result(res);
 		// comparacion la que se tiene actualmente
 		return ver > atof(conf->get_version().c_str()) ? true : false;
+		}
 	}
 }
