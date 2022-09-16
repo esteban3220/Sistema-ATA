@@ -10,6 +10,6 @@ public:
     ~builder();
 };
 
-builder::builder(){
+builder::builder(void){
     constructor = Gtk::Builder::create_from_file("ui.glade");
 }

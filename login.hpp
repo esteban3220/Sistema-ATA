@@ -15,10 +15,12 @@ private:
     Gtk::Stack *stack_ver;
     Gtk::LinkButton *link;
     Gtk::Label *lbl_status_herr,*lbl_titulo;
-    Gtk::Spinner *spinner;
+    Gtk::Spinner *spinner,*spinner_login;
+    bool cierra_Login(GdkEventAny* event);
 public:
     void run();
     void init();
+    void secion();
     login(/* args */);
     ~login();
 }*l1;
