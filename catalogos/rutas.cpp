@@ -23,9 +23,7 @@ void rutas::carga_datos(std::string id)
         set_origen(dat->row[1]);
         set_destino(dat->row[2]);
         set_distancia(dat->row[3]);
-        set_kms(dat->row[4]);
-        set_kms_reparto(dat->row[5]);
-        set_kms_cobro(dat->row[6]);
+        set_tiempo(dat->row[4]);
     }
     mysql_free_result(dat->res);
     mysql_close(con);

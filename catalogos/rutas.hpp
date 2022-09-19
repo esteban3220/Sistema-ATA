@@ -8,10 +8,14 @@ private:
     std::vector<std::string> origen;
     std::vector<std::string> destino;
     std::vector<std::string> distancia;
-    std::vector<std::string> kms;
-    std::vector<std::string> kms_reparto;
-    std::vector<std::string> kms_cobro;
-
+    std::vector<std::string> tiempo_estimado;
+/*
+    std::string _id;
+    std::string _origen;
+    std::string _destino;
+    std::string _distancia;
+    std::string _tiempo_estimado;
+*/
     void set_id(const char *id){
         this->id.push_back(id);
     }
@@ -24,18 +28,13 @@ private:
     void set_distancia(const char *distancia){
         this->distancia.push_back(distancia);
     }
-    void set_kms(const char *kms){
-        this->kms.push_back(kms);
-    }
-    void set_kms_reparto(const char *kms_reparto){
-        this->kms_reparto.push_back(kms_reparto);
-    }
-    void set_kms_cobro(const char *kms_cobro){
-        this->kms_cobro.push_back(kms_cobro);
+    void set_tiempo(const char *tiempo_estimado){
+        this->tiempo_estimado.push_back(tiempo_estimado);
     }
 public:
     rutas(void);
     ~rutas();
+    void carga_datos(std::string id);
     std::vector<std::string> get_id(){
         return this->id;
     }
@@ -48,15 +47,7 @@ public:
     std::vector<std::string> get_distancia(){
         return this->distancia;
     }
-    std::vector<std::string> get_kms(){
-        return this->kms;
+    std::vector<std::string> get_tiempo_estimado(){
+        return this->tiempo_estimado;
     }
-    std::vector<std::string> get_kms_reparto(){
-        return this->kms_reparto;
-    }
-    std::vector<std::string> get_kms_cobro(){
-        return this->kms_cobro;
-    }
-
-    void carga_datos(std::string id);
 };

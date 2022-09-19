@@ -15,6 +15,7 @@ win_main::win_main(std::string id)
     ui->constructor->get_widget("tree9", tree9);
     ui->constructor->get_widget("tree10", tree10);
     ui->constructor->get_widget("progress_view", progress_view);
+    ui->constructor->get_widget("spinner_login", spinner_login);
     m_connection_timeout = Glib::signal_timeout().connect(sigc::mem_fun(*this, &win_main::on_timeout), 75);
     win_operacion->signal_delete_event().connect(sigc::mem_fun(*this, &win_main::cierra_app));
 }
@@ -28,13 +29,19 @@ void win_main::run(void)
     win_operacion->show_all();
     hilo = new std::thread([this]()
                            { 
+                                spinner_login->start();
                                 llena_tractor(); 
                                 llena_remolque();
                                 llena_operadores();
                                 llena_ayudantes();
                                 llena_poblaciones();
                                 llena_rutas();
+                                llena_productos();
+                                llena_clientes();
+                                llena_tarifas();
+                                //llena_sueldos();
                                 m_bActivityMode = false; 
+                                spinner_login->stop();
                             });
 }
 
@@ -183,9 +190,7 @@ void win_main::llena_rutas()
     tree6->append_column("Origen", columns_rutas.Origen);
     tree6->append_column("Destino", columns_rutas.Destino);
     tree6->append_column("Distancia", columns_rutas.Distancia);
-    tree6->append_column("Kilometros", columns_rutas.Kms);
-    tree6->append_column("Kilometros Reparto", columns_rutas.Kms_reparto);
-    tree6->append_column("Kilometros Cobro", columns_rutas.Kms_cobro);
+    tree6->append_column("Tiempo Estimado", columns_rutas.Kms);
     rut->carga_datos(id);
     for (size_t i = 0; i < rut->get_id().size(); i++)
     {
@@ -194,8 +199,72 @@ void win_main::llena_rutas()
         row[columns_rutas.Origen] = rut->get_origen()[i];
         row[columns_rutas.Destino] = rut->get_destino()[i];
         row[columns_rutas.Distancia] = rut->get_distancia()[i];
-        row[columns_rutas.Kms] = rut->get_kms()[i];
-        row[columns_rutas.Kms_reparto] = rut->get_kms_reparto()[i];
-        row[columns_rutas.Kms_cobro] = rut->get_kms_cobro()[i];
+        row[columns_rutas.Kms] = rut->get_tiempo_estimado()[i];
+    }
+}
+
+void win_main::llena_productos(){
+    ListProductos = Gtk::ListStore::create(columns_productos);
+    tree7->set_model(ListProductos);
+    tree7->append_column("ID", columns_productos.Id);
+    tree7->append_column("Nombre", columns_productos.Nombre);
+    tree7->append_column("Unidad", columns_productos.Unidad);
+    tree7->append_column("Tarifa", columns_productos.Tarifa);
+    tree7->append_column("Otro", columns_productos.Otro);
+    pro->carga_datos(id);
+    for (size_t i = 0; i < pro->get_id().size(); i++)
+    {
+        row = *(ListProductos->append());
+        row[columns_productos.Id] = pro->get_id()[i];
+        row[columns_productos.Nombre] = pro->get_nombre()[i];
+        row[columns_productos.Unidad] = pro->get_unidad()[i];
+        row[columns_productos.Tarifa] = pro->get_tarifa()[i];
+        row[columns_productos.Otro] = pro->get_otro()[i];
+    }
+}
+
+void win_main::llena_clientes(){
+    ListClientes = Gtk::ListStore::create(columns_clientes);
+    tree8->set_model(ListClientes);
+    tree8->append_column("ID", columns_clientes.Id);
+    tree8->append_column("Razon Social", columns_clientes.Razon_social);
+    tree8->append_column("RFC", columns_clientes.Rfc);
+    tree8->append_column("Giro", columns_clientes.Giro);
+    tree8->append_column("Direccion Fiscal", columns_clientes.Direccion_fiscal);
+    tree8->append_column("Tarifa", columns_clientes.Tarifa);
+    tree8->append_column("T. Cliente", columns_clientes.Tipo_cliente);
+    tree8->append_column("Domicilio", columns_clientes.Domicilio);
+    cli->carga_datos(id);
+    for (size_t i = 0; i < cli->get_id().size(); i++)
+    {
+        row = *(ListClientes->append());
+        row[columns_clientes.Id] = cli->get_id()[i];
+        row[columns_clientes.Razon_social] = cli->get_razon_social()[i];
+        row[columns_clientes.Rfc] = cli->get_rfc()[i];
+        row[columns_clientes.Giro] = cli->get_giro()[i];
+        row[columns_clientes.Direccion_fiscal] = cli->get_direccion_fiscal()[i];
+        row[columns_clientes.Tarifa] = cli->get_tarifa()[i];
+        row[columns_clientes.Tipo_cliente] = cli->get_tipo_cliente()[i];
+        row[columns_clientes.Domicilio] = cli->get_domicilio()[i];
+    }
+}
+
+void win_main::llena_tarifas(){
+    ListTarifas = Gtk::ListStore::create(columns_tarifas);
+    tree9->set_model(ListTarifas);
+    tree9->append_column("ID", columns_tarifas.Id);
+    tree9->append_column("Tarifa Tonelada", columns_tarifas.Tarifa_tonelada);
+    tree9->append_column("Tarifa Litro", columns_tarifas.Tarifa_litro);
+    tree9->append_column("Tarifa Viaje", columns_tarifas.Tarifa_viaje);
+    tree9->append_column("Otro", columns_tarifas.Otro);
+    tar->carga_datos(id);
+    for (size_t i = 0; i < tar->get_id().size(); i++)
+    {
+        row = *(ListTarifas->append());
+        row[columns_tarifas.Id] = tar->get_id()[i];
+        row[columns_tarifas.Tarifa_tonelada] = tar->get_tarifa_tonelada()[i];
+        row[columns_tarifas.Tarifa_litro] = tar->get_tarifa_litro()[i];
+        row[columns_tarifas.Tarifa_viaje] = tar->get_tarifa_viaje()[i];
+        row[columns_tarifas.Otro] = tar->get_otro()[i];
     }
 }

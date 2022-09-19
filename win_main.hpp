@@ -5,6 +5,9 @@
 #include "catalogos/ayudantes.cpp"
 #include "catalogos/poblaciones.cpp"
 #include "catalogos/rutas.cpp"
+#include "catalogos/productos.cpp"
+#include "catalogos/clientes.cpp"
+#include "catalogos/tarifas.cpp"
 #include <thread>
 
 class win_main
@@ -19,9 +22,13 @@ private:
     ayudantes *ayu = new ayudantes();
     poblaciones *pob = new poblaciones();
     rutas *rut = new rutas();
+    productos *pro = new productos();
+    clientes *cli = new clientes();
+    tarifas *tar = new tarifas();
     Gtk::Window *win_operacion;
     Gtk::TreeView *tree1, *tree2, *tree3, *tree4, *tree5, *tree6, *tree7, *tree8, *tree9, *tree10;
     Gtk::ProgressBar *progress_view;
+    Gtk::Spinner *spinner_login;
     bool m_bActivityMode;
     sigc::connection m_connection_timeout;
     bool on_timeout();
@@ -166,8 +173,6 @@ private:
             add(Destino);
             add(Distancia);
             add(Kms);
-            add(Kms_reparto);
-            add(Kms_cobro);
         }
 
         Gtk::TreeModelColumn<Glib::ustring> Id;
@@ -175,9 +180,73 @@ private:
         Gtk::TreeModelColumn<Glib::ustring> Destino;
         Gtk::TreeModelColumn<Glib::ustring> Distancia;
         Gtk::TreeModelColumn<Glib::ustring> Kms;
-        Gtk::TreeModelColumn<Glib::ustring> Kms_reparto;
-        Gtk::TreeModelColumn<Glib::ustring> Kms_cobro;
     } columns_rutas;
+
+    // Columna productos
+    class ModelProductos : public Gtk::TreeModel::ColumnRecord
+    {
+    public:
+        ModelProductos()
+        {
+            add(Id);
+            add(Nombre);
+            add(Unidad);
+            add(Tarifa);
+            add(Otro);
+        }
+
+        Gtk::TreeModelColumn<Glib::ustring> Id;
+        Gtk::TreeModelColumn<Glib::ustring> Nombre;
+        Gtk::TreeModelColumn<Glib::ustring> Unidad;
+        Gtk::TreeModelColumn<Glib::ustring> Tarifa;
+        Gtk::TreeModelColumn<Glib::ustring> Otro;
+    } columns_productos;
+
+    // Columna clientes
+    class ModelClientes : public Gtk::TreeModel::ColumnRecord
+    {
+    public:
+        ModelClientes()
+        {
+            add(Id);
+            add(Razon_social);
+            add(Rfc);
+            add(Giro);
+            add(Direccion_fiscal);
+            add(Tarifa);
+            add(Tipo_cliente);
+            add(Domicilio);
+        }
+
+        Gtk::TreeModelColumn<Glib::ustring> Id;
+        Gtk::TreeModelColumn<Glib::ustring> Razon_social;
+        Gtk::TreeModelColumn<Glib::ustring> Rfc;
+        Gtk::TreeModelColumn<Glib::ustring> Giro;
+        Gtk::TreeModelColumn<Glib::ustring> Direccion_fiscal;
+        Gtk::TreeModelColumn<Glib::ustring> Tarifa;
+        Gtk::TreeModelColumn<Glib::ustring> Tipo_cliente;
+        Gtk::TreeModelColumn<Glib::ustring> Domicilio;
+    } columns_clientes;
+
+    // Columna tarifas
+    class ModelTarifas : public Gtk::TreeModel::ColumnRecord
+    {
+    public:
+        ModelTarifas()
+        {
+            add(Id);
+            add(Tarifa_tonelada);
+            add(Tarifa_litro);
+            add(Tarifa_viaje);
+            add(Otro);
+        }
+
+        Gtk::TreeModelColumn<Glib::ustring> Id;
+        Gtk::TreeModelColumn<Glib::ustring> Tarifa_tonelada;
+        Gtk::TreeModelColumn<Glib::ustring> Tarifa_litro;
+        Gtk::TreeModelColumn<Glib::ustring> Tarifa_viaje;
+        Gtk::TreeModelColumn<Glib::ustring> Otro;
+    } columns_tarifas;
     /*======================================== Fin ==============================================*/
     bool cierra_app(GdkEventAny *event);
 
