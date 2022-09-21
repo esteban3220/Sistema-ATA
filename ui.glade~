@@ -60,6 +60,10 @@ THE SOFTWARE.
       </object>
     </child>
   </object>
+  <object class="GtkMenu">
+    <property name="visible">True</property>
+    <property name="can-focus">False</property>
+  </object>
   <object class="GtkAccelGroup"/>
   <object class="GtkPopover">
     <property name="can-focus">False</property>
@@ -78,11 +82,12 @@ THE SOFTWARE.
     <property name="visible">True</property>
     <property name="can-focus">False</property>
   </object>
-  <object class="GtkMenu">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-  </object>
   <object class="GtkAdjustment" id="adjustment1">
+    <property name="upper">100</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment10">
     <property name="upper">100</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
@@ -699,6 +704,7 @@ THE SOFTWARE.
   </object>
   <object class="GtkPopoverMenu" id="popovermenu1">
     <property name="can-focus">False</property>
+    <property name="relative-to">menubutton1</property>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -852,17 +858,15 @@ THE SOFTWARE.
                   </packing>
                 </child>
                 <child>
-                  <object class="GtkRevealer">
+                  <object class="GtkRevealer" id="reveal_info">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
                     <property name="transition-type">slide-up</property>
-                    <property name="reveal-child">True</property>
                     <child>
-                      <object class="GtkInfoBar">
+                      <object class="GtkInfoBar" id="bar_info">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
                         <property name="show-close-button">True</property>
-                        <property name="revealed">False</property>
                         <child internal-child="action_area">
                           <object class="GtkButtonBox">
                             <property name="can-focus">False</property>
@@ -876,6 +880,26 @@ THE SOFTWARE.
                         <child internal-child="content_area">
                           <object class="GtkBox">
                             <property name="can-focus">False</property>
+                            <child>
+                              <object class="GtkLabel" id="lbl_info">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                              </object>
+                              <packing>
+                                <property name="expand">False</property>
+                                <property name="fill">True</property>
+                                <property name="position">0</property>
+                              </packing>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
+                            <child>
+                              <placeholder/>
+                            </child>
                           </object>
                           <packing>
                             <property name="expand">False</property>
@@ -953,7 +977,6 @@ THE SOFTWARE.
                             <property name="visible">True</property>
                             <property name="can-focus">False</property>
                             <property name="transition-type">slide-left</property>
-                            <property name="reveal-child">True</property>
                             <child>
                               <object class="GtkViewport">
                                 <property name="visible">True</property>
@@ -990,10 +1013,11 @@ THE SOFTWARE.
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="lbl1">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
                                             <property name="label" translatable="yes">Cátalogo de Tractores</property>
+                                            <property name="ellipsize">middle</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1184,6 +1208,7 @@ THE SOFTWARE.
                                               <object class="GtkSpinButton" id="spin_tar_verificacion">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="adjustment">adjustment10</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1395,10 +1420,11 @@ THE SOFTWARE.
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="lbl2">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
                                             <property name="label" translatable="yes">Cátalogo de Remolques</property>
+                                            <property name="ellipsize">middle</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -1806,10 +1832,11 @@ THE SOFTWARE.
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="lbl3">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
                                             <property name="label" translatable="yes">Cátalogo de Operadores</property>
+                                            <property name="ellipsize">middle</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2241,10 +2268,11 @@ THE SOFTWARE.
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="lbl4">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
                                             <property name="label" translatable="yes">Cátalogo de Ayudantes</property>
+                                            <property name="ellipsize">middle</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2614,10 +2642,11 @@ THE SOFTWARE.
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="lbl5">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
                                             <property name="label" translatable="yes">Cátalogo de Poblaciones</property>
+                                            <property name="ellipsize">middle</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -2963,10 +2992,11 @@ THE SOFTWARE.
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="lbl6">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
                                             <property name="label" translatable="yes">Cátalogo de Rutas</property>
+                                            <property name="ellipsize">middle</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -3483,10 +3513,11 @@ THE SOFTWARE.
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="lbl7">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
                                             <property name="label" translatable="yes">Cátalogo de Productos</property>
+                                            <property name="ellipsize">middle</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -3864,10 +3895,11 @@ THE SOFTWARE.
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="lbl8">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
                                             <property name="label" translatable="yes">Cátalogo de Clientes</property>
+                                            <property name="ellipsize">middle</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -4311,10 +4343,11 @@ THE SOFTWARE.
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="lbl9">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
                                             <property name="label" translatable="yes">Cátalogo de Tarifas de Cobro</property>
+                                            <property name="ellipsize">middle</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -4437,7 +4470,7 @@ THE SOFTWARE.
                                             <property name="orientation">vertical</property>
                                             <property name="homogeneous">True</property>
                                             <child>
-                                              <object class="GtkSpinButton" id="spin_tar_toneldad">
+                                              <object class="GtkSpinButton" id="spin_tar_tonelda">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
                                                 <property name="adjustment">adjustment6</property>
@@ -4692,7 +4725,7 @@ THE SOFTWARE.
                                           </packing>
                                         </child>
                                         <child>
-                                          <object class="GtkLabel">
+                                          <object class="GtkLabel" id="lbl10">
                                             <property name="visible">True</property>
                                             <property name="can-focus">False</property>
                                             <property name="label" translatable="yes">Cátalogo de Tractores</property>
@@ -5205,7 +5238,7 @@ THE SOFTWARE.
           </packing>
         </child>
         <child>
-          <object class="GtkMenuButton">
+          <object class="GtkMenuButton" id="menubutton1">
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="focus-on-click">False</property>

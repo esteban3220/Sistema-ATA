@@ -82,4 +82,5 @@ public:
     {
         return this->domicilio;
     }
+    unsigned getsize(std::string bd);
 };

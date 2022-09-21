@@ -26,7 +26,23 @@ private:
     clientes *cli = new clientes();
     tarifas *tar = new tarifas();
     Gtk::Window *win_operacion;
+    Gtk::InfoBar *bar_info;
     Gtk::TreeView *tree1, *tree2, *tree3, *tree4, *tree5, *tree6, *tree7, *tree8, *tree9, *tree10;
+    Gtk::Button *btn_add1, *btn_add2, *btn_add3, *btn_add4, *btn_add5, *btn_add6, *btn_add7, *btn_add8, *btn_add9, *btn_add10;
+    Gtk::SpinButton *spin_pob_distancia, *spin_rut_hora, *spin_rut_min, *spin_rut_seg, *spin_pro_tarifa, *spin_cli_tarifa,
+        *spin_tar_tonelada, *spin_tar_litro, *spin_tar_viaje, *spin_tar_otro, *spin_tar_verificacion, *spin_remo_verificacion, *spin_ope_licencia;
+    Gtk::ComboBox *cb_pro_unidad, *cb_cli_tipo, *cb_rut_origen, *cb_rut_destino;
+    Gtk::Entry *ety_tra_marca, *ety_tra_modelo, *ety_tra_placas, *ety_tra_tarjeta;
+    Gtk::Entry *ety_remo_marca, *ety_remo_modelo, *ety_remo_placas, *ety_remo_tarjeta;
+    Gtk::Entry *ety_ope_nombre, *ety_ope_rfc, *ety_ope_curp, *ety_ope_imss, *ety_ope_fecha;
+    Gtk::Entry *ety_ayu_nombre, *ety_ayu_rfc, *ety_ayu_imss, *ety_ayu_otro;
+    Gtk::Entry *ety_pob_nombre, *ety_pob_estado;
+    Gtk::Entry *ety_rut_nombre, *ety_rut_origen, *ety_rut_distancia;
+    Gtk::Entry *ety_pro_nombre, *ety_pro_otro;
+    Gtk::Entry *ety_cli_razon, *ety_cli_rfc, *ety_cli_giro, *ety_cli_direccion, *ety_cli_domicilio;
+    Gtk::Label *lbl1, *lbl2, *lbl3, *lbl4, *lbl5, *lbl6, *lbl7, *lbl8, *lbl9, *lbl10,*lbl_info;
+    Gtk::Revealer *reveal1,*reveal2,*reveal3,*reveal4,*reveal5,*reveal6,*reveal7,*reveal8,*reveal9,*reveal10,*reveal_info;
+    Gtk::ToggleButton *toogle_sidebar;
     Gtk::ProgressBar *progress_view;
     Gtk::Spinner *spinner_login;
     bool m_bActivityMode;
@@ -43,6 +59,44 @@ private:
     void llena_clientes();
     void llena_tarifas();
     void llena_sueldos();
+
+    void vacia_campos_tractor();
+    void vacia_campos_remolque();
+    void vacia_campos_operador();
+    void vacia_campos_ayudante();
+    void vacia_campos_poblacion();
+    void vacia_campos_ruta();
+    void vacia_campos_producto();
+    void vacia_campos_cliente();
+    void vacia_campos_tarifa();
+
+    void llena_widgets();
+    void conecta_senales();
+
+    void add_tractor(std::string marca, std::string modelo, std::string placas, std::string tarjeta, std::string verificacion);
+    void add_remolque(std::string marca, std::string modelo, std::string placas, std::string tarjeta, std::string verificacion);
+    void add_operador(std::string nombre, std::string rfc, std::string curp, std::string imss, std::string licencia, std::string fecha);
+    void add_ayudante(std::string nombre, std::string rfc, std::string imss, std::string otro);
+    void add_poblacion(std::string nombre, std::string estado, std::string distancia);
+    void add_ruta(std::string nombre, std::string origen, std::string destino, std::string fecha);
+    void add_producto(std::string nombre, std::string unidad, std::string tarifa, std::string otro);
+    void add_cliente(std::string razon, std::string rfc, std::string giro, std::string tipo, std::string direccion, std::string domicilio, std::string tarifa);
+    void add_tarifa(std::string tonelada, std::string litro, std::string viaje, std::string otro);
+    void add_sueldo();
+
+    // senales
+    void on_btn_add1_clicked();
+    void on_btn_add2_clicked();
+    void on_btn_add3_clicked();
+    void on_btn_add4_clicked();
+    void on_btn_add5_clicked();
+    void on_btn_add6_clicked();
+    void on_btn_add7_clicked();
+    void on_btn_add8_clicked();
+    void on_btn_add9_clicked();
+    void on_btn_add10_clicked();
+    void on_toogle_sidebar_toggled();
+
     // lista_tablas
     Gtk::TreeModel::Row row;
     Glib::RefPtr<Gtk::ListStore> ListTractor;

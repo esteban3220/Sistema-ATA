@@ -40,6 +40,7 @@ public:
     tractores(void);
     ~tractores();
     void carga_datos(std::string bd);
+    void add_tractor(std::string id,std::string marca, std::string modelo, std::string no_placas, std::string no_tc, std::string fo_verifica);
     // retorno de valores tractor
     std::vector<std::string> getNo_eco()
     {
@@ -65,4 +66,6 @@ public:
     {
         return Fo_verifica;
     }
+
+    unsigned getsize(std::string bd);
 };

@@ -65,4 +65,5 @@ public:
     {
         return Fo_verifica;
     }
+    unsigned getsize(std::string bd);
 };

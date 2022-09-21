@@ -50,4 +50,6 @@ public:
     std::vector<std::string> get_tiempo_estimado(){
         return this->tiempo_estimado;
     }
+    unsigned getsize(std::string bd);
+    unsigned getsize(std::string bd);
 };

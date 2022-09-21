@@ -38,5 +38,6 @@ public:
     }
 
     void carga_datos(std::string id);
+    unsigned getsize(std::string bd);
 };
 

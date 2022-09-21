@@ -54,4 +54,5 @@ public:
     {
         return this->otro;
     }
+    unsigned getsize(std::string bd);
 };
