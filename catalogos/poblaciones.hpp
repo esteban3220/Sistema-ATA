@@ -39,5 +39,8 @@ public:
 
     void carga_datos(std::string id);
     unsigned getsize(std::string bd);
+    void add_poblacion(std::string id, std::string nombre, std::string estado, std::string distancia);
+    void update_poblacion(std::string bd,std::string id, std::string nombre, std::string estado, std::string distancia);
+    void remove_poblacion(std::string bd,std::string id);
 };
 

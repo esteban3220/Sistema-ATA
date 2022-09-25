@@ -43,7 +43,9 @@ public:
     std::vector<std::string> get_otro(){
         return this->otro;
     }
-
+    void add_ayudante(std::string id, std::string nombre, std::string rfc, std::string no_imss, std::string otro);
+    void update_ayudante(std::string bd ,std::string id, std::string nombre, std::string rfc, std::string no_imss, std::string otro);
+    void remove_ayudante(std::string bd, std::string id);
     void carga_datos(std::string id);
     unsigned getsize(std::string bd);
 };

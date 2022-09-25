@@ -60,28 +60,25 @@ THE SOFTWARE.
       </object>
     </child>
   </object>
-  <object class="GtkMenu">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-  </object>
-  <object class="GtkAccelGroup"/>
-  <object class="GtkPopover">
+  <object class="GtkWindow">
     <property name="can-focus">False</property>
     <child>
-      <object class="GtkCalendar">
+      <placeholder/>
+    </child>
+    <child type="titlebar">
+      <object class="GtkHeaderBar">
         <property name="visible">True</property>
-        <property name="can-focus">True</property>
-        <property name="year">2022</property>
-        <property name="month">8</property>
-        <property name="day">18</property>
-        <property name="show-week-numbers">True</property>
+        <property name="can-focus">False</property>
+        <property name="title" translatable="yes">Expotar a Excel</property>
+        <property name="subtitle" translatable="yes">Mod. de Operación</property>
+        <property name="show-close-button">True</property>
+        <child>
+          <placeholder/>
+        </child>
       </object>
     </child>
   </object>
-  <object class="GtkMenu">
-    <property name="visible">True</property>
-    <property name="can-focus">False</property>
-  </object>
+  <object class="GtkAccelGroup"/>
   <object class="GtkAdjustment" id="adjustment1">
     <property name="upper">100</property>
     <property name="step-increment">1</property>
@@ -89,6 +86,21 @@ THE SOFTWARE.
   </object>
   <object class="GtkAdjustment" id="adjustment10">
     <property name="upper">100</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment11">
+    <property name="upper">100000000000</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment12">
+    <property name="upper">100000000000</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment13">
+    <property name="upper">10000000</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
@@ -702,9 +714,131 @@ THE SOFTWARE.
     <property name="can-focus">False</property>
     <property name="icon-name">list-add</property>
   </object>
+  <object class="GThemedIcon" id="themedicon1"/>
+  <object class="GtkPopover" id="pop_cal">
+    <property name="can-focus">False</property>
+    <property name="relative-to">ety_ope_fecha</property>
+    <child>
+      <object class="GtkCalendar" id="cal">
+        <property name="visible">True</property>
+        <property name="can-focus">True</property>
+        <property name="show-week-numbers">True</property>
+        <property name="detail-width-chars">12</property>
+        <property name="detail-height-rows">12</property>
+      </object>
+    </child>
+  </object>
   <object class="GtkPopoverMenu" id="popovermenu1">
     <property name="can-focus">False</property>
     <property name="relative-to">menubutton1</property>
+    <property name="position">bottom</property>
+    <child>
+      <object class="GtkBox" id="Configuracion">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="valign">center</property>
+        <property name="margin-start">10</property>
+        <property name="margin-end">10</property>
+        <property name="margin-top">10</property>
+        <property name="margin-bottom">10</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">5</property>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="text" translatable="yes">Nuevo</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="text" translatable="yes">Guardar</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="icon">themedicon1</property>
+            <property name="text" translatable="yes">Configuracion</property>
+            <property name="menu-name">Configuracion</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="text" translatable="yes">Acerca de ATA</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">5</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkModelButton">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="text" translatable="yes">Cerrar</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">6</property>
+          </packing>
+        </child>
+      </object>
+      <packing>
+        <property name="submenu">submenu1</property>
+        <property name="position">1</property>
+      </packing>
+    </child>
     <child>
       <object class="GtkBox">
         <property name="visible">True</property>
@@ -747,6 +881,9 @@ THE SOFTWARE.
             <property name="visible">True</property>
             <property name="can-focus">True</property>
             <property name="receives-default">True</property>
+            <property name="icon">themedicon1</property>
+            <property name="text" translatable="yes">Configuracion</property>
+            <property name="menu-name">Configuracion</property>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -806,7 +943,7 @@ THE SOFTWARE.
       </object>
       <packing>
         <property name="submenu">submenu0</property>
-        <property name="position">1</property>
+        <property name="position">2</property>
       </packing>
     </child>
   </object>
@@ -949,7 +1086,9 @@ THE SOFTWARE.
                                   <object class="GtkTreeView" id="tree1">
                                     <property name="visible">True</property>
                                     <property name="can-focus">True</property>
+                                    <property name="reorderable">True</property>
                                     <property name="enable-grid-lines">both</property>
+                                    <property name="activate-on-single-click">True</property>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection"/>
                                     </child>
@@ -1156,6 +1295,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_tra_marca">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">100</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
                                               </object>
@@ -1169,6 +1309,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_tra_modelo">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">10</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
                                               </object>
@@ -1182,6 +1323,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_tra_placas">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">10</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
                                               </object>
@@ -1195,6 +1337,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_tra_tarjeta">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">10</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
                                               </object>
@@ -1208,6 +1351,7 @@ THE SOFTWARE.
                                               <object class="GtkSpinButton" id="spin_tar_verificacion">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-width-chars">10</property>
                                                 <property name="adjustment">adjustment10</property>
                                               </object>
                                               <packing>
@@ -1231,9 +1375,10 @@ THE SOFTWARE.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkStack">
+                                      <object class="GtkStack" id="stack_cat_1">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
+                                        <property name="transition-type">crossfade</property>
                                         <child>
                                           <object class="GtkButton" id="btn_add1">
                                             <property name="label" translatable="yes">Añadir</property>
@@ -1255,7 +1400,7 @@ THE SOFTWARE.
                                             <property name="can-focus">False</property>
                                             <property name="layout-style">expand</property>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_back_1">
                                                 <property name="label" translatable="yes">Atras</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -1270,7 +1415,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_edit_1">
                                                 <property name="label" translatable="yes">Editar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -1285,7 +1430,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_remove_1">
                                                 <property name="label" translatable="yes">Eliminar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -1356,7 +1501,10 @@ THE SOFTWARE.
                                   <object class="GtkTreeView" id="tree2">
                                     <property name="visible">True</property>
                                     <property name="can-focus">True</property>
+                                    <property name="reorderable">True</property>
                                     <property name="enable-grid-lines">both</property>
+                                    <property name="enable-tree-lines">True</property>
+                                    <property name="activate-on-single-click">True</property>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection"/>
                                     </child>
@@ -1563,6 +1711,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_remo_marca">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">100</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
                                               </object>
@@ -1576,6 +1725,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_remo_modelo">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">10</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
                                               </object>
@@ -1589,6 +1739,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_remo_placas">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">10</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
                                               </object>
@@ -1602,6 +1753,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_remo_tarjeta">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">10</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
                                               </object>
@@ -1615,8 +1767,10 @@ THE SOFTWARE.
                                               <object class="GtkSpinButton" id="spin_remo_verificacion">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-width-chars">11</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
+                                                <property name="adjustment">adjustment11</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -1639,9 +1793,10 @@ THE SOFTWARE.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkStack">
+                                      <object class="GtkStack" id="stack_cat_2">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
+                                        <property name="transition-type">crossfade</property>
                                         <child>
                                           <object class="GtkButton" id="btn_add2">
                                             <property name="label" translatable="yes">Añadir</property>
@@ -1663,7 +1818,7 @@ THE SOFTWARE.
                                             <property name="can-focus">False</property>
                                             <property name="layout-style">expand</property>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_back_2">
                                                 <property name="label" translatable="yes">Atras</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -1678,7 +1833,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_edit_2">
                                                 <property name="label" translatable="yes">Editar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -1693,7 +1848,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_remove_2">
                                                 <property name="label" translatable="yes">Eliminar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -1768,7 +1923,9 @@ THE SOFTWARE.
                                     <property name="margin-end">5</property>
                                     <property name="margin-top">5</property>
                                     <property name="margin-bottom">5</property>
+                                    <property name="reorderable">True</property>
                                     <property name="enable-grid-lines">both</property>
+                                    <property name="activate-on-single-click">True</property>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection"/>
                                     </child>
@@ -1988,6 +2145,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_ope_nombre">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">150</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
                                               </object>
@@ -2001,6 +2159,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_ope_rfc">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">13</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
                                               </object>
@@ -2014,6 +2173,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_ope_curp">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">18</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
                                               </object>
@@ -2027,6 +2187,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_ope_imss">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">45</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
                                               </object>
@@ -2040,8 +2201,10 @@ THE SOFTWARE.
                                               <object class="GtkSpinButton" id="spin_ope_licencia">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-width-chars">10</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
+                                                <property name="adjustment">adjustment12</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -2053,10 +2216,10 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_ope_fecha">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
-                                                <property name="secondary-icon-name">widget-gtk-calendar</property>
+                                                <property name="secondary-icon-name">view-paged-rtl-symbolic</property>
                                                 <property name="primary-icon-activatable">False</property>
                                                 <property name="primary-icon-sensitive">False</property>
-                                                <property name="placeholder-text" translatable="yes">dd/mm/yyyy</property>
+                                                <property name="placeholder-text" translatable="yes">yyyy/mm/dd</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -2079,9 +2242,10 @@ THE SOFTWARE.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkStack">
+                                      <object class="GtkStack" id="stack_cat_3">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
+                                        <property name="transition-type">crossfade</property>
                                         <child>
                                           <object class="GtkButton" id="btn_add3">
                                             <property name="label" translatable="yes">Añadir</property>
@@ -2103,7 +2267,7 @@ THE SOFTWARE.
                                             <property name="can-focus">False</property>
                                             <property name="layout-style">expand</property>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_back_3">
                                                 <property name="label" translatable="yes">Atras</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -2118,7 +2282,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_edit_3">
                                                 <property name="label" translatable="yes">Editar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -2133,7 +2297,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_remove_3">
                                                 <property name="label" translatable="yes">Eliminar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -2204,7 +2368,9 @@ THE SOFTWARE.
                                     <property name="margin-end">5</property>
                                     <property name="margin-top">5</property>
                                     <property name="margin-bottom">5</property>
+                                    <property name="reorderable">True</property>
                                     <property name="enable-grid-lines">both</property>
+                                    <property name="activate-on-single-click">True</property>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection"/>
                                     </child>
@@ -2398,6 +2564,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_ayu_nombre">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">150</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -2409,6 +2576,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_ayu_rfc">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">45</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -2420,6 +2588,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_ayu_imss">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">45</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -2431,6 +2600,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_ayu_otro">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">45</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -2453,9 +2623,10 @@ THE SOFTWARE.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkStack">
+                                      <object class="GtkStack" id="stack_cat_4">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
+                                        <property name="transition-type">crossfade</property>
                                         <child>
                                           <object class="GtkButton" id="btn_add4">
                                             <property name="label" translatable="yes">Añadir</property>
@@ -2477,7 +2648,7 @@ THE SOFTWARE.
                                             <property name="can-focus">False</property>
                                             <property name="layout-style">expand</property>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_back_4">
                                                 <property name="label" translatable="yes">Atras</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -2492,7 +2663,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_edit_4">
                                                 <property name="label" translatable="yes">Editar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -2507,7 +2678,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_remove_4">
                                                 <property name="label" translatable="yes">Eliminar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -2578,7 +2749,9 @@ THE SOFTWARE.
                                   <object class="GtkTreeView" id="tree5">
                                     <property name="visible">True</property>
                                     <property name="can-focus">True</property>
+                                    <property name="rules-hint">True</property>
                                     <property name="enable-grid-lines">both</property>
+                                    <property name="activate-on-single-click">True</property>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection"/>
                                     </child>
@@ -2759,6 +2932,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_pob_nombre">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">150</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -2770,6 +2944,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_pob_estado">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">145</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -2781,6 +2956,8 @@ THE SOFTWARE.
                                               <object class="GtkSpinButton" id="spin_pob_distancia">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-width-chars">20</property>
+                                                <property name="adjustment">adjustment13</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -2803,9 +2980,10 @@ THE SOFTWARE.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkStack">
+                                      <object class="GtkStack" id="stack_cat_5">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
+                                        <property name="transition-type">crossfade</property>
                                         <child>
                                           <object class="GtkButton" id="btn_add5">
                                             <property name="label" translatable="yes">Añadir</property>
@@ -2827,7 +3005,7 @@ THE SOFTWARE.
                                             <property name="can-focus">False</property>
                                             <property name="layout-style">expand</property>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_back_5">
                                                 <property name="label" translatable="yes">Atras</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -2842,7 +3020,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_edit_5">
                                                 <property name="label" translatable="yes">Editar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -2857,7 +3035,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_remove_5">
                                                 <property name="label" translatable="yes">Eliminar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -2928,7 +3106,9 @@ THE SOFTWARE.
                                   <object class="GtkTreeView" id="tree6">
                                     <property name="visible">True</property>
                                     <property name="can-focus">True</property>
+                                    <property name="reorderable">True</property>
                                     <property name="enable-grid-lines">both</property>
+                                    <property name="activate-on-single-click">True</property>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection"/>
                                     </child>
@@ -3144,6 +3324,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_rut_distancia">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-width-chars">11</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -3324,9 +3505,10 @@ THE SOFTWARE.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkStack">
+                                      <object class="GtkStack" id="stack_cat_6">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
+                                        <property name="transition-type">crossfade</property>
                                         <child>
                                           <object class="GtkButton" id="btn_add6">
                                             <property name="label" translatable="yes">Añadir</property>
@@ -3348,7 +3530,7 @@ THE SOFTWARE.
                                             <property name="can-focus">False</property>
                                             <property name="layout-style">expand</property>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_back_6">
                                                 <property name="label" translatable="yes">Atras</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -3363,7 +3545,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_edit_6">
                                                 <property name="label" translatable="yes">Editar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -3378,7 +3560,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_remove_6">
                                                 <property name="label" translatable="yes">Eliminar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -3449,7 +3631,9 @@ THE SOFTWARE.
                                   <object class="GtkTreeView" id="tree7">
                                     <property name="visible">True</property>
                                     <property name="can-focus">True</property>
+                                    <property name="reorderable">True</property>
                                     <property name="enable-grid-lines">both</property>
+                                    <property name="activate-on-single-click">True</property>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection"/>
                                     </child>
@@ -3643,6 +3827,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_pro_nombre">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">150</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -3670,6 +3855,7 @@ THE SOFTWARE.
                                               <object class="GtkSpinButton" id="spin_pro_tarifa">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-width-chars">9</property>
                                                 <property name="primary-icon-name">rotation-allowed-symbolic</property>
                                                 <property name="adjustment">adjustment4</property>
                                                 <property name="digits">2</property>
@@ -3684,6 +3870,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_pro_otro">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="max-length">45</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -3706,9 +3893,10 @@ THE SOFTWARE.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkStack">
+                                      <object class="GtkStack" id="stack_cat_7">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
+                                        <property name="transition-type">crossfade</property>
                                         <child>
                                           <object class="GtkButton" id="btn_add7">
                                             <property name="label" translatable="yes">Añadir</property>
@@ -3730,7 +3918,7 @@ THE SOFTWARE.
                                             <property name="can-focus">False</property>
                                             <property name="layout-style">expand</property>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_back_7">
                                                 <property name="label" translatable="yes">Atras</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -3745,7 +3933,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_edit_7">
                                                 <property name="label" translatable="yes">Editar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -3760,7 +3948,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_remove_7">
                                                 <property name="label" translatable="yes">Eliminar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -3831,7 +4019,9 @@ THE SOFTWARE.
                                   <object class="GtkTreeView" id="tree8">
                                     <property name="visible">True</property>
                                     <property name="can-focus">True</property>
+                                    <property name="reorderable">True</property>
                                     <property name="enable-grid-lines">both</property>
+                                    <property name="activate-on-single-click">True</property>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection"/>
                                     </child>
@@ -3871,6 +4061,7 @@ THE SOFTWARE.
                                   <object class="GtkBox">
                                     <property name="visible">True</property>
                                     <property name="can-focus">False</property>
+                                    <property name="halign">baseline</property>
                                     <property name="margin-start">5</property>
                                     <property name="margin-end">5</property>
                                     <property name="margin-top">5</property>
@@ -4064,6 +4255,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_cli_razon">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="halign">start</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -4075,6 +4267,8 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_cli_rfc">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="halign">start</property>
+                                                <property name="max-length">18</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -4086,6 +4280,7 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_cli_giro">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="halign">start</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -4097,6 +4292,9 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_cli_direccion">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="halign">start</property>
+                                                <property name="max-length">200</property>
+                                                <property name="max-width-chars">0</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -4108,6 +4306,8 @@ THE SOFTWARE.
                                               <object class="GtkSpinButton" id="spin_cli_tarifa">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="halign">start</property>
+                                                <property name="max-width-chars">9</property>
                                                 <property name="adjustment">adjustment5</property>
                                                 <property name="digits">2</property>
                                               </object>
@@ -4121,6 +4321,11 @@ THE SOFTWARE.
                                               <object class="GtkComboBoxText" id="cb_cli_tipo">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">False</property>
+                                                <property name="halign">start</property>
+                                                <items>
+                                                  <item translatable="yes">Eventual</item>
+                                                  <item translatable="yes">Dedicado</item>
+                                                </items>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -4132,6 +4337,9 @@ THE SOFTWARE.
                                               <object class="GtkEntry" id="ety_cli_domicilio">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
+                                                <property name="halign">start</property>
+                                                <property name="max-length">90</property>
+                                                <property name="max-width-chars">0</property>
                                               </object>
                                               <packing>
                                                 <property name="expand">False</property>
@@ -4154,9 +4362,10 @@ THE SOFTWARE.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkStack">
+                                      <object class="GtkStack" id="stack_cat_8">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
+                                        <property name="transition-type">crossfade</property>
                                         <child>
                                           <object class="GtkButton" id="btn_add8">
                                             <property name="label" translatable="yes">Añadir</property>
@@ -4178,7 +4387,7 @@ THE SOFTWARE.
                                             <property name="can-focus">False</property>
                                             <property name="layout-style">expand</property>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_back_8">
                                                 <property name="label" translatable="yes">Atras</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -4193,7 +4402,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_edit_8">
                                                 <property name="label" translatable="yes">Editar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -4208,7 +4417,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_remove_8">
                                                 <property name="label" translatable="yes">Eliminar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -4279,7 +4488,9 @@ THE SOFTWARE.
                                   <object class="GtkTreeView" id="tree9">
                                     <property name="visible">True</property>
                                     <property name="can-focus">True</property>
+                                    <property name="reorderable">True</property>
                                     <property name="enable-grid-lines">both</property>
+                                    <property name="activate-on-single-click">True</property>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection"/>
                                     </child>
@@ -4470,7 +4681,7 @@ THE SOFTWARE.
                                             <property name="orientation">vertical</property>
                                             <property name="homogeneous">True</property>
                                             <child>
-                                              <object class="GtkSpinButton" id="spin_tar_tonelda">
+                                              <object class="GtkSpinButton" id="spin_tar_tonelada">
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
                                                 <property name="adjustment">adjustment6</property>
@@ -4536,9 +4747,10 @@ THE SOFTWARE.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkStack">
+                                      <object class="GtkStack" id="stack_cat_9">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
+                                        <property name="transition-type">crossfade</property>
                                         <child>
                                           <object class="GtkButton" id="btn_add9">
                                             <property name="label" translatable="yes">Añadir</property>
@@ -4560,7 +4772,7 @@ THE SOFTWARE.
                                             <property name="can-focus">False</property>
                                             <property name="layout-style">expand</property>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_back_9">
                                                 <property name="label" translatable="yes">Atras</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -4575,7 +4787,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_edit_9">
                                                 <property name="label" translatable="yes">Editar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -4590,7 +4802,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_remove_9">
                                                 <property name="label" translatable="yes">Eliminar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -4661,7 +4873,9 @@ THE SOFTWARE.
                                   <object class="GtkTreeView" id="tree10">
                                     <property name="visible">True</property>
                                     <property name="can-focus">True</property>
+                                    <property name="reorderable">True</property>
                                     <property name="enable-grid-lines">both</property>
+                                    <property name="activate-on-single-click">True</property>
                                     <child internal-child="selection">
                                       <object class="GtkTreeSelection"/>
                                     </child>
@@ -4933,9 +5147,10 @@ THE SOFTWARE.
                                       </packing>
                                     </child>
                                     <child>
-                                      <object class="GtkStack">
+                                      <object class="GtkStack" id="stack_cat_10">
                                         <property name="visible">True</property>
                                         <property name="can-focus">False</property>
+                                        <property name="transition-type">crossfade</property>
                                         <child>
                                           <object class="GtkButton" id="btn_add10">
                                             <property name="label" translatable="yes">Añadir</property>
@@ -4957,7 +5172,7 @@ THE SOFTWARE.
                                             <property name="can-focus">False</property>
                                             <property name="layout-style">expand</property>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_back_10">
                                                 <property name="label" translatable="yes">Atras</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -4972,7 +5187,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_edit_10">
                                                 <property name="label" translatable="yes">Editar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -4987,7 +5202,7 @@ THE SOFTWARE.
                                               </packing>
                                             </child>
                                             <child>
-                                              <object class="GtkButton">
+                                              <object class="GtkButton" id="btn_remove_10">
                                                 <property name="label" translatable="yes">Eliminar</property>
                                                 <property name="visible">True</property>
                                                 <property name="can-focus">True</property>
@@ -5087,6 +5302,7 @@ THE SOFTWARE.
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
                         <property name="receives-default">True</property>
+                        <property name="inconsistent">True</property>
                         <child>
                           <object class="GtkImage">
                             <property name="visible">True</property>

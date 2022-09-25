@@ -66,6 +66,7 @@ public:
     {
         return Fo_verifica;
     }
-
+    void update_tractor(std::string bd,std::string id , std::string marca, std::string modelo, std::string no_placas, std::string no_tc, std::string fo_verifica);
+    void remove_tractor(std::string bd,std::string id);
     unsigned getsize(std::string bd);
 };

@@ -55,4 +55,7 @@ public:
         return this->otro;
     }
     unsigned getsize(std::string bd);
+    void add_producto(std::string id, std::string nombre, std::string unidad, std::string tarifa, std::string otro);
+    void update_producto(std::string bd,std::string id, std::string nombre, std::string unidad, std::string tarifa, std::string otro);
+    void remove_producto(std::string bd, std::string id);
 };

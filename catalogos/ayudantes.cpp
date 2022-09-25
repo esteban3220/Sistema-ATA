@@ -33,7 +33,7 @@ unsigned ayudantes::getsize(std::string bd)
 {
     unsigned size;
     MYSQL *con = dat->con(bd);
-    if (mysql_query(con, "select count(*) from catalogo_ayudantes"))
+    if (mysql_query(con, "select id from catalogo_ayudantes"))
     {
         mysql_close(con);
         throw std::runtime_error(mysql_error(con));
@@ -45,4 +45,38 @@ unsigned ayudantes::getsize(std::string bd)
     mysql_free_result(dat->res);
     mysql_close(con);
     return size;
+}
+
+void ayudantes::add_ayudante(std::string id, std::string nombre, std::string rfc, std::string no_imss, std::string otro)
+{
+    MYSQL *con = dat->con(id);
+    std::string query = "insert into catalogo_ayudantes values (null,'" + nombre + "','" + rfc + "','" + no_imss + "','" + otro + "')";
+    if (mysql_query(con, query.c_str()))
+    {
+        mysql_close(con);
+        throw std::runtime_error(mysql_error(con));
+    }
+    mysql_close(con);
+}
+
+void ayudantes::update_ayudante(std::string bd ,std::string id, std::string nombre, std::string rfc, std::string no_imss, std::string otro){
+    MYSQL *con = dat->con(bd);
+    std::string query = "update catalogo_ayudantes set nombre = '" + nombre + "', rfc = '" + rfc + "', no_imss = '" + no_imss + "', otro = '" + otro + "' where id = " + id;
+    if (mysql_query(con, query.c_str()))
+    {
+        mysql_close(con);
+        throw std::runtime_error(mysql_error(con));
+    }
+    mysql_close(con);
+}
+
+void ayudantes::remove_ayudante(std::string bd, std::string id){
+    MYSQL *con = dat->con(bd);
+    std::string query = "delete from catalogo_ayudantes where id = " + id;
+    if (mysql_query(con, query.c_str()))
+    {
+        mysql_close(con);
+        throw std::runtime_error(mysql_error(con));
+    }
+    mysql_close(con);
 }

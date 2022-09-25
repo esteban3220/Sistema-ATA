@@ -33,7 +33,7 @@ void operador::carga_datos(std::string bd){
 unsigned operador::getsize(std::string bd){
     unsigned size;
     MYSQL *con = dat->con(bd);
-    if (mysql_query(con, "select count(*) from catalogo_operador"))
+    if (mysql_query(con, "select id from catalogo_operador"))
     {
         mysql_close(con);
         throw std::runtime_error(mysql_error(con));
@@ -45,4 +45,37 @@ unsigned operador::getsize(std::string bd){
     mysql_free_result(dat->res);
     mysql_close(con);
     return size;
+}
+
+void operador::add_operador(std::string id, std::string nombre, std::string rfc, std::string curp, std::string no_imss, std::string no_licensia, std::string fecha_ingreso){
+    MYSQL *con = dat->con(id);
+    std::string query = "insert into catalogo_operador values(null,'" + nombre + "','" + rfc + "','" + curp + "','" + no_imss + "','" + no_licensia + "','" + fecha_ingreso + "')";
+    if (mysql_query(con, query.c_str()))
+    {
+        mysql_close(con);
+        throw std::runtime_error(mysql_error(con));
+    }
+    mysql_close(con);
+}
+
+void operador::update_operador(std::string bd,std::string id, std::string nombre, std::string rfc, std::string curp, std::string no_imss, std::string no_licensia, std::string fecha_ingreso){
+    MYSQL *con = dat->con(bd);
+    std::string query = "update catalogo_operador set nombre = '" + nombre + "', rfc = '" + rfc + "', curp = '" + curp + "', no_imss = '" + no_imss + "', no_licensia = '" + no_licensia + "', fecha_ingreso = '" + fecha_ingreso + "' where id = " + id;
+    if (mysql_query(con, query.c_str()))
+    {
+        mysql_close(con);
+        throw std::runtime_error(mysql_error(con));
+    }
+    mysql_close(con);
+}
+
+void operador::remove_operador(std::string bd, std::string id){
+    MYSQL *con = dat->con(bd);
+    std::string query = "delete from catalogo_operador where id = " + id;
+    if (mysql_query(con, query.c_str()))
+    {
+        mysql_close(con);
+        throw std::runtime_error(mysql_error(con));
+    }
+    mysql_close(con);
 }

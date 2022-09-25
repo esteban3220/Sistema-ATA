@@ -36,7 +36,7 @@ unsigned clientes::getsize(std::string bd)
 {
     unsigned size;
     MYSQL *con = dat->con(bd);
-    if (mysql_query(con, "select count(*) from catalogo_clientes"))
+    if (mysql_query(con, "select id from catalogo_clientes"))
     {
         mysql_close(con);
         throw std::runtime_error(mysql_error(con));
@@ -48,4 +48,40 @@ unsigned clientes::getsize(std::string bd)
     mysql_free_result(dat->res);
     mysql_close(con);
     return size;
+}
+
+void clientes::add_cliente(std::string bd, std::string razon_social, std::string rfc, std::string giro, std::string direccion_fiscal, std::string tarifa, std::string tipo_cliente, std::string domicilio)
+{
+    MYSQL *con = dat->con(bd);
+    std::string query = "insert into catalogo_clientes (razon_social, rfc, giro, direccion, tarifa, tipo_cliente, domicilio) values ('" + razon_social + "', '" + rfc + "', '" + giro + "', '" + direccion_fiscal + "', " + tarifa + ", '" + tipo_cliente + "', '" + domicilio + "')";
+    if (mysql_query(con, query.c_str()))
+    {
+        mysql_close(con);
+        throw std::runtime_error(mysql_error(con));
+    }
+    mysql_close(con);
+}
+
+void clientes::update_cliente(std::string bd, std::string id, std::string razon_social, std::string rfc, std::string giro, std::string direccion_fiscal, std::string tarifa, std::string tipo_cliente, std::string domicilio)
+{
+    MYSQL *con = dat->con(bd);
+    std::string query = "update catalogo_clientes set razon_social = '" + razon_social + "', rfc = '" + rfc + "', giro = '" + giro + "', direccion = '" + direccion_fiscal + "', tarifa = " + tarifa + ", tipo_cliente = '" + tipo_cliente + "', domicilio = '" + domicilio + "' where id = " + id;
+    if (mysql_query(con, query.c_str()))
+    {
+        mysql_close(con);
+        throw std::runtime_error(mysql_error(con));
+    }
+    mysql_close(con);
+}
+
+void clientes::remove_cliente(std::string bd, std::string id)
+{
+    MYSQL *con = dat->con(bd);
+    std::string query = "delete from catalogo_clientes where id = " + id;
+    if (mysql_query(con, query.c_str()))
+    {
+        mysql_close(con);
+        throw std::runtime_error(mysql_error(con));
+    }
+    mysql_close(con);
 }

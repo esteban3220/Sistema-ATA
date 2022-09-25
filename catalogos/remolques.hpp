@@ -65,5 +65,8 @@ public:
     {
         return Fo_verifica;
     }
+    void add_remolque(std::string id,std::string marca, std::string modelo, std::string no_placas, std::string no_tc, std::string fo_verifica);
+    void update_remolque(std::string bd,std::string no_economico,std::string marca, std::string modelo, std::string no_placas, std::string no_tc, std::string fo_verifica);
+    void remove_remolque(std::string bd,std::string no_economico);
     unsigned getsize(std::string bd);
 };

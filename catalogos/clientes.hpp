@@ -83,4 +83,7 @@ public:
         return this->domicilio;
     }
     unsigned getsize(std::string bd);
+    void add_cliente(std::string bd, std::string razon_social, std::string rfc, std::string giro, std::string direccion_fiscal, std::string tarifa, std::string tipo_cliente, std::string domicilio);
+    void update_cliente(std::string bd, std::string id, std::string razon_social, std::string rfc, std::string giro, std::string direccion_fiscal, std::string tarifa, std::string tipo_cliente, std::string domicilio);
+    void remove_cliente(std::string bd, std::string id);
 };

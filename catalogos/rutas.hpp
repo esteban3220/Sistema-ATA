@@ -51,5 +51,7 @@ public:
         return this->tiempo_estimado;
     }
     unsigned getsize(std::string bd);
-    unsigned getsize(std::string bd);
+    void add_ruta(std::string id, std::string origen, std::string destino, std::string distancia, std::string tiempo_estimado);
+    void update_ruta(std::string bd ,std::string id, std::string origen, std::string destino, std::string distancia, std::string tiempo_estimado);
+    void remove_ruta(std::string bd,std::string id);
 };

@@ -70,7 +70,9 @@ public:
     {
         return fecha_ingreso;
     }
-
+    void add_operador(std::string id, std::string nombre, std::string rfc, std::string curp, std::string no_imss, std::string no_licensia, std::string fecha_ingreso);
+    void update_operador(std::string bd,std::string id, std::string nombre, std::string rfc, std::string curp, std::string no_imss, std::string no_licensia, std::string fecha_ingreso);
+    void remove_operador(std::string bd,std::string id);
     void carga_datos(std::string bd);
     unsigned getsize(std::string bd);
 };

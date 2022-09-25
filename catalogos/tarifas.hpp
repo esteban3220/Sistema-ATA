@@ -56,4 +56,7 @@ public:
         return this->otro;
     }
     unsigned getsize(std::string bd);
+    void add_tarifa(std::string id, std::string tarifa_tonelada, std::string tarifa_litro, std::string tarifa_viaje, std::string otro);
+    void update_tarifa(std::string bd,std::string id, std::string tarifa_tonelada, std::string tarifa_litro, std::string tarifa_viaje, std::string otro);
+    void remove_tarifa(std::string bd, std::string id);
 };
