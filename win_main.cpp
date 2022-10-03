@@ -1,11 +1,14 @@
 #include "win_main.hpp"
-//#include "hpdf.h"
 #include <xlnt/xlnt.hpp>
-#include "pdf/pdf.hpp"
+//#include "pdf/pdf.hpp"
 
 win_main::win_main(std::string id)
 {
 	this->id = id;
+	for (int i = 0; i < 9; i++)
+	{
+		cat[i] = false;
+	}
 	llena_widgets();
 	conecta_senales();
 }
@@ -16,151 +19,174 @@ win_main::~win_main()
 
 void win_main::llena_widgets()
 {
-	ui->constructor->get_widget("win_operacion", win_operacion);
-	ui->constructor->get_widget("tree1", tree1);
-	ui->constructor->get_widget("tree2", tree2);
-	ui->constructor->get_widget("tree3", tree3);
-	ui->constructor->get_widget("tree4", tree4);
-	ui->constructor->get_widget("tree5", tree5);
-	ui->constructor->get_widget("tree6", tree6);
-	ui->constructor->get_widget("tree7", tree7);
-	ui->constructor->get_widget("tree8", tree8);
-	ui->constructor->get_widget("tree9", tree9);
-	ui->constructor->get_widget("tree10", tree10);
-	ui->constructor->get_widget("progress_view", progress_view);
-	ui->constructor->get_widget("spinner_login", spinner_login);
-	ui->constructor->get_widget("lbl1", lbl1);
-	ui->constructor->get_widget("lbl2", lbl2);
-	ui->constructor->get_widget("lbl3", lbl3);
-	ui->constructor->get_widget("lbl4", lbl4);
-	ui->constructor->get_widget("lbl5", lbl5);
-	ui->constructor->get_widget("lbl6", lbl6);
-	ui->constructor->get_widget("lbl7", lbl7);
-	ui->constructor->get_widget("lbl8", lbl8);
-	ui->constructor->get_widget("lbl9", lbl9);
-	ui->constructor->get_widget("lbl10", lbl10);
-	ui->constructor->get_widget("lbl_info", lbl_info);
-	ui->constructor->get_widget("btn_add1", btn_add1);
-	ui->constructor->get_widget("btn_add2", btn_add2);
-	ui->constructor->get_widget("btn_add3", btn_add3);
-	ui->constructor->get_widget("btn_add4", btn_add4);
-	ui->constructor->get_widget("btn_add5", btn_add5);
-	ui->constructor->get_widget("btn_add6", btn_add6);
-	ui->constructor->get_widget("btn_add7", btn_add7);
-	ui->constructor->get_widget("btn_add8", btn_add8);
-	ui->constructor->get_widget("btn_add9", btn_add9);
-	ui->constructor->get_widget("btn_add10", btn_add10);
-	ui->constructor->get_widget("ety_tra_marca", ety_tra_marca);
-	ui->constructor->get_widget("ety_tra_modelo", ety_tra_modelo);
-	ui->constructor->get_widget("ety_tra_placas", ety_tra_placas);
-	ui->constructor->get_widget("ety_tra_tarjeta", ety_tra_tarjeta);
-	ui->constructor->get_widget("ety_remo_marca", ety_remo_marca);
-	ui->constructor->get_widget("ety_remo_modelo", ety_remo_modelo);
-	ui->constructor->get_widget("ety_remo_placas", ety_remo_placas);
-	ui->constructor->get_widget("ety_remo_tarjeta", ety_remo_tarjeta);
-	ui->constructor->get_widget("ety_ope_nombre", ety_ope_nombre);
-	ui->constructor->get_widget("ety_ope_rfc", ety_ope_rfc);
-	ui->constructor->get_widget("ety_ope_curp", ety_ope_curp);
-	ui->constructor->get_widget("ety_ope_imss", ety_ope_imss);
-	ui->constructor->get_widget("ety_ope_fecha", ety_ope_fecha);
-	ui->constructor->get_widget("ety_ayu_nombre", ety_ayu_nombre);
-	ui->constructor->get_widget("ety_ayu_rfc", ety_ayu_rfc);
-	ui->constructor->get_widget("ety_ayu_imss", ety_ayu_imss);
-	ui->constructor->get_widget("ety_ayu_otro", ety_ayu_otro);
-	ui->constructor->get_widget("ety_pob_nombre", ety_pob_nombre);
-	ui->constructor->get_widget("ety_pob_estado", ety_pob_estado);
-	ui->constructor->get_widget("ety_rut_distancia", ety_rut_distancia);
-	ui->constructor->get_widget("ety_pro_nombre", ety_pro_nombre);
-	ui->constructor->get_widget("ety_pro_otro", ety_pro_otro);
-	ui->constructor->get_widget("ety_cli_razon", ety_cli_razon);
-	ui->constructor->get_widget("ety_cli_rfc", ety_cli_rfc);
-	ui->constructor->get_widget("ety_cli_domicilio", ety_cli_domicilio);
-	ui->constructor->get_widget("ety_cli_direccion", ety_cli_direccion);
-	ui->constructor->get_widget("ety_cli_giro", ety_cli_giro);
-	ui->constructor->get_widget("cb_rut_origen", cb_rut_origen);
-	ui->constructor->get_widget("cb_rut_destino", cb_rut_destino);
-	ui->constructor->get_widget("cb_pro_unidad", cb_pro_unidad);
-	ui->constructor->get_widget("cb_cli_tipo", cb_cli_tipo);
-	ui->constructor->get_widget("spin_tar_verificacion", spin_tar_verificacion);
-	ui->constructor->get_widget("spin_remo_verificacion", spin_remo_verificacion);
-	ui->constructor->get_widget("spin_ope_licencia", spin_ope_licencia);
-	ui->constructor->get_widget("spin_pob_distancia", spin_pob_distancia);
-	ui->constructor->get_widget("spin_rut_hora", spin_rut_hora);
-	ui->constructor->get_widget("spin_rut_min", spin_rut_min);
-	ui->constructor->get_widget("spin_rut_seg", spin_rut_seg);
-	ui->constructor->get_widget("spin_pro_tarifa", spin_pro_tarifa);
-	ui->constructor->get_widget("spin_cli_tarifa", spin_cli_tarifa);
-	ui->constructor->get_widget("spin_tar_tonelada", spin_tar_tonelada);
-	ui->constructor->get_widget("spin_tar_litro", spin_tar_litro);
-	ui->constructor->get_widget("spin_tar_viaje", spin_tar_viaje);
-	ui->constructor->get_widget("spin_tar_otro", spin_tar_otro);
-	ui->constructor->get_widget("toogle_sidebar", toogle_sidebar);
-	ui->constructor->get_widget("reveal1", reveal1);
-	ui->constructor->get_widget("reveal2", reveal2);
-	ui->constructor->get_widget("reveal3", reveal3);
-	ui->constructor->get_widget("reveal4", reveal4);
-	ui->constructor->get_widget("reveal5", reveal5);
-	ui->constructor->get_widget("reveal6", reveal6);
-	ui->constructor->get_widget("reveal7", reveal7);
-	ui->constructor->get_widget("reveal8", reveal8);
-	ui->constructor->get_widget("reveal9", reveal9);
-	ui->constructor->get_widget("reveal10", reveal10);
-	ui->constructor->get_widget("reveal_info", reveal_info);
-	ui->constructor->get_widget("bar_info", bar_info);
-	ui->constructor->get_widget("cal", cal);
-	ui->constructor->get_widget("pop_cal", pop_cal);
-	ui->constructor->get_widget("stack_cat_1", stack_cat_1);
-	ui->constructor->get_widget("stack_cat_2", stack_cat_2);
-	ui->constructor->get_widget("stack_cat_3", stack_cat_3);
-	ui->constructor->get_widget("stack_cat_4", stack_cat_4);
-	ui->constructor->get_widget("stack_cat_5", stack_cat_5);
-	ui->constructor->get_widget("stack_cat_6", stack_cat_6);
-	ui->constructor->get_widget("stack_cat_7", stack_cat_7);
-	ui->constructor->get_widget("stack_cat_8", stack_cat_8);
-	ui->constructor->get_widget("stack_cat_9", stack_cat_9);
-	ui->constructor->get_widget("stack_cat_10", stack_cat_10);
-	ui->constructor->get_widget("btn_edit_1", btn_edit_1);
-	ui->constructor->get_widget("btn_edit_2", btn_edit_2);
-	ui->constructor->get_widget("btn_edit_3", btn_edit_3);
-	ui->constructor->get_widget("btn_edit_4", btn_edit_4);
-	ui->constructor->get_widget("btn_edit_5", btn_edit_5);
-	ui->constructor->get_widget("btn_edit_6", btn_edit_6);
-	ui->constructor->get_widget("btn_edit_7", btn_edit_7);
-	ui->constructor->get_widget("btn_edit_8", btn_edit_8);
-	ui->constructor->get_widget("btn_edit_9", btn_edit_9);
-	ui->constructor->get_widget("btn_edit_10", btn_edit_10);
-	ui->constructor->get_widget("btn_remove_1", btn_remove_1);
-	ui->constructor->get_widget("btn_remove_2", btn_remove_2);
-	ui->constructor->get_widget("btn_remove_3", btn_remove_3);
-	ui->constructor->get_widget("btn_remove_4", btn_remove_4);
-	ui->constructor->get_widget("btn_remove_5", btn_remove_5);
-	ui->constructor->get_widget("btn_remove_6", btn_remove_6);
-	ui->constructor->get_widget("btn_remove_7", btn_remove_7);
-	ui->constructor->get_widget("btn_remove_8", btn_remove_8);
-	ui->constructor->get_widget("btn_remove_9", btn_remove_9);
-	ui->constructor->get_widget("btn_remove_10", btn_remove_10);
-	ui->constructor->get_widget("box_opcion1", box_opcion1);
-	ui->constructor->get_widget("box_opcion2", box_opcion2);
-	ui->constructor->get_widget("box_opcion3", box_opcion3);
-	ui->constructor->get_widget("box_opcion4", box_opcion4);
-	ui->constructor->get_widget("box_opcion5", box_opcion5);
-	ui->constructor->get_widget("box_opcion6", box_opcion6);
-	ui->constructor->get_widget("box_opcion7", box_opcion7);
-	ui->constructor->get_widget("box_opcion8", box_opcion8);
-	ui->constructor->get_widget("box_opcion9", box_opcion9);
-	ui->constructor->get_widget("box_opcion10", box_opcion10);
-	ui->constructor->get_widget("btn_print", btn_print);
-	ui->constructor->get_widget("btn_excel", btn_excel);
-	ui->constructor->get_widget("btn_back_1", btn_back_1);
-	ui->constructor->get_widget("btn_back_2", btn_back_2);
-	ui->constructor->get_widget("btn_back_3", btn_back_3);
-	ui->constructor->get_widget("btn_back_4", btn_back_4);
-	ui->constructor->get_widget("btn_back_5", btn_back_5);
-	ui->constructor->get_widget("btn_back_6", btn_back_6);
-	ui->constructor->get_widget("btn_back_7", btn_back_7);
-	ui->constructor->get_widget("btn_back_8", btn_back_8);
-	ui->constructor->get_widget("btn_back_9", btn_back_9);
-	ui->constructor->get_widget("btn_back_10", btn_back_10);
+	try
+	{
+		ui->constructor->get_widget("win_operacion", win_operacion);
+		ui->constructor->get_widget("tree1", tree1);
+		ui->constructor->get_widget("tree2", tree2);
+		ui->constructor->get_widget("tree3", tree3);
+		ui->constructor->get_widget("tree4", tree4);
+		ui->constructor->get_widget("tree5", tree5);
+		ui->constructor->get_widget("tree6", tree6);
+		ui->constructor->get_widget("tree7", tree7);
+		ui->constructor->get_widget("tree8", tree8);
+		ui->constructor->get_widget("tree9", tree9);
+		ui->constructor->get_widget("tree10", tree10);
+		ui->constructor->get_widget("progress_view", progress_view);
+		ui->constructor->get_widget("spinner_login", spinner_login);
+		ui->constructor->get_widget("lbl1", lbl1);
+		ui->constructor->get_widget("lbl2", lbl2);
+		ui->constructor->get_widget("lbl3", lbl3);
+		ui->constructor->get_widget("lbl4", lbl4);
+		ui->constructor->get_widget("lbl5", lbl5);
+		ui->constructor->get_widget("lbl6", lbl6);
+		ui->constructor->get_widget("lbl7", lbl7);
+		ui->constructor->get_widget("lbl8", lbl8);
+		ui->constructor->get_widget("lbl9", lbl9);
+		ui->constructor->get_widget("lbl10", lbl10);
+		ui->constructor->get_widget("lbl_status_exp", lbl_status_exp);
+		ui->constructor->get_widget("lbl_info", lbl_info);
+		ui->constructor->get_widget("btn_add1", btn_add1);
+		ui->constructor->get_widget("btn_add2", btn_add2);
+		ui->constructor->get_widget("btn_add3", btn_add3);
+		ui->constructor->get_widget("btn_add4", btn_add4);
+		ui->constructor->get_widget("btn_add5", btn_add5);
+		ui->constructor->get_widget("btn_add6", btn_add6);
+		ui->constructor->get_widget("btn_add7", btn_add7);
+		ui->constructor->get_widget("btn_add8", btn_add8);
+		ui->constructor->get_widget("btn_add9", btn_add9);
+		ui->constructor->get_widget("btn_add10", btn_add10);
+		ui->constructor->get_widget("ety_tra_marca", ety_tra_marca);
+		ui->constructor->get_widget("ety_tra_modelo", ety_tra_modelo);
+		ui->constructor->get_widget("ety_tra_placas", ety_tra_placas);
+		ui->constructor->get_widget("ety_tra_tarjeta", ety_tra_tarjeta);
+		ui->constructor->get_widget("ety_remo_marca", ety_remo_marca);
+		ui->constructor->get_widget("ety_remo_modelo", ety_remo_modelo);
+		ui->constructor->get_widget("ety_remo_placas", ety_remo_placas);
+		ui->constructor->get_widget("ety_remo_tarjeta", ety_remo_tarjeta);
+		ui->constructor->get_widget("ety_ope_nombre", ety_ope_nombre);
+		ui->constructor->get_widget("ety_ope_rfc", ety_ope_rfc);
+		ui->constructor->get_widget("ety_ope_curp", ety_ope_curp);
+		ui->constructor->get_widget("ety_ope_imss", ety_ope_imss);
+		ui->constructor->get_widget("ety_ope_fecha", ety_ope_fecha);
+		ui->constructor->get_widget("ety_ayu_nombre", ety_ayu_nombre);
+		ui->constructor->get_widget("ety_ayu_rfc", ety_ayu_rfc);
+		ui->constructor->get_widget("ety_ayu_imss", ety_ayu_imss);
+		ui->constructor->get_widget("ety_ayu_otro", ety_ayu_otro);
+		ui->constructor->get_widget("ety_pob_nombre", ety_pob_nombre);
+		ui->constructor->get_widget("ety_pob_estado", ety_pob_estado);
+		ui->constructor->get_widget("ety_rut_distancia", ety_rut_distancia);
+		ui->constructor->get_widget("ety_pro_nombre", ety_pro_nombre);
+		ui->constructor->get_widget("ety_pro_otro", ety_pro_otro);
+		ui->constructor->get_widget("ety_cli_razon", ety_cli_razon);
+		ui->constructor->get_widget("ety_cli_rfc", ety_cli_rfc);
+		ui->constructor->get_widget("ety_cli_domicilio", ety_cli_domicilio);
+		ui->constructor->get_widget("ety_cli_direccion", ety_cli_direccion);
+		ui->constructor->get_widget("ety_cli_giro", ety_cli_giro);
+		ui->constructor->get_widget("cb_rut_origen", cb_rut_origen);
+		ui->constructor->get_widget("cb_rut_destino", cb_rut_destino);
+		ui->constructor->get_widget("cb_pro_unidad", cb_pro_unidad);
+		ui->constructor->get_widget("cb_cli_tipo", cb_cli_tipo);
+		ui->constructor->get_widget("spin_tar_verificacion", spin_tar_verificacion);
+		ui->constructor->get_widget("spin_remo_verificacion", spin_remo_verificacion);
+		ui->constructor->get_widget("spin_ope_licencia", spin_ope_licencia);
+		ui->constructor->get_widget("spin_pob_distancia", spin_pob_distancia);
+		ui->constructor->get_widget("spin_rut_hora", spin_rut_hora);
+		ui->constructor->get_widget("spin_rut_min", spin_rut_min);
+		ui->constructor->get_widget("spin_rut_seg", spin_rut_seg);
+		ui->constructor->get_widget("spin_pro_tarifa", spin_pro_tarifa);
+		ui->constructor->get_widget("spin_cli_tarifa", spin_cli_tarifa);
+		ui->constructor->get_widget("spin_tar_tonelada", spin_tar_tonelada);
+		ui->constructor->get_widget("spin_tar_litro", spin_tar_litro);
+		ui->constructor->get_widget("spin_tar_viaje", spin_tar_viaje);
+		ui->constructor->get_widget("spin_tar_otro", spin_tar_otro);
+		ui->constructor->get_widget("toogle_sidebar", toogle_sidebar);
+		ui->constructor->get_widget("reveal1", reveal1);
+		ui->constructor->get_widget("reveal2", reveal2);
+		ui->constructor->get_widget("reveal3", reveal3);
+		ui->constructor->get_widget("reveal4", reveal4);
+		ui->constructor->get_widget("reveal5", reveal5);
+		ui->constructor->get_widget("reveal6", reveal6);
+		ui->constructor->get_widget("reveal7", reveal7);
+		ui->constructor->get_widget("reveal8", reveal8);
+		ui->constructor->get_widget("reveal9", reveal9);
+		ui->constructor->get_widget("reveal10", reveal10);
+		ui->constructor->get_widget("reveal_info", reveal_info);
+		ui->constructor->get_widget("bar_info", bar_info);
+		ui->constructor->get_widget("cal", cal);
+		ui->constructor->get_widget("pop_cal", pop_cal);
+		ui->constructor->get_widget("stack_cat_1", stack_cat_1);
+		ui->constructor->get_widget("stack_cat_2", stack_cat_2);
+		ui->constructor->get_widget("stack_cat_3", stack_cat_3);
+		ui->constructor->get_widget("stack_cat_4", stack_cat_4);
+		ui->constructor->get_widget("stack_cat_5", stack_cat_5);
+		ui->constructor->get_widget("stack_cat_6", stack_cat_6);
+		ui->constructor->get_widget("stack_cat_7", stack_cat_7);
+		ui->constructor->get_widget("stack_cat_8", stack_cat_8);
+		ui->constructor->get_widget("stack_cat_9", stack_cat_9);
+		ui->constructor->get_widget("stack_cat_10", stack_cat_10);
+		ui->constructor->get_widget("btn_edit_1", btn_edit_1);
+		ui->constructor->get_widget("btn_edit_2", btn_edit_2);
+		ui->constructor->get_widget("btn_edit_3", btn_edit_3);
+		ui->constructor->get_widget("btn_edit_4", btn_edit_4);
+		ui->constructor->get_widget("btn_edit_5", btn_edit_5);
+		ui->constructor->get_widget("btn_edit_6", btn_edit_6);
+		ui->constructor->get_widget("btn_edit_7", btn_edit_7);
+		ui->constructor->get_widget("btn_edit_8", btn_edit_8);
+		ui->constructor->get_widget("btn_edit_9", btn_edit_9);
+		ui->constructor->get_widget("btn_edit_10", btn_edit_10);
+		ui->constructor->get_widget("btn_remove_1", btn_remove_1);
+		ui->constructor->get_widget("btn_remove_2", btn_remove_2);
+		ui->constructor->get_widget("btn_remove_3", btn_remove_3);
+		ui->constructor->get_widget("btn_remove_4", btn_remove_4);
+		ui->constructor->get_widget("btn_remove_5", btn_remove_5);
+		ui->constructor->get_widget("btn_remove_6", btn_remove_6);
+		ui->constructor->get_widget("btn_remove_7", btn_remove_7);
+		ui->constructor->get_widget("btn_remove_8", btn_remove_8);
+		ui->constructor->get_widget("btn_remove_9", btn_remove_9);
+		ui->constructor->get_widget("btn_remove_10", btn_remove_10);
+		ui->constructor->get_widget("box_opcion1", box_opcion1);
+		ui->constructor->get_widget("box_opcion2", box_opcion2);
+		ui->constructor->get_widget("box_opcion3", box_opcion3);
+		ui->constructor->get_widget("box_opcion4", box_opcion4);
+		ui->constructor->get_widget("box_opcion5", box_opcion5);
+		ui->constructor->get_widget("box_opcion6", box_opcion6);
+		ui->constructor->get_widget("box_opcion7", box_opcion7);
+		ui->constructor->get_widget("box_opcion8", box_opcion8);
+		ui->constructor->get_widget("box_opcion9", box_opcion9);
+		ui->constructor->get_widget("box_opcion10", box_opcion10);
+		ui->constructor->get_widget("btn_back_1", btn_back_1);
+		ui->constructor->get_widget("btn_back_2", btn_back_2);
+		ui->constructor->get_widget("btn_back_3", btn_back_3);
+		ui->constructor->get_widget("btn_back_4", btn_back_4);
+		ui->constructor->get_widget("btn_back_5", btn_back_5);
+		ui->constructor->get_widget("btn_back_6", btn_back_6);
+		ui->constructor->get_widget("btn_back_7", btn_back_7);
+		ui->constructor->get_widget("btn_back_8", btn_back_8);
+		ui->constructor->get_widget("btn_back_9", btn_back_9);
+		ui->constructor->get_widget("btn_back_10", btn_back_10);
+		ui->constructor->get_widget("btn_export_excel", btn_export_excel);
+
+		ui->constructor->get_widget("radiobutton4", radiobutton4);
+		ui->constructor->get_widget("radiobutton5", radiobutton5);
+		ui->constructor->get_widget("radiobutton6", radiobutton6);
+		ui->constructor->get_widget("exp_cat", exp_cat);
+		ui->constructor->get_widget("cb_export_cat", cb_export_cat);
+		ui->constructor->get_widget("ch_1", ch_1);
+		ui->constructor->get_widget("ch_2", ch_2);
+		ui->constructor->get_widget("ch_3", ch_3);
+		ui->constructor->get_widget("ch_4", ch_4);
+		ui->constructor->get_widget("ch_5", ch_5);
+		ui->constructor->get_widget("ch_6", ch_6);
+		ui->constructor->get_widget("ch_7", ch_7);
+		ui->constructor->get_widget("ch_8", ch_8);
+		ui->constructor->get_widget("ch_9", ch_9);
+		ui->constructor->get_widget("ch_10", ch_10);
+	}
+	catch (const Glib::Error &ex)
+	{
+		std::cerr << "Glade::Xml::Xml(): " << ex.what() << std::endl;
+	}
 }
 
 void win_main::conecta_senales()
@@ -207,8 +233,9 @@ void win_main::conecta_senales()
 	btn_back_8->signal_clicked().connect(sigc::mem_fun(*this, &win_main::on_btn_back_8_clicked));
 	btn_back_9->signal_clicked().connect(sigc::mem_fun(*this, &win_main::on_btn_back_9_clicked));
 	// btn_back_10->signal_clicked().connect(sigc::mem_fun(*this, &win_main::on_btn_back_10_clicked));
-	btn_print->signal_clicked().connect(sigc::mem_fun(*this, &win_main::on_btn_print_clicked));
-	btn_excel->signal_clicked().connect(sigc::mem_fun(*this, &win_main::on_btn_excel_clicked));
+
+	btn_export_excel->signal_clicked().connect(sigc::mem_fun(*this, &win_main::on_btn_export_excel_clicked));
+
 	ety_ope_fecha->signal_icon_press().connect(sigc::mem_fun(*this, &win_main::on_ety_ope_fecha_icon_press));
 	cal->signal_day_selected_double_click().connect(sigc::mem_fun(*this, &win_main::on_cal_day_selected_double_click));
 	bar_info->signal_response().connect(sigc::mem_fun(*this, &win_main::on_bar_info_response));
@@ -222,7 +249,12 @@ void win_main::conecta_senales()
 	tree8->get_selection()->signal_changed().connect(sigc::mem_fun(*this, &win_main::on_treeview8_selection_changed));
 	tree9->get_selection()->signal_changed().connect(sigc::mem_fun(*this, &win_main::on_treeview9_selection_changed));
 	// tree10->get_selection()->signal_changed().connect(sigc::mem_fun(*this, &win_main::on_treeview10_selection_changed));
+
+	radiobutton4->signal_toggled().connect(sigc::mem_fun(*this, &win_main::on_radiobutton4_toggled));
+	radiobutton5->signal_toggled().connect(sigc::mem_fun(*this, &win_main::on_radiobutton5_toggled));
+	radiobutton6->signal_toggled().connect(sigc::mem_fun(*this, &win_main::on_radiobutton6_toggled));
 }
+
 void win_main::run(void)
 {
 	win_operacion->show_all();
@@ -241,8 +273,9 @@ void win_main::run(void)
                                 //llena_sueldos();
                                 m_bActivityMode = false; 
                                 spinner_login->stop(); });
-	hilo->detach();
-	//hilo->join();
+	// hilo->detach();
+	hilo->join();
+	delete hilo;
 }
 
 bool win_main::cierra_app(GdkEventAny *event)
@@ -273,7 +306,6 @@ bool win_main::on_timeout()
 
 void win_main::llena_tractor()
 {
-	mutex->try_lock();
 	ListTractor = Gtk::ListStore::create(columns_tractor);
 	tree1->set_model(ListTractor);
 	tree1->append_column("No. Economico", columns_tractor.No_economico);
@@ -293,12 +325,7 @@ void win_main::llena_tractor()
 		row[columns_tractor.No_tc] = tra->getno_tc()[i];
 		row[columns_tractor.Folio_verificacion] = tra->getfo_verifica()[i];
 	}
-	tra->getNo_eco().clear();
-	tra->getmarca().clear();
-	tra->getmodelo().clear();
-	tra->getno_placas().clear();
-	tra->getno_tc().clear();
-	tra->getfo_verifica().clear();
+	tra->vaciar();
 	Gtk::TreeView::Column *pColumn = tree1->get_column(0);
 	if (pColumn)
 	{
@@ -329,12 +356,10 @@ void win_main::llena_tractor()
 	{
 		pColumn->set_sort_column(columns_tractor.Folio_verificacion);
 	}
-	mutex->unlock();
 }
 
 void win_main::llena_remolque()
 {
-	mutex->try_lock();
 	ListRemolque = Gtk::ListStore::create(columns_remolque);
 	tree2->set_model(ListRemolque);
 	tree2->append_column("No. Economico", columns_remolque.No_economico);
@@ -354,12 +379,7 @@ void win_main::llena_remolque()
 		row[columns_remolque.No_tc] = remo->getno_tc()[i];
 		row[columns_remolque.Folio_verificacion] = remo->getfo_verifica()[i];
 	}
-	remo->getNo_eco().clear();
-	remo->getmarca().clear();
-	remo->getmodelo().clear();
-	remo->getno_placas().clear();
-	remo->getno_tc().clear();
-	remo->getfo_verifica().clear();
+	remo->vaciar();
 	Gtk::TreeView::Column *pColumn = tree2->get_column(0);
 	if (pColumn)
 	{
@@ -390,12 +410,10 @@ void win_main::llena_remolque()
 	{
 		pColumn->set_sort_column(columns_remolque.Folio_verificacion);
 	}
-	mutex->unlock();
 }
 
 void win_main::llena_operadores()
 {
-	mutex->try_lock();
 	ListOperador = Gtk::ListStore::create(columns_operador);
 	tree3->set_model(ListOperador);
 	tree3->append_column("ID", columns_operador.Id);
@@ -417,13 +435,7 @@ void win_main::llena_operadores()
 		row[columns_operador.No_licen] = ope->getno_licensia()[i];
 		row[columns_operador.Fecha] = ope->getfecha()[i];
 	}
-	ope->getid().clear();
-	ope->getnombre().clear();
-	ope->getrfc().clear();
-	ope->getcurp().clear();
-	ope->getno_imss().clear();
-	ope->getno_licensia().clear();
-	ope->getfecha().clear();
+	ope->vaciar();
 	Gtk::TreeView::Column *pColumn = tree3->get_column(0);
 	if (pColumn)
 	{
@@ -459,12 +471,10 @@ void win_main::llena_operadores()
 	{
 		pColumn->set_sort_column(columns_operador.Fecha);
 	}
-	mutex->unlock();
 }
 
 void win_main::llena_ayudantes()
 {
-	mutex->try_lock();
 	ListAyudante = Gtk::ListStore::create(columns_ayudante);
 	tree4->set_model(ListAyudante);
 	tree4->append_column("ID", columns_ayudante.Id);
@@ -482,11 +492,7 @@ void win_main::llena_ayudantes()
 		row[columns_ayudante.No_imss] = ayu->get_no_imss()[i];
 		row[columns_ayudante.Otro] = ayu->get_otro()[i];
 	}
-	ayu->get_id().clear();
-	ayu->get_nombre().clear();
-	ayu->get_rfc().clear();
-	ayu->get_no_imss().clear();
-	ayu->get_otro().clear();
+	ayu->vaciar();
 	Gtk::TreeView::Column *pColumn = tree4->get_column(0);
 	if (pColumn)
 	{
@@ -512,12 +518,10 @@ void win_main::llena_ayudantes()
 	{
 		pColumn->set_sort_column(columns_ayudante.Otro);
 	}
-	mutex->unlock();
 }
 
 void win_main::llena_poblaciones()
 {
-	mutex->try_lock();
 	ListPoblacion = Gtk::ListStore::create(columns_poblacion);
 	tree5->set_model(ListPoblacion);
 	tree5->append_column("ID", columns_poblacion.Id);
@@ -535,10 +539,7 @@ void win_main::llena_poblaciones()
 		cb_rut_origen->append(pob->get_estado()[i]);
 		cb_rut_destino->append(pob->get_estado()[i]);
 	}
-	pob->get_id().clear();
-	pob->get_nombre().clear();
-	pob->get_estado().clear();
-	pob->get_distancia().clear();
+	pob->vaciar();
 	Gtk::TreeView::Column *pColumn = tree5->get_column(0);
 	if (pColumn)
 	{
@@ -559,12 +560,10 @@ void win_main::llena_poblaciones()
 	{
 		pColumn->set_sort_column(columns_poblacion.Distancia);
 	}
-	mutex->unlock();
 }
 
 void win_main::llena_rutas()
 {
-	mutex->try_lock();
 	ListRutas = Gtk::ListStore::create(columns_rutas);
 	tree6->set_model(ListRutas);
 	tree6->append_column("ID", columns_rutas.Id);
@@ -582,11 +581,7 @@ void win_main::llena_rutas()
 		row[columns_rutas.Distancia] = rut->get_distancia()[i];
 		row[columns_rutas.Kms] = rut->get_tiempo_estimado()[i];
 	}
-	rut->get_id().clear();
-	rut->get_origen().clear();
-	rut->get_destino().clear();
-	rut->get_distancia().clear();
-	rut->get_tiempo_estimado().clear();
+	rut->vaciar();
 	Gtk::TreeView::Column *pColumn = tree6->get_column(0);
 	if (pColumn)
 	{
@@ -612,12 +607,10 @@ void win_main::llena_rutas()
 	{
 		pColumn->set_sort_column(columns_rutas.Kms);
 	}
-	mutex->unlock();
 }
 
 void win_main::llena_productos()
 {
-	mutex->try_lock();
 	ListProductos = Gtk::ListStore::create(columns_productos);
 	tree7->set_model(ListProductos);
 	tree7->append_column("ID", columns_productos.Id);
@@ -635,11 +628,7 @@ void win_main::llena_productos()
 		row[columns_productos.Tarifa] = pro->get_tarifa()[i];
 		row[columns_productos.Otro] = pro->get_otro()[i];
 	}
-	pro->get_id().clear();
-	pro->get_nombre().clear();
-	pro->get_unidad().clear();
-	pro->get_tarifa().clear();
-	pro->get_otro().clear();
+	pro->vaciar();
 	Gtk::TreeView::Column *pColumn = tree7->get_column(0);
 	if (pColumn)
 	{
@@ -665,12 +654,10 @@ void win_main::llena_productos()
 	{
 		pColumn->set_sort_column(columns_productos.Otro);
 	}
-	mutex->unlock();
 }
 
 void win_main::llena_clientes()
 {
-	mutex->try_lock();
 	ListClientes = Gtk::ListStore::create(columns_clientes);
 	tree8->set_model(ListClientes);
 	tree8->append_column("ID", columns_clientes.Id);
@@ -694,14 +681,7 @@ void win_main::llena_clientes()
 		row[columns_clientes.Tipo_cliente] = cli->get_tipo_cliente()[i];
 		row[columns_clientes.Domicilio] = cli->get_domicilio()[i];
 	}
-	cli->get_id().clear();
-	cli->get_razon_social().clear();
-	cli->get_rfc().clear();
-	cli->get_giro().clear();
-	cli->get_direccion_fiscal().clear();
-	cli->get_tarifa().clear();
-	cli->get_tipo_cliente().clear();
-	cli->get_domicilio().clear();
+	cli->vaciar();
 	Gtk::TreeView::Column *pColumn = tree8->get_column(0);
 	if (pColumn)
 	{
@@ -742,12 +722,10 @@ void win_main::llena_clientes()
 	{
 		pColumn->set_sort_column(columns_clientes.Domicilio);
 	}
-	mutex->unlock();
 }
 
 void win_main::llena_tarifas()
 {
-	mutex->try_lock();
 	ListTarifas = Gtk::ListStore::create(columns_tarifas);
 	tree9->set_model(ListTarifas);
 	tree9->append_column("ID", columns_tarifas.Id);
@@ -765,11 +743,7 @@ void win_main::llena_tarifas()
 		row[columns_tarifas.Tarifa_viaje] = tar->get_tarifa_viaje()[i];
 		row[columns_tarifas.Otro] = tar->get_otro()[i];
 	}
-	tar->get_id().clear();
-	tar->get_tarifa_tonelada().clear();
-	tar->get_tarifa_litro().clear();
-	tar->get_tarifa_viaje().clear();
-	tar->get_otro().clear();
+	tar->vaciar();
 	Gtk::TreeView::Column *pColumn = tree9->get_column(0);
 	if (pColumn)
 	{
@@ -795,7 +769,6 @@ void win_main::llena_tarifas()
 	{
 		pColumn->set_sort_column(columns_tarifas.Otro);
 	}
-	mutex->unlock();
 }
 
 void win_main::vacia_campos_tractor()
@@ -2267,35 +2240,38 @@ void win_main::on_btn_back_9_clicked()
 	lbl9->set_text("Cátalogo de Tarifas");
 	vacia_campos_tarifa();
 }
-
-void win_main::on_btn_print_clicked(){
+/*
+void win_main::on_btn_print_clicked()
+{
 	try
-    {
-        HelloWorld("argv[1].pdf");
-    }
-    catch (PdfError &eCode)
-    {
-        eCode.PrintErrorMsg();
-    }
+	{
+		HelloWorld("argv[1].pdf");
+	}
+	catch (PdfError &eCode)
+	{
+		eCode.PrintErrorMsg();
+	}
 
-    try
-    {
-        PdfEncodingFactory::FreeGlobalEncodingInstances();
-    }
-    catch (PdfError &eCode)
-    {
-        eCode.PrintErrorMsg();
-    }
+	try
+	{
+		PdfEncodingFactory::FreeGlobalEncodingInstances();
+	}
+	catch (PdfError &eCode)
+	{
+		eCode.PrintErrorMsg();
+	}
 
-    std::cout << std::endl
-              << "Created a PDF file containing the line \"Hello World!\": " << "argv[1]" << std::endl
-              << std::endl;
+	std::cout << std::endl
+			  << "Created a PDF file containing the line \"Hello World!\": "
+			  << "argv[1]" << std::endl
+			  << std::endl;
 }
 
-void win_main::on_btn_excel_clicked(){
+void win_main::on_btn_excel_clicked()
+{
 	tra->carga_datos(id);
 	xlnt::workbook wb;
-    xlnt::worksheet ws = wb.active_sheet();
+	xlnt::worksheet ws = wb.active_sheet();
 	for (size_t i = 0; i < tra->getNo_eco().size(); i++)
 	{
 		ws.cell("A" + std::to_string(i + 1)).value(atoi(tra->getNo_eco()[i].c_str()));
@@ -2312,4 +2288,409 @@ void win_main::on_btn_excel_clicked(){
 	tra->getno_tc().clear();
 	tra->getfo_verifica().clear();
 	wb.save("Tractores.xlsx");
+}
+*/
+void win_main::on_radiobutton4_toggled()
+{
+	if (radiobutton4->get_active())
+	{
+		radiobutton5->set_active(false);
+		radiobutton6->set_active(false);
+		exp_cat->set_sensitive(false);
+		exp_cat->set_expanded(false);
+		cb_export_cat->set_sensitive(false);
+	}
+}
+
+void win_main::on_radiobutton5_toggled()
+{
+	if (radiobutton5->get_active())
+	{
+		radiobutton4->set_active(false);
+		radiobutton6->set_active(false);
+		exp_cat->set_sensitive(true);
+		cb_export_cat->set_sensitive(false);
+	}
+}
+
+void win_main::on_radiobutton6_toggled()
+{
+	if (radiobutton6->get_active())
+	{
+		radiobutton4->set_active(false);
+		radiobutton5->set_active(false);
+		exp_cat->set_sensitive(false);
+		exp_cat->set_expanded(false);
+		cb_export_cat->set_sensitive(true);
+	}
+}
+
+void win_main::crea_xls_tractor()
+{
+	// nota: crear una instancia que vacie los vectores
+	try
+	{
+		tra->carga_datos(id);
+		xlnt::workbook wb;
+		xlnt::worksheet ws = wb.active_sheet();
+		ws.cell("A1").value("No. Eco");
+		ws.cell("B1").value("Marca");
+		ws.cell("C1").value("Modelo");
+		ws.cell("D1").value("No. Placas");
+		ws.cell("E1").value("No. Tarjeta de Circulación");
+		ws.cell("F1").value("Folio Verificación");
+		for (size_t i = 0; i < tra->getNo_eco().size(); i++)
+		{
+			ws.cell("A" + std::to_string(i + 2)).value(atoi(tra->getNo_eco()[i].c_str()));
+			ws.cell("B" + std::to_string(i + 2)).value(tra->getmarca()[i]);
+			ws.cell("C" + std::to_string(i + 2)).value(atoi(tra->getmodelo()[i].c_str()));
+			ws.cell("D" + std::to_string(i + 2)).value(tra->getno_placas()[i]);
+			ws.cell("E" + std::to_string(i + 2)).value(tra->getno_tc()[i]);
+			ws.cell("F" + std::to_string(i + 2)).value(atoi(tra->getfo_verifica()[i].c_str()));
+		}
+		tra->vaciar();
+		wb.save("Tractores.xlsx");
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void win_main::crea_xls_remolque()
+{
+	try
+	{
+		remo->carga_datos(id);
+		xlnt::workbook wb;
+		xlnt::worksheet ws = wb.active_sheet();
+		ws.cell("A1").value("No. Eco");
+		ws.cell("B1").value("Marca");
+		ws.cell("C1").value("Modelo");
+		ws.cell("D1").value("No. Placas");
+		ws.cell("E1").value("No. Tarjeta de Circulación");
+		ws.cell("F1").value("Folio Verificación");
+		for (size_t i = 0; i < remo->getNo_eco().size(); i++)
+		{
+			ws.cell("A" + std::to_string(i + 2)).value(atoi(remo->getNo_eco()[i].c_str()));
+			ws.cell("B" + std::to_string(i + 2)).value(remo->getmarca()[i]);
+			ws.cell("C" + std::to_string(i + 2)).value(atoi(remo->getmodelo()[i].c_str()));
+			ws.cell("D" + std::to_string(i + 2)).value(remo->getno_placas()[i]);
+			ws.cell("E" + std::to_string(i + 2)).value(remo->getno_tc()[i]);
+			ws.cell("F" + std::to_string(i + 2)).value(atoi(remo->getfo_verifica()[i].c_str()));
+		}
+		remo->vaciar();
+		wb.save("Remolques.xlsx");
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void win_main::crea_xls_operador()
+{
+	try
+	{
+		ope->carga_datos(id);
+		xlnt::workbook wb;
+		xlnt::worksheet ws = wb.active_sheet();
+		ws.cell("A1").value("ID");
+		ws.cell("B1").value("Nombre");
+		ws.cell("C1").value("RFC");
+		ws.cell("D1").value("CURP");
+		ws.cell("E1").value("No. IMSS");
+		ws.cell("F1").value("No. Licencia");
+		ws.cell("G1").value("Fecha de Ingreso");
+		for (size_t i = 0; i < ope->getid().size(); i++)
+		{
+			ws.cell("A" + std::to_string(i + 2)).value(atoi(ope->getid()[i].c_str()));
+			ws.cell("B" + std::to_string(i + 2)).value(ope->getnombre()[i]);
+			ws.cell("C" + std::to_string(i + 2)).value(ope->getrfc()[i]);
+			ws.cell("D" + std::to_string(i + 2)).value(ope->getcurp()[i]);
+			ws.cell("E" + std::to_string(i + 2)).value(atoi(ope->getno_imss()[i].c_str()));
+			ws.cell("F" + std::to_string(i + 2)).value(atoi(ope->getno_licensia()[i].c_str()));
+			ws.cell("G" + std::to_string(i + 2)).value(ope->getfecha()[i]);
+		}
+		ope->vaciar();
+		wb.save("Operadores.xlsx");
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void win_main::crea_xls_ayudante()
+{
+	try
+	{
+		ayu->carga_datos(id);
+		xlnt::workbook wb;
+		xlnt::worksheet ws = wb.active_sheet();
+		ws.cell("A1").value("ID");
+		ws.cell("B1").value("Nombre");
+		ws.cell("C1").value("RFC");
+		ws.cell("E1").value("No. IMSS");
+		ws.cell("F1").value("Otro");
+		for (size_t i = 0; i < ayu->get_id().size(); i++)
+		{
+			ws.cell("A" + std::to_string(i + 2)).value(atoi(ayu->get_id()[i].c_str()));
+			ws.cell("B" + std::to_string(i + 2)).value(ayu->get_nombre()[i]);
+			ws.cell("C" + std::to_string(i + 2)).value(ayu->get_rfc()[i]);
+			ws.cell("E" + std::to_string(i + 2)).value(atoi(ayu->get_no_imss()[i].c_str()));
+			ws.cell("F" + std::to_string(i + 2)).value(ayu->get_otro()[i]);
+		}
+		ayu->vaciar();
+		wb.save("Ayudantes.xlsx");
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void win_main::crea_xls_poblacion()
+{
+	try
+	{
+		pob->carga_datos(id);
+		xlnt::workbook wb;
+		xlnt::worksheet ws = wb.active_sheet();
+		ws.cell("A1").value("ID");
+		ws.cell("B1").value("Nombre");
+		ws.cell("C1").value("Estado");
+		ws.cell("D1").value("Distancia");
+		for (size_t i = 0; i < pob->get_id().size(); i++)
+		{
+			ws.cell("A" + std::to_string(i + 2)).value(atoi(pob->get_id()[i].c_str()));
+			ws.cell("B" + std::to_string(i + 2)).value(pob->get_nombre()[i]);
+			ws.cell("C" + std::to_string(i + 2)).value(pob->get_estado()[i]);
+			ws.cell("D" + std::to_string(i + 2)).value(atoi(pob->get_distancia()[i].c_str()));
+		}
+		pob->vaciar();
+		wb.save("Poblaciones.xlsx");
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void win_main::crea_xls_ruta()
+{
+	try
+	{
+		rut->carga_datos(id);
+		xlnt::workbook wb;
+		xlnt::worksheet ws = wb.active_sheet();
+		ws.cell("A1").value("ID");
+		ws.cell("B1").value("Origen");
+		ws.cell("C1").value("Destino");
+		ws.cell("D1").value("Distancia");
+		ws.cell("E1").value("Tiempo Estimado");
+		for (size_t i = 0; i < rut->get_id().size(); i++)
+		{
+			ws.cell("A" + std::to_string(i + 2)).value(atoi(rut->get_id()[i].c_str()));
+			ws.cell("B" + std::to_string(i + 2)).value(rut->get_origen()[i]);
+			ws.cell("C" + std::to_string(i + 2)).value(rut->get_destino()[i]);
+			ws.cell("D" + std::to_string(i + 2)).value(atoi(rut->get_distancia()[i].c_str()));
+			ws.cell("E" + std::to_string(i + 2)).value(rut->get_tiempo_estimado()[i].c_str());
+		}
+		rut->vaciar();
+		wb.save("Rutas.xlsx");
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void win_main::crea_xls_producto()
+{
+	try
+	{
+		pro->carga_datos(id);
+		xlnt::workbook wb;
+		xlnt::worksheet ws = wb.active_sheet();
+		ws.cell("A1").value("ID");
+		ws.cell("B1").value("Nombre");
+		ws.cell("C1").value("Unidad");
+		ws.cell("D1").value("Tarifa");
+		ws.cell("E1").value("Otro");
+		for (size_t i = 0; i < pro->get_id().size(); i++)
+		{
+			ws.cell("A" + std::to_string(i + 2)).value(atoi(pro->get_id()[i].c_str()));
+			ws.cell("B" + std::to_string(i + 2)).value(pro->get_nombre()[i]);
+			ws.cell("C" + std::to_string(i + 2)).value(pro->get_unidad()[i]);
+			ws.cell("D" + std::to_string(i + 2)).value(atoi(pro->get_tarifa()[i].c_str()));
+			ws.cell("E" + std::to_string(i + 2)).value(pro->get_otro()[i]);
+		}
+		pro->vaciar();
+		pro->get_otro().clear();
+		wb.save("Productos.xlsx");
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void win_main::crea_xls_cliente()
+{
+	try
+	{
+		cli->carga_datos(id);
+		xlnt::workbook wb;
+		xlnt::worksheet ws = wb.active_sheet();
+		ws.cell("A1").value("ID");
+		ws.cell("B1").value("Razon Social");
+		ws.cell("C1").value("RFC");
+		ws.cell("D1").value("Giro");
+		ws.cell("E1").value("Direccion Fiscal");
+		ws.cell("F1").value("Tarifa");
+		ws.cell("G1").value("Tipo de Cliente");
+		ws.cell("H1").value("Domicilio");
+		for (size_t i = 0; i < cli->get_id().size(); i++)
+		{
+			ws.cell("A" + std::to_string(i + 2)).value(atoi(cli->get_id()[i].c_str()));
+			ws.cell("B" + std::to_string(i + 2)).value(cli->get_razon_social()[i]);
+			ws.cell("C" + std::to_string(i + 2)).value(cli->get_rfc()[i]);
+			ws.cell("D" + std::to_string(i + 2)).value(cli->get_giro()[i]);
+			ws.cell("E" + std::to_string(i + 2)).value(cli->get_direccion_fiscal()[i]);
+			ws.cell("F" + std::to_string(i + 2)).value(atoi(cli->get_tarifa()[i].c_str()));
+			ws.cell("G" + std::to_string(i + 2)).value(cli->get_tipo_cliente()[i]);
+			ws.cell("H" + std::to_string(i + 2)).value(cli->get_domicilio()[i]);
+		}
+		cli->vaciar();
+		wb.save("Clientes.xlsx");
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void win_main::crea_xls_tarifa()
+{
+	try
+	{
+		tar->carga_datos(id);
+		xlnt::workbook wb;
+		xlnt::worksheet ws = wb.active_sheet();
+		ws.cell("A1").value("ID");
+		ws.cell("B1").value("Por Tonelada");
+		ws.cell("C1").value("Por Litrp");
+		ws.cell("D1").value("Por Viaje");
+		ws.cell("E1").value("Otro");
+		for (size_t i = 0; i < tar->get_id().size(); i++)
+		{
+			ws.cell("A" + std::to_string(i + 2)).value(atof(tar->get_id()[i].c_str()));
+			ws.cell("B" + std::to_string(i + 2)).value(atof(tar->get_tarifa_tonelada()[i].c_str()));
+			ws.cell("C" + std::to_string(i + 2)).value(atof(tar->get_tarifa_litro()[i].c_str()));
+			ws.cell("D" + std::to_string(i + 2)).value(atof(tar->get_tarifa_viaje()[i].c_str()));
+			ws.cell("E" + std::to_string(i + 2)).value(tar->get_otro()[i]);
+		}
+		tar->vaciar();
+		wb.save("Tarifas.xlsx");
+	}
+	catch (std::exception &e)
+	{
+		std::cout << e.what() << std::endl;
+	}
+}
+
+void win_main::on_btn_export_excel_clicked()
+{
+	if (radiobutton4->get_active())
+	{
+		hilo2 = new std::thread([this]()
+								{ 
+									btn_export_excel->set_sensitive(false);
+									m_bActivityMode = true;
+									progress_view->set_text("Exportando Catálogos en Excel...");
+									progress_view->set_show_text(true);
+									progress_view->pulse();
+									std::cout << "imprime todos los catalogos" << std::endl;
+									crea_xls_tractor();
+									crea_xls_remolque();
+									crea_xls_operador();
+									crea_xls_ayudante();
+									crea_xls_poblacion();
+									crea_xls_ruta();
+									crea_xls_producto();
+									crea_xls_cliente();
+									crea_xls_tarifa();
+									btn_export_excel->set_sensitive(true);
+									progress_view->set_show_text(false);
+									progress_view->set_fraction(1.0);
+									m_bActivityMode = false; });
+
+		// delete hilo2;
+		hilo2->detach();
+	}
+	else if (radiobutton5->get_active())
+	{
+		// imprime solo los catalogos seleccionado
+		hilo2 = new std::thread([this]()
+								{ 
+		btn_export_excel->set_sensitive(false);
+									m_bActivityMode = true;
+									progress_view->set_text("Exportando Catálogos en Excel...");
+									progress_view->set_show_text(true);
+									progress_view->pulse();
+		std::cout << "imprime solo los catalogos seleccionado" << std::endl;
+		if (ch_1->get_active())
+		{
+			crea_xls_tractor();
+		}
+		if (ch_2->get_active())
+		{
+			crea_xls_remolque();
+		}
+		if (ch_3->get_active())
+		{
+			crea_xls_operador();
+		}
+		if (ch_4->get_active())
+		{
+			crea_xls_ayudante();
+		}
+		if (ch_5->get_active())
+		{
+			crea_xls_poblacion();
+		}
+		if (ch_6->get_active())
+		{
+			crea_xls_ruta();
+		}
+		if (ch_7->get_active())
+		{
+			crea_xls_producto();
+		}
+		if (ch_8->get_active())
+		{
+			crea_xls_cliente();
+		}
+		if (ch_9->get_active())
+		{
+			crea_xls_tarifa();
+		}
+		btn_export_excel->set_sensitive(true);
+									progress_view->set_show_text(false);
+									progress_view->set_fraction(1.0);
+									m_bActivityMode = false; });
+	}
+	else if (radiobutton6->get_active())
+	{
+		// imprime solo el catalogo seleccionado
+		std::cout << "imprime solo el catalogo seleccionado" << std::endl;
+	}
+	else
+	{
+		Gtk::MessageDialog dialog(*win_operacion, "No se ha seleccionado ningun catalogo", false, Gtk::MESSAGE_ERROR);
+		dialog.set_title("Error");
+		dialog.run();
+	}
+	// hilo->detach();
 }

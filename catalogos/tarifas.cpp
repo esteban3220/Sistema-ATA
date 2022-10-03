@@ -83,3 +83,11 @@ void tarifas::remove_tarifa(std::string bd, std::string id){
     }
     mysql_close(con);
 }
+
+void tarifas::vaciar(){
+    id.clear();
+    tafifa_tonelada.clear();
+    tarifa_litro.clear();
+    tarifa_viaje.clear();
+    otro.clear();
+}

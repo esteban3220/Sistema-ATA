@@ -15,8 +15,7 @@ class win_main
 {
 private:
     std::string id;
-    std::thread *hilo;
-    std::mutex *mutex;
+    std::thread *hilo,*hilo2;
     builder *ui = new builder();
     tractores *tra = new tractores();
     remolques *remo = new remolques();
@@ -27,18 +26,22 @@ private:
     productos *pro = new productos();
     clientes *cli = new clientes();
     tarifas *tar = new tarifas();
+
     Gtk::Window *win_operacion;
     Gtk::InfoBar *bar_info;
+    Gtk::RadioButton *radiobutton4, *radiobutton5, *radiobutton6;
+    Gtk::CheckButton *ch_1, *ch_2, *ch_3, *ch_4, *ch_5, *ch_6, *ch_7, *ch_8, *ch_9, *ch_10;
     Gtk::TreeView *tree1, *tree2, *tree3, *tree4, *tree5, *tree6, *tree7, *tree8, *tree9, *tree10;
     Gtk::Button *btn_add1, *btn_add2, *btn_add3, *btn_add4, *btn_add5, *btn_add6, *btn_add7, *btn_add8, *btn_add9, *btn_add10;
     Gtk::Button *btn_edit_1, *btn_edit_2, *btn_edit_3, *btn_edit_4, *btn_edit_5, *btn_edit_6, *btn_edit_7, *btn_edit_8, *btn_edit_9, *btn_edit_10;
     Gtk::Button *btn_remove_1, *btn_remove_2, *btn_remove_3, *btn_remove_4, *btn_remove_5, *btn_remove_6, *btn_remove_7, *btn_remove_8, *btn_remove_9, *btn_remove_10;
     Gtk::Button *btn_back_1, *btn_back_2, *btn_back_3, *btn_back_4, *btn_back_5, *btn_back_6, *btn_back_7, *btn_back_8, *btn_back_9, *btn_back_10;
-    Gtk::Button *btn_print,*btn_excel;
+    Gtk::Button *btn_export_excel;
+    Gtk::MenuButton *btn_cat_export;
     Gtk::ButtonBox *box_opcion1, *box_opcion2, *box_opcion3, *box_opcion4, *box_opcion5, *box_opcion6, *box_opcion7, *box_opcion8, *box_opcion9, *box_opcion10;
     Gtk::SpinButton *spin_pob_distancia, *spin_rut_hora, *spin_rut_min, *spin_rut_seg, *spin_pro_tarifa, *spin_cli_tarifa,
         *spin_tar_tonelada, *spin_tar_litro, *spin_tar_viaje, *spin_tar_otro, *spin_tar_verificacion, *spin_remo_verificacion, *spin_ope_licencia;
-    Gtk::ComboBoxText *cb_pro_unidad, *cb_cli_tipo, *cb_rut_origen, *cb_rut_destino;
+    Gtk::ComboBoxText *cb_pro_unidad, *cb_cli_tipo, *cb_rut_origen, *cb_rut_destino, *cb_export_cat;
     Gtk::Entry *ety_tra_marca, *ety_tra_modelo, *ety_tra_placas, *ety_tra_tarjeta;
     Gtk::Entry *ety_remo_marca, *ety_remo_modelo, *ety_remo_placas, *ety_remo_tarjeta;
     Gtk::Entry *ety_ope_nombre, *ety_ope_rfc, *ety_ope_curp, *ety_ope_imss, *ety_ope_fecha;
@@ -47,7 +50,7 @@ private:
     Gtk::Entry *ety_rut_distancia;
     Gtk::Entry *ety_pro_nombre, *ety_pro_otro;
     Gtk::Entry *ety_cli_razon, *ety_cli_rfc, *ety_cli_giro, *ety_cli_direccion, *ety_cli_domicilio;
-    Gtk::Label *lbl1, *lbl2, *lbl3, *lbl4, *lbl5, *lbl6, *lbl7, *lbl8, *lbl9, *lbl10,*lbl_info;
+    Gtk::Label *lbl1, *lbl2, *lbl3, *lbl4, *lbl5, *lbl6, *lbl7, *lbl8, *lbl9, *lbl10,*lbl_info, *lbl_status_exp;
     Gtk::Revealer *reveal1,*reveal2,*reveal3,*reveal4,*reveal5,*reveal6,*reveal7,*reveal8,*reveal9,*reveal10,*reveal_info;
     Gtk::Stack *stack_cat_1, *stack_cat_2, *stack_cat_3, *stack_cat_4, *stack_cat_5, *stack_cat_6, *stack_cat_7, *stack_cat_8, *stack_cat_9, *stack_cat_10;
     Gtk::Popover *pop_cal;
@@ -55,9 +58,28 @@ private:
     Gtk::ToggleButton *toogle_sidebar;
     Gtk::ProgressBar *progress_view;
     Gtk::Spinner *spinner_login;
+    Gtk::Expander *exp_cat;
     bool m_bActivityMode;
     sigc::connection m_connection_timeout;
     bool on_timeout();
+    bool cat[9];
+
+    void on_radiobutton6_toggled();
+    void on_radiobutton4_toggled();
+    void on_radiobutton5_toggled();
+
+    void on_btn_export_excel_clicked();
+
+    void crea_xls_tractor();
+    void crea_xls_remolque();
+    void crea_xls_operador();
+    void crea_xls_ayudante();
+    void crea_xls_poblacion();
+    void crea_xls_ruta();
+    void crea_xls_producto();
+    void crea_xls_cliente();
+    void crea_xls_tarifa();
+
     // init tablas
     void llena_tractor();
     void llena_remolque();
@@ -160,11 +182,10 @@ private:
     void on_btn_back_9_clicked();
     //void on_btn_back_10_clicked();
     void on_toogle_sidebar_toggled();
-    void on_btn_print_clicked();
-    void on_btn_excel_clicked();
 
     // lista_tablas
     Gtk::TreeModel::Row row;
+
     Glib::RefPtr<Gtk::ListStore> ListTractor;
     Glib::RefPtr<Gtk::ListStore> ListRemolque;
     Glib::RefPtr<Gtk::ListStore> ListOperador;

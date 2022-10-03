@@ -31,6 +31,7 @@ void login::run()
     win_verificacion->show_all();
     hilo = new std::thread([this](){ init(); });
     win_login->show_all();
+    hilo->detach();
 }
 
 void login::init()
@@ -79,7 +80,9 @@ void login::init()
         }
         catch (const std::exception &e)
         {
-            std::cerr << e.what() << '\n';
+            std::cout << e.what() << '\n';
+            lbl_status_herr->set_text("Error al verificar la conexion con el servidor. \nSi el problema persiste contacte al administrador del sistema.");
+            g_print(e.what());
         }
     }
 }
@@ -131,7 +134,7 @@ void login::secion()
         mensaje.set_secondary_text("No se puede conectar ala Base de Datos. Por favor intentelo en otro momento.");
         mensaje.set_icon_name("dialog-error-symbolic");
         mensaje.set_title("ATA");
-        g_printerr( e.what());
+        g_print( e.what());
         mensaje.run();
         spinner_login->stop();
     }

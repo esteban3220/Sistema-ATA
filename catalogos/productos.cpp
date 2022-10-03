@@ -81,3 +81,12 @@ void productos::remove_producto(std::string bd, std::string id){
     }
     mysql_close(con);
 }
+
+void productos::vaciar()
+{
+    id.clear();
+    nombre.clear();
+    unidad.clear();
+    tarifa.clear();
+    otro.clear();
+}

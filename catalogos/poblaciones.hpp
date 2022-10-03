@@ -9,31 +9,31 @@ private:
     std::vector<std::string> estado;
     std::vector<std::string> distancia;
 
-    void set_id(const char *id){
+    inline void set_id(const char *id){
         this->id.push_back(id);
     }
-    void set_nombre(const char *nombre){
+    inline void set_nombre(const char *nombre){
         this->nombre.push_back(nombre);
     }
-    void set_estado(const char *estado){
+    inline void set_estado(const char *estado){
         this->estado.push_back(estado);
     }
-    void set_distancia(const char *distancia){
+    inline void set_distancia(const char *distancia){
         this->distancia.push_back(distancia);
     }
 public:
     poblaciones(/* args */);
     ~poblaciones();
-    std::vector<std::string> get_id(){
+    inline std::vector<std::string> get_id(){
         return this->id;
     }
-    std::vector<std::string> get_nombre(){
+    inline std::vector<std::string> get_nombre(){
         return this->nombre;
     }
-    std::vector<std::string> get_estado(){
+    inline std::vector<std::string> get_estado(){
         return this->estado;
     }
-    std::vector<std::string> get_distancia(){
+    inline std::vector<std::string> get_distancia(){
         return this->distancia;
     }
 
@@ -42,5 +42,6 @@ public:
     void add_poblacion(std::string id, std::string nombre, std::string estado, std::string distancia);
     void update_poblacion(std::string bd,std::string id, std::string nombre, std::string estado, std::string distancia);
     void remove_poblacion(std::string bd,std::string id);
+    void vaciar();   
 };
 

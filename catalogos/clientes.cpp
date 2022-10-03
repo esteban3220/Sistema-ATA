@@ -85,3 +85,14 @@ void clientes::remove_cliente(std::string bd, std::string id)
     }
     mysql_close(con);
 }
+
+void clientes::vaciar(){
+    id.clear();
+    razon_social.clear();
+    rfc.clear();
+    giro.clear();
+    direccion_fiscal.clear();
+    tarifa.clear();
+    tipo_cliente.clear();
+    domicilio.clear();
+}

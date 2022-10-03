@@ -84,3 +84,12 @@ void tractores::remove_tractor(std::string id, std::string no_eco)
     }
     mysql_close(conn);
 }
+
+void tractores::vaciar(){
+    No_eco.clear();
+    Marca.clear();
+    Modelo.clear();
+    No_placas.clear();
+    No_tc.clear();
+    Fo_verifica.clear();
+}

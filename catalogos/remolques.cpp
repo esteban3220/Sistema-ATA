@@ -80,3 +80,12 @@ void remolques::remove_remolque(std::string bd,std::string no_economico){
     }
     mysql_close(con);
 }
+
+void remolques::vaciar(){
+    No_eco.clear();
+    Marca.clear();
+    Modelo.clear();
+    No_placas.clear();
+    No_tc.clear();
+    Fo_verifica.clear();
+}

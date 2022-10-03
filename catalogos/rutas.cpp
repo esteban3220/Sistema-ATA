@@ -80,3 +80,11 @@ void rutas::remove_ruta(std::string bd, std::string id){
     }
     mysql_close(con);
 }
+
+void rutas::vaciar(){
+    id.clear();
+    origen.clear();
+    destino.clear();
+    distancia.clear();
+    tiempo_estimado.clear();
+}

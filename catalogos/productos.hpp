@@ -10,23 +10,23 @@ private:
     std::vector<std::string> tarifa;
     std::vector<std::string> otro;
 
-    void set_id(std::string id)
+    inline void set_id(std::string id)
     {
         this->id.push_back(id);
     }
-    void set_nombre(std::string nombre)
+    inline void set_nombre(std::string nombre)
     {
         this->nombre.push_back(nombre);
     }
-    void set_unidad(std::string unidad)
+    inline void set_unidad(std::string unidad)
     {
         this->unidad.push_back(unidad);
     }
-    void set_tarifa(std::string tarifa)
+    inline void set_tarifa(std::string tarifa)
     {
         this->tarifa.push_back(tarifa);
     }
-    void set_otro(std::string otro)
+    inline void set_otro(std::string otro)
     {
         this->otro.push_back(otro);
     }
@@ -34,23 +34,23 @@ public:
     productos(/* args */);
     ~productos();
     void carga_datos(std::string bd);
-    std::vector<std::string> get_id()
+    inline std::vector<std::string> get_id()
     {
         return this->id;
     }
-    std::vector<std::string> get_nombre()
+    inline std::vector<std::string> get_nombre()
     {
         return this->nombre;
     }
-    std::vector<std::string> get_unidad()
+    inline std::vector<std::string> get_unidad()
     {
         return this->unidad;
     }
-    std::vector<std::string> get_tarifa()
+    inline std::vector<std::string> get_tarifa()
     {
         return this->tarifa;
     }
-    std::vector<std::string> get_otro()
+    inline std::vector<std::string> get_otro()
     {
         return this->otro;
     }
@@ -58,4 +58,5 @@ public:
     void add_producto(std::string id, std::string nombre, std::string unidad, std::string tarifa, std::string otro);
     void update_producto(std::string bd,std::string id, std::string nombre, std::string unidad, std::string tarifa, std::string otro);
     void remove_producto(std::string bd, std::string id);
+    void vaciar();
 };

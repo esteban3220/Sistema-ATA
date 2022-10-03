@@ -79,3 +79,10 @@ void poblaciones::remove_poblacion(std::string bd,std::string id){
     }
     mysql_close(con);
 }
+
+void poblaciones::vaciar(){
+    id.clear();
+    nombre.clear();
+    estado.clear();
+    distancia.clear();
+}

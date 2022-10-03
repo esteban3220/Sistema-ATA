@@ -79,3 +79,13 @@ void operador::remove_operador(std::string bd, std::string id){
     }
     mysql_close(con);
 }
+
+void operador::vaciar(){
+    id.clear();
+    nombre.clear();
+    rfc.clear();
+    curp.clear();
+    no_imss.clear();
+    no_licensia.clear();
+    fecha_ingreso.clear();
+}

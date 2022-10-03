@@ -16,42 +16,43 @@ private:
     std::string _distancia;
     std::string _tiempo_estimado;
 */
-    void set_id(const char *id){
+    inline void set_id(const char *id){
         this->id.push_back(id);
     }
-    void set_origen(const char *origen){
+    inline void set_origen(const char *origen){
         this->origen.push_back(origen);
     }
-    void set_destino(const char *destino){
+    inline void set_destino(const char *destino){
         this->destino.push_back(destino);
     }
-    void set_distancia(const char *distancia){
+    inline void set_distancia(const char *distancia){
         this->distancia.push_back(distancia);
     }
-    void set_tiempo(const char *tiempo_estimado){
+    inline void set_tiempo(const char *tiempo_estimado){
         this->tiempo_estimado.push_back(tiempo_estimado);
     }
 public:
     rutas(void);
     ~rutas();
     void carga_datos(std::string id);
-    std::vector<std::string> get_id(){
+    inline std::vector<std::string> get_id(){
         return this->id;
     }
-    std::vector<std::string> get_origen(){
+    inline std::vector<std::string> get_origen(){
         return this->origen;
     }
-    std::vector<std::string> get_destino(){
+    inline std::vector<std::string> get_destino(){
         return this->destino;
     }
-    std::vector<std::string> get_distancia(){
+    inline std::vector<std::string> get_distancia(){
         return this->distancia;
     }
-    std::vector<std::string> get_tiempo_estimado(){
+    inline std::vector<std::string> get_tiempo_estimado(){
         return this->tiempo_estimado;
     }
     unsigned getsize(std::string bd);
     void add_ruta(std::string id, std::string origen, std::string destino, std::string distancia, std::string tiempo_estimado);
     void update_ruta(std::string bd ,std::string id, std::string origen, std::string destino, std::string distancia, std::string tiempo_estimado);
     void remove_ruta(std::string bd,std::string id);
+    void vaciar();
 };

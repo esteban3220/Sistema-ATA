@@ -10,37 +10,37 @@ private:
     std::vector<std::string> no_imss;
     std::vector<std::string> otro;
 
-    void set_id(const char *id){
+    inline void set_id(const char *id){
         this->id.push_back(id);
     }
-    void set_nombre(const char *nombre){
+    inline void set_nombre(const char *nombre){
         this->nombre.push_back(nombre);
     }
-    void set_rfc(const char *rfc){
+    inline void set_rfc(const char *rfc){
         this->rfc.push_back(rfc);
     }
-    void set_no_imss(const char *no_imss){
+    inline void set_no_imss(const char *no_imss){
         this->no_imss.push_back(no_imss);
     }
-    void set_otro(const char *otro){
+    inline void set_otro(const char *otro){
         this->otro.push_back(otro);
     }
 public:
     ayudantes(void);
     ~ayudantes();
-    std::vector<std::string> get_id(){
+    inline std::vector<std::string> get_id(){
         return this->id;
     }
-    std::vector<std::string> get_nombre(){
+    inline std::vector<std::string> get_nombre(){
         return this->nombre;
     }
-    std::vector<std::string> get_rfc(){
+    inline std::vector<std::string> get_rfc(){
         return this->rfc;
     }
-    std::vector<std::string> get_no_imss(){
+    inline std::vector<std::string> get_no_imss(){
         return this->no_imss;
     }
-    std::vector<std::string> get_otro(){
+    inline std::vector<std::string> get_otro(){
         return this->otro;
     }
     void add_ayudante(std::string id, std::string nombre, std::string rfc, std::string no_imss, std::string otro);
@@ -48,6 +48,7 @@ public:
     void remove_ayudante(std::string bd, std::string id);
     void carga_datos(std::string id);
     unsigned getsize(std::string bd);
+    void vaciar();
 };
 
 

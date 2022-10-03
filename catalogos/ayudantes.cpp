@@ -80,3 +80,11 @@ void ayudantes::remove_ayudante(std::string bd, std::string id){
     }
     mysql_close(con);
 }
+
+void ayudantes::vaciar(){
+    id.clear();
+    nombre.clear();
+    rfc.clear();
+    no_imss.clear();
+    otro.clear();
+}
