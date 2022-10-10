@@ -2,19 +2,15 @@
 <!-- Generated with glade 3.40.0 
 
 The MIT License (MIT)
-
 Copyright (c) 
-
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
 in the Software without restriction, including without limitation the rights
 to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
-
 The above copyright notice and this permission notice shall be included in
 all copies or substantial portions of the Software.
-
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -396,9 +392,6 @@ THE SOFTWARE.
             <property name="can-focus">False</property>
             <property name="label" translatable="yes">Exportando Catalogo...</property>
             <property name="use-underline">True</property>
-            <attributes>
-              <attribute name="variant" value="all-small-caps"/>
-            </attributes>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -429,27 +422,62 @@ THE SOFTWARE.
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment10">
-    <property name="upper">100</property>
+    <property name="upper">100000000000000</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment11">
-    <property name="upper">100000000000</property>
+    <property name="upper">100000000000000</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment12">
-    <property name="upper">100000000000</property>
+    <property name="upper">100000000000000</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment13">
-    <property name="upper">10000000</property>
+    <property name="upper">100000000000000</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment14">
+    <property name="upper">59</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment15">
+    <property name="upper">59</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment16">
+    <property name="upper">1000</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment17">
+    <property name="upper">100000000000</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment18">
+    <property name="upper">100000000000</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment19">
+    <property name="upper">100000000000</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment2">
     <property name="upper">59</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment20">
+    <property name="upper">9.9999999999999998e+37</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
@@ -459,12 +487,12 @@ THE SOFTWARE.
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment4">
-    <property name="upper">1000000000000</property>
+    <property name="upper">100000000000000</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment5">
-    <property name="upper">10000000000</property>
+    <property name="upper">100000000000000</property>
     <property name="step-increment">1</property>
     <property name="page-increment">10</property>
   </object>
@@ -536,7 +564,7 @@ THE SOFTWARE.
                     <property name="margin-bottom">73</property>
                     <property name="label" translatable="yes">Login</property>
                     <attributes>
-                      <attribute name="variant" value="small-caps"/>
+                      <attribute name="weight" value="bold"/>
                       <attribute name="size" value="36864"/>
                     </attributes>
                   </object>
@@ -1493,9 +1521,7 @@ THE SOFTWARE.
               <object class="GtkCalendar">
                 <property name="visible">True</property>
                 <property name="can-focus">True</property>
-                <property name="year">2022</property>
-                <property name="month">9</property>
-                <property name="day">9</property>
+                <property name="show-week-numbers">True</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1532,6 +1558,7 @@ THE SOFTWARE.
                         <property name="can-focus">True</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
+                        <property name="adjustment">adjustment16</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1583,6 +1610,7 @@ THE SOFTWARE.
                         <property name="can-focus">True</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
+                        <property name="adjustment">adjustment14</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1634,6 +1662,7 @@ THE SOFTWARE.
                         <property name="can-focus">True</property>
                         <property name="valign">center</property>
                         <property name="orientation">vertical</property>
+                        <property name="adjustment">adjustment15</property>
                       </object>
                       <packing>
                         <property name="expand">False</property>
@@ -1922,8 +1951,9 @@ THE SOFTWARE.
   </object>
   <object class="GtkWindow" id="win_operacion">
     <property name="can-focus">False</property>
-    <property name="default-width">848</property>
-    <property name="default-height">640</property>
+    <property name="default-width">1220</property>
+    <property name="default-height">740</property>
+    <property name="destroy-with-parent">True</property>
     <child>
       <object class="GtkStack" id="stack_main">
         <property name="visible">True</property>
@@ -6390,6 +6420,7 @@ THE SOFTWARE.
                   <object class="GtkStack" id="stack_orden">
                     <property name="visible">True</property>
                     <property name="can-focus">False</property>
+                    <property name="transition-type">crossfade</property>
                     <child>
                       <object class="GtkBox">
                         <property name="visible">True</property>
@@ -6435,19 +6466,6 @@ THE SOFTWARE.
                                                     <property name="can-focus">False</property>
                                                     <property name="spacing">3</property>
                                                     <property name="homogeneous">True</property>
-                                                    <child>
-                                                      <object class="GtkEntry" id="ety_orden_lugar">
-                                                        <property name="visible">True</property>
-                                                        <property name="can-focus">True</property>
-                                                        <property name="primary-icon-name">daytime-sunset-symbolic</property>
-                                                        <property name="placeholder-text" translatable="yes">Lugar de Emision</property>
-                                                      </object>
-                                                      <packing>
-                                                        <property name="expand">False</property>
-                                                        <property name="fill">True</property>
-                                                        <property name="position">0</property>
-                                                      </packing>
-                                                    </child>
                                                     <child>
                                                       <object class="GtkEntry" id="ety_orden_fecha">
                                                         <property name="visible">True</property>
@@ -6498,6 +6516,20 @@ THE SOFTWARE.
                                                   <object class="GtkBox">
                                                     <property name="visible">True</property>
                                                     <property name="can-focus">False</property>
+                                                    <property name="spacing">3</property>
+                                                    <child>
+                                                      <object class="GtkEntry" id="ety_orden_lugar">
+                                                        <property name="visible">True</property>
+                                                        <property name="can-focus">True</property>
+                                                        <property name="primary-icon-name">daytime-sunset-symbolic</property>
+                                                        <property name="placeholder-text" translatable="yes">Lugar de Emision</property>
+                                                      </object>
+                                                      <packing>
+                                                        <property name="expand">True</property>
+                                                        <property name="fill">True</property>
+                                                        <property name="position">0</property>
+                                                      </packing>
+                                                    </child>
                                                     <child>
                                                       <object class="GtkComboBoxText" id="cb_orden_empresa">
                                                         <property name="visible">True</property>
@@ -6514,11 +6546,8 @@ THE SOFTWARE.
                                                       <packing>
                                                         <property name="expand">True</property>
                                                         <property name="fill">True</property>
-                                                        <property name="position">0</property>
+                                                        <property name="position">1</property>
                                                       </packing>
-                                                    </child>
-                                                    <child>
-                                                      <placeholder/>
                                                     </child>
                                                   </object>
                                                   <packing>
@@ -7401,7 +7430,6 @@ THE SOFTWARE.
                                 <property name="can-focus">False</property>
                                 <property name="margin-start">3</property>
                                 <property name="margin-top">3</property>
-                                <property name="margin-bottom">3</property>
                                 <property name="label-xalign">0</property>
                                 <property name="shadow-type">in</property>
                                 <child>
@@ -7436,6 +7464,8 @@ THE SOFTWARE.
                                           <object class="GtkSpinButton" id="spin_orden_efectivo">
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
+                                            <property name="adjustment">adjustment17</property>
+                                            <property name="digits">2</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -7473,6 +7503,8 @@ THE SOFTWARE.
                                           <object class="GtkSpinButton" id="spin_orden_vales">
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
+                                            <property name="adjustment">adjustment18</property>
+                                            <property name="digits">2</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -7510,6 +7542,8 @@ THE SOFTWARE.
                                           <object class="GtkSpinButton" id="spin_orden_iave">
                                             <property name="visible">True</property>
                                             <property name="can-focus">True</property>
+                                            <property name="adjustment">adjustment19</property>
+                                            <property name="digits">2</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
@@ -7550,6 +7584,8 @@ THE SOFTWARE.
                                             <property name="visible">True</property>
                                             <property name="sensitive">False</property>
                                             <property name="can-focus">True</property>
+                                            <property name="adjustment">adjustment20</property>
+                                            <property name="digits">2</property>
                                           </object>
                                           <packing>
                                             <property name="expand">False</property>
