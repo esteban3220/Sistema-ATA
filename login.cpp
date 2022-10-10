@@ -19,7 +19,7 @@ login::login()
     ui->constructor->get_widget("spinner_login", spinner_login);
     ui->constructor->get_widget("win_verificacion", win_verificacion);
     btn_sesion->signal_clicked().connect(sigc::mem_fun(*this, &login::secion));
-    win_login->signal_delete_event().connect(sigc::mem_fun(*this,&login::cierra_Login));
+    win_login->signal_delete_event().connect(sigc::mem_fun(*this, &login::cierra_Login));
 }
 
 login::~login()
@@ -89,7 +89,6 @@ void login::init()
 
 void login::secion()
 {
-    std::vector<std::string> b;
 
     for (std::string a : con->secion(ety_user->get_text(), ety_contra->get_text()))
     {
@@ -102,9 +101,11 @@ void login::secion()
         if (!b[0].compare("Activo"))
         {
             win_main *m1 = new win_main(b[1].c_str());
+            m1->init();
+            win_login->hide();
             m1->run();
             spinner_login->stop();
-            win_login->hide();
+            std::fflush(stdout);
         }
         else
         {
@@ -134,10 +135,12 @@ void login::secion()
         mensaje.set_secondary_text("No se puede conectar ala Base de Datos. Por favor intentelo en otro momento.");
         mensaje.set_icon_name("dialog-error-symbolic");
         mensaje.set_title("ATA");
-        g_print( e.what());
+        g_print(e.what());
         mensaje.run();
         spinner_login->stop();
     }
+    
+        b.clear();
 }
 
 bool login::cierra_Login(GdkEventAny *event)

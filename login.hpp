@@ -5,6 +5,7 @@
 class login
 {
 private:
+    std::vector<std::string> b;
     builder *ui = new builder();
     coneccion *con = new coneccion();
     std::thread *hilo;

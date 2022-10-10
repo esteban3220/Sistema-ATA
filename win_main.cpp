@@ -1,14 +1,10 @@
 #include "win_main.hpp"
 #include <xlnt/xlnt.hpp>
-//#include "pdf/pdf.hpp"
+#include "pdf/pdf.hpp"
 
 win_main::win_main(std::string id)
 {
 	this->id = id;
-	for (int i = 0; i < 9; i++)
-	{
-		cat[i] = false;
-	}
 	llena_widgets();
 	conecta_senales();
 }
@@ -33,7 +29,6 @@ void win_main::llena_widgets()
 		ui->constructor->get_widget("tree9", tree9);
 		ui->constructor->get_widget("tree10", tree10);
 		ui->constructor->get_widget("progress_view", progress_view);
-		ui->constructor->get_widget("spinner_login", spinner_login);
 		ui->constructor->get_widget("lbl1", lbl1);
 		ui->constructor->get_widget("lbl2", lbl2);
 		ui->constructor->get_widget("lbl3", lbl3);
@@ -83,6 +78,44 @@ void win_main::llena_widgets()
 		ui->constructor->get_widget("ety_cli_domicilio", ety_cli_domicilio);
 		ui->constructor->get_widget("ety_cli_direccion", ety_cli_direccion);
 		ui->constructor->get_widget("ety_cli_giro", ety_cli_giro);
+
+		ui->constructor->get_widget("ety_orden_lugar", ety_orden_lugar);
+		ui->constructor->get_widget("ety_orden_fecha", ety_orden_fecha);
+		ui->constructor->get_widget("ety_cb_unidad", ety_cb_unidad);
+		ui->constructor->get_widget("ety_cb_empresa", ety_cb_empresa);
+		ui->constructor->get_widget("ety_cb_operador", ety_cb_operador);
+		ui->constructor->get_widget("ety_cb_unidad", ety_cb_unidad);
+		ui->constructor->get_widget("ety_cb_ruta", ety_cb_ruta);
+		ui->constructor->get_widget("ety_orden_razon", ety_orden_razon);
+		ui->constructor->get_widget("ety_orden_rfc", ety_orden_rfc);
+		ui->constructor->get_widget("ety_orden_giro", ety_orden_giro);
+		ui->constructor->get_widget("ety_orden_domicilio", ety_orden_domicilio);
+		ui->constructor->get_widget("ety_orden_direccion", ety_orden_direccion);
+		ui->constructor->get_widget("ety_orden_nombre", ety_orden_nombre);
+		ui->constructor->get_widget("ety_orden_rfc1", ety_orden_rfc1);
+		ui->constructor->get_widget("ety_orden_curp", ety_orden_curp);
+		ui->constructor->get_widget("ety_orden_imss", ety_orden_imss);
+		ui->constructor->get_widget("ety_orden_licen", ety_orden_licen);
+		ui->constructor->get_widget("ety_orden_marca", ety_orden_marca);
+		ui->constructor->get_widget("ety_orden_modelo", ety_orden_modelo);
+		ui->constructor->get_widget("ety_orden_placas", ety_orden_placas);
+		ui->constructor->get_widget("ety_orden_tarjeta", ety_orden_tarjeta);
+		ui->constructor->get_widget("ety_orden_verificacion", ety_orden_verificacion);
+		ui->constructor->get_widget("ety_orden_origen", ety_orden_origen);
+		ui->constructor->get_widget("ety_orden_destino", ety_orden_destino);
+		ui->constructor->get_widget("ety_orden_distancia", ety_orden_distancia);
+		ui->constructor->get_widget("ety_orden_estimado", ety_orden_estimado);
+
+		ui->constructor->get_widget("cb_orden_unidad", cb_orden_unidad);
+		ui->constructor->get_widget("cb_orden_empresa", cb_orden_empresa);
+		ui->constructor->get_widget("cb_orden_operador", cb_orden_operador);
+		ui->constructor->get_widget("cb_orden_ruta", cb_orden_ruta);
+
+		ui->constructor->get_widget("spin_orden_efectivo", spin_orden_efectivo);
+		ui->constructor->get_widget("spin_orden_vales", spin_orden_vales);
+		ui->constructor->get_widget("spin_orden_iave",spin_orden_iave);
+		ui->constructor->get_widget("spin_orden_total", spin_orden_total);
+
 		ui->constructor->get_widget("cb_rut_origen", cb_rut_origen);
 		ui->constructor->get_widget("cb_rut_destino", cb_rut_destino);
 		ui->constructor->get_widget("cb_pro_unidad", cb_pro_unidad);
@@ -100,6 +133,8 @@ void win_main::llena_widgets()
 		ui->constructor->get_widget("spin_tar_litro", spin_tar_litro);
 		ui->constructor->get_widget("spin_tar_viaje", spin_tar_viaje);
 		ui->constructor->get_widget("spin_tar_otro", spin_tar_otro);
+		ui->constructor->get_widget("spinner_login", spinner_login);
+
 		ui->constructor->get_widget("toogle_sidebar", toogle_sidebar);
 		ui->constructor->get_widget("reveal1", reveal1);
 		ui->constructor->get_widget("reveal2", reveal2);
@@ -166,12 +201,12 @@ void win_main::llena_widgets()
 		ui->constructor->get_widget("btn_back_9", btn_back_9);
 		ui->constructor->get_widget("btn_back_10", btn_back_10);
 		ui->constructor->get_widget("btn_export_excel", btn_export_excel);
+		ui->constructor->get_widget("btn_export_pdf", btn_export_pdf);
+		ui->constructor->get_widget("btn_file_chooser", btn_file_chooser);
+		ui->constructor->get_widget("pop_orden_fecha", pop_orden_fecha);
 
 		ui->constructor->get_widget("radiobutton4", radiobutton4);
 		ui->constructor->get_widget("radiobutton5", radiobutton5);
-		ui->constructor->get_widget("radiobutton6", radiobutton6);
-		ui->constructor->get_widget("exp_cat", exp_cat);
-		ui->constructor->get_widget("cb_export_cat", cb_export_cat);
 		ui->constructor->get_widget("ch_1", ch_1);
 		ui->constructor->get_widget("ch_2", ch_2);
 		ui->constructor->get_widget("ch_3", ch_3);
@@ -235,8 +270,10 @@ void win_main::conecta_senales()
 	// btn_back_10->signal_clicked().connect(sigc::mem_fun(*this, &win_main::on_btn_back_10_clicked));
 
 	btn_export_excel->signal_clicked().connect(sigc::mem_fun(*this, &win_main::on_btn_export_excel_clicked));
+	btn_export_pdf->signal_clicked().connect(sigc::mem_fun(*this, &win_main::on_btn_export_pdf_clicked));
 
 	ety_ope_fecha->signal_icon_press().connect(sigc::mem_fun(*this, &win_main::on_ety_ope_fecha_icon_press));
+	ety_orden_fecha->signal_grab_focus().connect(sigc::mem_fun(*this, &win_main::on_ety_orden_fecha_focus_in_event));
 	cal->signal_day_selected_double_click().connect(sigc::mem_fun(*this, &win_main::on_cal_day_selected_double_click));
 	bar_info->signal_response().connect(sigc::mem_fun(*this, &win_main::on_bar_info_response));
 	tree1->get_selection()->signal_changed().connect(sigc::mem_fun(*this, &win_main::on_treeview1_selection_changed));
@@ -252,30 +289,41 @@ void win_main::conecta_senales()
 
 	radiobutton4->signal_toggled().connect(sigc::mem_fun(*this, &win_main::on_radiobutton4_toggled));
 	radiobutton5->signal_toggled().connect(sigc::mem_fun(*this, &win_main::on_radiobutton5_toggled));
-	radiobutton6->signal_toggled().connect(sigc::mem_fun(*this, &win_main::on_radiobutton6_toggled));
+}
+
+void win_main::on_ety_orden_fecha_focus_in_event()
+{
+	pop_orden_fecha->set_visible(true);
+}
+
+void win_main::init(void)
+{
+	hilo = new std::thread([this]()
+						   {
+								llena_tractor(); 
+								llena_remolque(); });
+	hilo2 = new std::thread([this]()
+							{
+								llena_operadores();
+								llena_ayudantes();  });
+	hilo3 = new std::thread([this]()
+							{
+								llena_poblaciones(); 
+								llena_rutas(); 
+								llena_productos();
+								llena_clientes(); 
+								llena_tarifas(); 
+								m_bActivityMode=false;
+								progress_view->set_show_text(false); });
+	hilo->detach();
+	hilo2->detach();
+	hilo3->detach();
 }
 
 void win_main::run(void)
 {
 	win_operacion->show_all();
-	hilo = new std::thread([this]()
-						   { 
-                                spinner_login->start();
-                                llena_tractor(); 
-                                llena_remolque();
-                                llena_operadores();
-                                llena_ayudantes();
-                                llena_poblaciones();
-                                llena_rutas();
-                                llena_productos();
-                                llena_clientes();
-                                llena_tarifas();
-                                //llena_sueldos();
-                                m_bActivityMode = false; 
-                                spinner_login->stop(); });
 	// hilo->detach();
-	hilo->join();
-	delete hilo;
 }
 
 bool win_main::cierra_app(GdkEventAny *event)
@@ -306,6 +354,7 @@ bool win_main::on_timeout()
 
 void win_main::llena_tractor()
 {
+	g_mutex_lock(&mutex);
 	ListTractor = Gtk::ListStore::create(columns_tractor);
 	tree1->set_model(ListTractor);
 	tree1->append_column("No. Economico", columns_tractor.No_economico);
@@ -356,10 +405,12 @@ void win_main::llena_tractor()
 	{
 		pColumn->set_sort_column(columns_tractor.Folio_verificacion);
 	}
+	g_mutex_unlock(&mutex);
 }
 
 void win_main::llena_remolque()
 {
+	g_mutex_lock(&mutex);
 	ListRemolque = Gtk::ListStore::create(columns_remolque);
 	tree2->set_model(ListRemolque);
 	tree2->append_column("No. Economico", columns_remolque.No_economico);
@@ -371,13 +422,13 @@ void win_main::llena_remolque()
 	remo->carga_datos(id);
 	for (size_t i = 0; i < remo->getNo_eco().size(); i++)
 	{
-		row = *(ListRemolque->append());
-		row[columns_remolque.No_economico] = remo->getNo_eco()[i];
-		row[columns_remolque.Marca] = remo->getmarca()[i];
-		row[columns_remolque.Modelo] = remo->getmodelo()[i];
-		row[columns_remolque.No_placas] = remo->getno_placas()[i];
-		row[columns_remolque.No_tc] = remo->getno_tc()[i];
-		row[columns_remolque.Folio_verificacion] = remo->getfo_verifica()[i];
+		row2 = *(ListRemolque->append());
+		row2[columns_remolque.No_economico] = remo->getNo_eco()[i];
+		row2[columns_remolque.Marca] = remo->getmarca()[i];
+		row2[columns_remolque.Modelo] = remo->getmodelo()[i];
+		row2[columns_remolque.No_placas] = remo->getno_placas()[i];
+		row2[columns_remolque.No_tc] = remo->getno_tc()[i];
+		row2[columns_remolque.Folio_verificacion] = remo->getfo_verifica()[i];
 	}
 	remo->vaciar();
 	Gtk::TreeView::Column *pColumn = tree2->get_column(0);
@@ -410,10 +461,12 @@ void win_main::llena_remolque()
 	{
 		pColumn->set_sort_column(columns_remolque.Folio_verificacion);
 	}
+	g_mutex_unlock(&mutex);
 }
 
 void win_main::llena_operadores()
 {
+	g_mutex_lock(&mutex);
 	ListOperador = Gtk::ListStore::create(columns_operador);
 	tree3->set_model(ListOperador);
 	tree3->append_column("ID", columns_operador.Id);
@@ -426,14 +479,15 @@ void win_main::llena_operadores()
 	ope->carga_datos(id);
 	for (size_t i = 0; i < ope->getid().size(); i++)
 	{
-		row = *(ListOperador->append());
-		row[columns_operador.Id] = ope->getid()[i];
-		row[columns_operador.Nombre] = ope->getnombre()[i];
-		row[columns_operador.Rfc] = ope->getrfc()[i];
-		row[columns_operador.Curp] = ope->getcurp()[i];
-		row[columns_operador.No_imss] = ope->getno_imss()[i];
-		row[columns_operador.No_licen] = ope->getno_licensia()[i];
-		row[columns_operador.Fecha] = ope->getfecha()[i];
+		row3 = *(ListOperador->append());
+		row3[columns_operador.Id] = ope->getid()[i];
+		row3[columns_operador.Nombre] = ope->getnombre()[i];
+		row3[columns_operador.Rfc] = ope->getrfc()[i];
+		row3[columns_operador.Curp] = ope->getcurp()[i];
+		row3[columns_operador.No_imss] = ope->getno_imss()[i];
+		row3[columns_operador.No_licen] = ope->getno_licensia()[i];
+		row3[columns_operador.Fecha] = ope->getfecha()[i];
+		cb_orden_operador->append(ope->getnombre()[i]);
 	}
 	ope->vaciar();
 	Gtk::TreeView::Column *pColumn = tree3->get_column(0);
@@ -471,10 +525,12 @@ void win_main::llena_operadores()
 	{
 		pColumn->set_sort_column(columns_operador.Fecha);
 	}
+	g_mutex_unlock(&mutex);
 }
 
 void win_main::llena_ayudantes()
 {
+	g_mutex_lock(&mutex);
 	ListAyudante = Gtk::ListStore::create(columns_ayudante);
 	tree4->set_model(ListAyudante);
 	tree4->append_column("ID", columns_ayudante.Id);
@@ -485,12 +541,12 @@ void win_main::llena_ayudantes()
 	ayu->carga_datos(id);
 	for (size_t i = 0; i < ayu->get_id().size(); i++)
 	{
-		row = *(ListAyudante->append());
-		row[columns_ayudante.Id] = ayu->get_id()[i];
-		row[columns_ayudante.Nombre] = ayu->get_nombre()[i];
-		row[columns_ayudante.Rfc] = ayu->get_rfc()[i];
-		row[columns_ayudante.No_imss] = ayu->get_no_imss()[i];
-		row[columns_ayudante.Otro] = ayu->get_otro()[i];
+		row4 = *(ListAyudante->append());
+		row4[columns_ayudante.Id] = ayu->get_id()[i];
+		row4[columns_ayudante.Nombre] = ayu->get_nombre()[i];
+		row4[columns_ayudante.Rfc] = ayu->get_rfc()[i];
+		row4[columns_ayudante.No_imss] = ayu->get_no_imss()[i];
+		row4[columns_ayudante.Otro] = ayu->get_otro()[i];
 	}
 	ayu->vaciar();
 	Gtk::TreeView::Column *pColumn = tree4->get_column(0);
@@ -518,10 +574,12 @@ void win_main::llena_ayudantes()
 	{
 		pColumn->set_sort_column(columns_ayudante.Otro);
 	}
+	g_mutex_unlock(&mutex);
 }
 
 void win_main::llena_poblaciones()
 {
+	g_mutex_lock(&mutex);
 	ListPoblacion = Gtk::ListStore::create(columns_poblacion);
 	tree5->set_model(ListPoblacion);
 	tree5->append_column("ID", columns_poblacion.Id);
@@ -531,11 +589,11 @@ void win_main::llena_poblaciones()
 	pob->carga_datos(id);
 	for (size_t i = 0; i < pob->get_id().size(); i++)
 	{
-		row = *(ListPoblacion->append());
-		row[columns_poblacion.Id] = pob->get_id()[i];
-		row[columns_poblacion.Nombre] = pob->get_nombre()[i];
-		row[columns_poblacion.Estado] = pob->get_estado()[i];
-		row[columns_poblacion.Distancia] = pob->get_distancia()[i];
+		row5 = *(ListPoblacion->append());
+		row5[columns_poblacion.Id] = pob->get_id()[i];
+		row5[columns_poblacion.Nombre] = pob->get_nombre()[i];
+		row5[columns_poblacion.Estado] = pob->get_estado()[i];
+		row5[columns_poblacion.Distancia] = pob->get_distancia()[i];
 		cb_rut_origen->append(pob->get_estado()[i]);
 		cb_rut_destino->append(pob->get_estado()[i]);
 	}
@@ -560,10 +618,12 @@ void win_main::llena_poblaciones()
 	{
 		pColumn->set_sort_column(columns_poblacion.Distancia);
 	}
+	g_mutex_unlock(&mutex);
 }
 
 void win_main::llena_rutas()
 {
+	g_mutex_lock(&mutex);
 	ListRutas = Gtk::ListStore::create(columns_rutas);
 	tree6->set_model(ListRutas);
 	tree6->append_column("ID", columns_rutas.Id);
@@ -574,12 +634,13 @@ void win_main::llena_rutas()
 	rut->carga_datos(id);
 	for (size_t i = 0; i < rut->get_id().size(); i++)
 	{
-		row = *(ListRutas->append());
-		row[columns_rutas.Id] = rut->get_id()[i];
-		row[columns_rutas.Origen] = rut->get_origen()[i];
-		row[columns_rutas.Destino] = rut->get_destino()[i];
-		row[columns_rutas.Distancia] = rut->get_distancia()[i];
-		row[columns_rutas.Kms] = rut->get_tiempo_estimado()[i];
+		row6 = *(ListRutas->append());
+		row6[columns_rutas.Id] = rut->get_id()[i];
+		row6[columns_rutas.Origen] = rut->get_origen()[i];
+		row6[columns_rutas.Destino] = rut->get_destino()[i];
+		row6[columns_rutas.Distancia] = rut->get_distancia()[i];
+		row6[columns_rutas.Kms] = rut->get_tiempo_estimado()[i];
+		cb_orden_ruta->append(rut->get_id()[i]);
 	}
 	rut->vaciar();
 	Gtk::TreeView::Column *pColumn = tree6->get_column(0);
@@ -607,10 +668,12 @@ void win_main::llena_rutas()
 	{
 		pColumn->set_sort_column(columns_rutas.Kms);
 	}
+	g_mutex_unlock(&mutex);
 }
 
 void win_main::llena_productos()
 {
+	g_mutex_lock(&mutex);
 	ListProductos = Gtk::ListStore::create(columns_productos);
 	tree7->set_model(ListProductos);
 	tree7->append_column("ID", columns_productos.Id);
@@ -621,12 +684,12 @@ void win_main::llena_productos()
 	pro->carga_datos(id);
 	for (size_t i = 0; i < pro->get_id().size(); i++)
 	{
-		row = *(ListProductos->append());
-		row[columns_productos.Id] = pro->get_id()[i];
-		row[columns_productos.Nombre] = pro->get_nombre()[i];
-		row[columns_productos.Unidad] = pro->get_unidad()[i];
-		row[columns_productos.Tarifa] = pro->get_tarifa()[i];
-		row[columns_productos.Otro] = pro->get_otro()[i];
+		row7 = *(ListProductos->append());
+		row7[columns_productos.Id] = pro->get_id()[i];
+		row7[columns_productos.Nombre] = pro->get_nombre()[i];
+		row7[columns_productos.Unidad] = pro->get_unidad()[i];
+		row7[columns_productos.Tarifa] = pro->get_tarifa()[i];
+		row7[columns_productos.Otro] = pro->get_otro()[i];
 	}
 	pro->vaciar();
 	Gtk::TreeView::Column *pColumn = tree7->get_column(0);
@@ -654,10 +717,12 @@ void win_main::llena_productos()
 	{
 		pColumn->set_sort_column(columns_productos.Otro);
 	}
+	g_mutex_unlock(&mutex);
 }
 
 void win_main::llena_clientes()
 {
+	g_mutex_lock(&mutex);
 	ListClientes = Gtk::ListStore::create(columns_clientes);
 	tree8->set_model(ListClientes);
 	tree8->append_column("ID", columns_clientes.Id);
@@ -671,15 +736,16 @@ void win_main::llena_clientes()
 	cli->carga_datos(id);
 	for (size_t i = 0; i < cli->get_id().size(); i++)
 	{
-		row = *(ListClientes->append());
-		row[columns_clientes.Id] = cli->get_id()[i];
-		row[columns_clientes.Razon_social] = cli->get_razon_social()[i];
-		row[columns_clientes.Rfc] = cli->get_rfc()[i];
-		row[columns_clientes.Giro] = cli->get_giro()[i];
-		row[columns_clientes.Direccion_fiscal] = cli->get_direccion_fiscal()[i];
-		row[columns_clientes.Tarifa] = cli->get_tarifa()[i];
-		row[columns_clientes.Tipo_cliente] = cli->get_tipo_cliente()[i];
-		row[columns_clientes.Domicilio] = cli->get_domicilio()[i];
+		row8 = *(ListClientes->append());
+		row8[columns_clientes.Id] = cli->get_id()[i];
+		row8[columns_clientes.Razon_social] = cli->get_razon_social()[i];
+		row8[columns_clientes.Rfc] = cli->get_rfc()[i];
+		row8[columns_clientes.Giro] = cli->get_giro()[i];
+		row8[columns_clientes.Direccion_fiscal] = cli->get_direccion_fiscal()[i];
+		row8[columns_clientes.Tarifa] = cli->get_tarifa()[i];
+		row8[columns_clientes.Tipo_cliente] = cli->get_tipo_cliente()[i];
+		row8[columns_clientes.Domicilio] = cli->get_domicilio()[i];
+		cb_orden_empresa->append(cli->get_rfc()[i]);
 	}
 	cli->vaciar();
 	Gtk::TreeView::Column *pColumn = tree8->get_column(0);
@@ -722,10 +788,12 @@ void win_main::llena_clientes()
 	{
 		pColumn->set_sort_column(columns_clientes.Domicilio);
 	}
+	g_mutex_unlock(&mutex);
 }
 
 void win_main::llena_tarifas()
 {
+	g_mutex_lock(&mutex);
 	ListTarifas = Gtk::ListStore::create(columns_tarifas);
 	tree9->set_model(ListTarifas);
 	tree9->append_column("ID", columns_tarifas.Id);
@@ -736,12 +804,12 @@ void win_main::llena_tarifas()
 	tar->carga_datos(id);
 	for (size_t i = 0; i < tar->get_id().size(); i++)
 	{
-		row = *(ListTarifas->append());
-		row[columns_tarifas.Id] = tar->get_id()[i];
-		row[columns_tarifas.Tarifa_tonelada] = tar->get_tarifa_tonelada()[i];
-		row[columns_tarifas.Tarifa_litro] = tar->get_tarifa_litro()[i];
-		row[columns_tarifas.Tarifa_viaje] = tar->get_tarifa_viaje()[i];
-		row[columns_tarifas.Otro] = tar->get_otro()[i];
+		row9 = *(ListTarifas->append());
+		row9[columns_tarifas.Id] = tar->get_id()[i];
+		row9[columns_tarifas.Tarifa_tonelada] = tar->get_tarifa_tonelada()[i];
+		row9[columns_tarifas.Tarifa_litro] = tar->get_tarifa_litro()[i];
+		row9[columns_tarifas.Tarifa_viaje] = tar->get_tarifa_viaje()[i];
+		row9[columns_tarifas.Otro] = tar->get_otro()[i];
 	}
 	tar->vaciar();
 	Gtk::TreeView::Column *pColumn = tree9->get_column(0);
@@ -769,6 +837,7 @@ void win_main::llena_tarifas()
 	{
 		pColumn->set_sort_column(columns_tarifas.Otro);
 	}
+	g_mutex_unlock(&mutex);
 }
 
 void win_main::vacia_campos_tractor()
@@ -872,13 +941,13 @@ void win_main::add_remolque(std::string marca, std::string modelo, std::string p
 	unsigned x = remo->getsize(id);
 	snprintf(size, sizeof(size), "%010d", x);
 	std::string no_eco = size;
-	row = *(ListRemolque->append());
-	row[columns_remolque.No_economico] = no_eco;
-	row[columns_remolque.Marca] = marca;
-	row[columns_remolque.Modelo] = modelo;
-	row[columns_remolque.No_placas] = placas;
-	row[columns_remolque.No_tc] = tarjeta;
-	row[columns_remolque.Folio_verificacion] = folio;
+	row2 = *(ListRemolque->append());
+	row2[columns_remolque.No_economico] = no_eco;
+	row2[columns_remolque.Marca] = marca;
+	row2[columns_remolque.Modelo] = modelo;
+	row2[columns_remolque.No_placas] = placas;
+	row2[columns_remolque.No_tc] = tarjeta;
+	row2[columns_remolque.Folio_verificacion] = folio;
 }
 
 void win_main::add_operador(std::string nombre, std::string rfc, std::string curp, std::string imss, std::string licencia, std::string fecha)
@@ -887,14 +956,14 @@ void win_main::add_operador(std::string nombre, std::string rfc, std::string cur
 	unsigned x = ope->getsize(id);
 	snprintf(size, sizeof(size), "%010d", x);
 	std::string no_eco = size;
-	row = *(ListOperador->append());
-	row[columns_operador.Id] = no_eco;
-	row[columns_operador.Nombre] = nombre;
-	row[columns_operador.Rfc] = rfc;
-	row[columns_operador.Curp] = curp;
-	row[columns_operador.No_imss] = imss;
-	row[columns_operador.No_licen] = licencia;
-	row[columns_operador.Fecha] = fecha;
+	row3 = *(ListOperador->append());
+	row3[columns_operador.Id] = no_eco;
+	row3[columns_operador.Nombre] = nombre;
+	row3[columns_operador.Rfc] = rfc;
+	row3[columns_operador.Curp] = curp;
+	row3[columns_operador.No_imss] = imss;
+	row3[columns_operador.No_licen] = licencia;
+	row3[columns_operador.Fecha] = fecha;
 }
 
 void win_main::add_ayudante(std::string nombre, std::string rfc, std::string imss, std::string otro)
@@ -903,21 +972,21 @@ void win_main::add_ayudante(std::string nombre, std::string rfc, std::string ims
 	unsigned x = ayu->getsize(id);
 	snprintf(size, sizeof(size), "%010d", x);
 	std::string no_eco = size;
-	row = *(ListAyudante->append());
-	row[columns_ayudante.Id] = no_eco;
-	row[columns_ayudante.Nombre] = nombre;
-	row[columns_ayudante.Rfc] = rfc;
-	row[columns_ayudante.No_imss] = imss;
-	row[columns_ayudante.Otro] = otro;
+	row4 = *(ListAyudante->append());
+	row4[columns_ayudante.Id] = no_eco;
+	row4[columns_ayudante.Nombre] = nombre;
+	row4[columns_ayudante.Rfc] = rfc;
+	row4[columns_ayudante.No_imss] = imss;
+	row4[columns_ayudante.Otro] = otro;
 }
 
 void win_main::add_poblacion(std::string nombre, std::string estado, std::string distancia)
 {
-	row = *(ListPoblacion->append());
-	row[columns_poblacion.Id] = std::to_string(pob->getsize(id));
-	row[columns_poblacion.Nombre] = nombre;
-	row[columns_poblacion.Estado] = estado;
-	row[columns_poblacion.Distancia] = distancia;
+	row5 = *(ListPoblacion->append());
+	row5[columns_poblacion.Id] = std::to_string(pob->getsize(id));
+	row5[columns_poblacion.Nombre] = nombre;
+	row5[columns_poblacion.Estado] = estado;
+	row5[columns_poblacion.Distancia] = distancia;
 	cb_rut_origen->append(estado);
 	cb_rut_destino->append(estado);
 }
@@ -928,12 +997,12 @@ void win_main::add_ruta(std::string origen, std::string destino, std::string dis
 	unsigned x = rut->getsize(id);
 	snprintf(size, sizeof(size), "%010d", x);
 	std::string no_eco = size;
-	row = *(ListRutas->append());
-	row[columns_rutas.Id] = no_eco;
-	row[columns_rutas.Origen] = origen;
-	row[columns_rutas.Destino] = destino;
-	row[columns_rutas.Distancia] = distancia;
-	row[columns_rutas.Kms] = fecha;
+	row6 = *(ListRutas->append());
+	row6[columns_rutas.Id] = no_eco;
+	row6[columns_rutas.Origen] = origen;
+	row6[columns_rutas.Destino] = destino;
+	row6[columns_rutas.Distancia] = distancia;
+	row6[columns_rutas.Kms] = fecha;
 }
 
 void win_main::add_producto(std::string nombre, std::string unidad, std::string tarifa, std::string otro)
@@ -942,12 +1011,12 @@ void win_main::add_producto(std::string nombre, std::string unidad, std::string 
 	unsigned x = pro->getsize(id);
 	snprintf(size, sizeof(size), "%010d", x);
 	std::string no_eco = size;
-	row = *(ListProductos->append());
-	row[columns_productos.Id] = no_eco;
-	row[columns_productos.Nombre] = nombre;
-	row[columns_productos.Unidad] = unidad;
-	row[columns_productos.Tarifa] = tarifa;
-	row[columns_productos.Otro] = otro;
+	row7 = *(ListProductos->append());
+	row7[columns_productos.Id] = no_eco;
+	row7[columns_productos.Nombre] = nombre;
+	row7[columns_productos.Unidad] = unidad;
+	row7[columns_productos.Tarifa] = tarifa;
+	row7[columns_productos.Otro] = otro;
 }
 
 void win_main::add_cliente(std::string razon, std::string rfc, std::string giro, std::string direccion, std::string tarifa, std::string tipo, std::string domicilio)
@@ -956,25 +1025,25 @@ void win_main::add_cliente(std::string razon, std::string rfc, std::string giro,
 	unsigned x = cli->getsize(id);
 	snprintf(size, sizeof(size), "%010d", x);
 	std::string no_eco = size;
-	row = *(ListClientes->append());
-	row[columns_clientes.Id] = no_eco;
-	row[columns_clientes.Razon_social] = razon;
-	row[columns_clientes.Rfc] = rfc;
-	row[columns_clientes.Giro] = giro;
-	row[columns_clientes.Direccion_fiscal] = direccion;
-	row[columns_clientes.Tarifa] = tarifa;
-	row[columns_clientes.Tipo_cliente] = tipo;
-	row[columns_clientes.Domicilio] = domicilio;
+	row8 = *(ListClientes->append());
+	row8[columns_clientes.Id] = no_eco;
+	row8[columns_clientes.Razon_social] = razon;
+	row8[columns_clientes.Rfc] = rfc;
+	row8[columns_clientes.Giro] = giro;
+	row8[columns_clientes.Direccion_fiscal] = direccion;
+	row8[columns_clientes.Tarifa] = tarifa;
+	row8[columns_clientes.Tipo_cliente] = tipo;
+	row8[columns_clientes.Domicilio] = domicilio;
 }
 
 void win_main::add_tarifa(std::string tonelada, std::string litro, std::string viaje, std::string otro)
 {
-	row = *(ListTarifas->append());
-	row[columns_tarifas.Id] = std::to_string(tar->getsize(id));
-	row[columns_tarifas.Tarifa_tonelada] = tonelada;
-	row[columns_tarifas.Tarifa_litro] = litro;
-	row[columns_tarifas.Tarifa_viaje] = viaje;
-	row[columns_tarifas.Otro] = otro;
+	row9 = *(ListTarifas->append());
+	row9[columns_tarifas.Id] = std::to_string(tar->getsize(id));
+	row9[columns_tarifas.Tarifa_tonelada] = tonelada;
+	row9[columns_tarifas.Tarifa_litro] = litro;
+	row9[columns_tarifas.Tarifa_viaje] = viaje;
+	row9[columns_tarifas.Otro] = otro;
 }
 
 void win_main::on_toogle_sidebar_toggled()
@@ -2295,10 +2364,15 @@ void win_main::on_radiobutton4_toggled()
 	if (radiobutton4->get_active())
 	{
 		radiobutton5->set_active(false);
-		radiobutton6->set_active(false);
-		exp_cat->set_sensitive(false);
-		exp_cat->set_expanded(false);
-		cb_export_cat->set_sensitive(false);
+		ch_1->set_sensitive(false);
+		ch_2->set_sensitive(false);
+		ch_3->set_sensitive(false);
+		ch_4->set_sensitive(false);
+		ch_5->set_sensitive(false);
+		ch_6->set_sensitive(false);
+		ch_7->set_sensitive(false);
+		ch_8->set_sensitive(false);
+		ch_9->set_sensitive(false);
 	}
 }
 
@@ -2307,27 +2381,31 @@ void win_main::on_radiobutton5_toggled()
 	if (radiobutton5->get_active())
 	{
 		radiobutton4->set_active(false);
-		radiobutton6->set_active(false);
-		exp_cat->set_sensitive(true);
-		cb_export_cat->set_sensitive(false);
+		ch_1->set_sensitive(true);
+		ch_2->set_sensitive(true);
+		ch_3->set_sensitive(true);
+		ch_4->set_sensitive(true);
+		ch_5->set_sensitive(true);
+		ch_6->set_sensitive(true);
+		ch_7->set_sensitive(true);
+		ch_8->set_sensitive(true);
+		ch_9->set_sensitive(true);
+		ch_1->set_active(false);
+		ch_2->set_active(false);
+		ch_3->set_active(false);
+		ch_4->set_active(false);
+		ch_5->set_active(false);
+		ch_6->set_active(false);
+		ch_7->set_active(false);
+		ch_8->set_active(false);
+		ch_9->set_active(false);
 	}
 }
 
-void win_main::on_radiobutton6_toggled()
-{
-	if (radiobutton6->get_active())
-	{
-		radiobutton4->set_active(false);
-		radiobutton5->set_active(false);
-		exp_cat->set_sensitive(false);
-		exp_cat->set_expanded(false);
-		cb_export_cat->set_sensitive(true);
-	}
-}
-
-void win_main::crea_xls_tractor()
+void win_main::crea_xls_tractor(std::string file)
 {
 	// nota: crear una instancia que vacie los vectores
+	g_mutex_lock(&mutex);
 	try
 	{
 		tra->carga_datos(id);
@@ -2349,16 +2427,18 @@ void win_main::crea_xls_tractor()
 			ws.cell("F" + std::to_string(i + 2)).value(atoi(tra->getfo_verifica()[i].c_str()));
 		}
 		tra->vaciar();
-		wb.save("Tractores.xlsx");
+		wb.save(file + "/Tractores.xlsx");
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	g_mutex_unlock(&mutex);
 }
 
-void win_main::crea_xls_remolque()
+void win_main::crea_xls_remolque(std::string file)
 {
+	g_mutex_lock(&mutex);
 	try
 	{
 		remo->carga_datos(id);
@@ -2380,16 +2460,18 @@ void win_main::crea_xls_remolque()
 			ws.cell("F" + std::to_string(i + 2)).value(atoi(remo->getfo_verifica()[i].c_str()));
 		}
 		remo->vaciar();
-		wb.save("Remolques.xlsx");
+		wb.save(file + "/Remolques.xlsx");
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	g_mutex_unlock(&mutex);
 }
 
-void win_main::crea_xls_operador()
+void win_main::crea_xls_operador(std::string file)
 {
+	g_mutex_lock(&mutex);
 	try
 	{
 		ope->carga_datos(id);
@@ -2413,16 +2495,18 @@ void win_main::crea_xls_operador()
 			ws.cell("G" + std::to_string(i + 2)).value(ope->getfecha()[i]);
 		}
 		ope->vaciar();
-		wb.save("Operadores.xlsx");
+		wb.save(file + "/Operadores.xlsx");
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	g_mutex_unlock(&mutex);
 }
 
-void win_main::crea_xls_ayudante()
+void win_main::crea_xls_ayudante(std::string file)
 {
+	g_mutex_lock(&mutex);
 	try
 	{
 		ayu->carga_datos(id);
@@ -2438,20 +2522,22 @@ void win_main::crea_xls_ayudante()
 			ws.cell("A" + std::to_string(i + 2)).value(atoi(ayu->get_id()[i].c_str()));
 			ws.cell("B" + std::to_string(i + 2)).value(ayu->get_nombre()[i]);
 			ws.cell("C" + std::to_string(i + 2)).value(ayu->get_rfc()[i]);
-			ws.cell("E" + std::to_string(i + 2)).value(atoi(ayu->get_no_imss()[i].c_str()));
+			ws.cell("E" + std::to_string(i + 2)).value(ayu->get_no_imss()[i].c_str());
 			ws.cell("F" + std::to_string(i + 2)).value(ayu->get_otro()[i]);
 		}
 		ayu->vaciar();
-		wb.save("Ayudantes.xlsx");
+		wb.save(file + "/Ayudantes.xlsx");
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	g_mutex_unlock(&mutex);
 }
 
-void win_main::crea_xls_poblacion()
+void win_main::crea_xls_poblacion(std::string file)
 {
+	g_mutex_lock(&mutex);
 	try
 	{
 		pob->carga_datos(id);
@@ -2469,16 +2555,18 @@ void win_main::crea_xls_poblacion()
 			ws.cell("D" + std::to_string(i + 2)).value(atoi(pob->get_distancia()[i].c_str()));
 		}
 		pob->vaciar();
-		wb.save("Poblaciones.xlsx");
+		wb.save(file + "/Poblaciones.xlsx");
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	g_mutex_unlock(&mutex);
 }
 
-void win_main::crea_xls_ruta()
+void win_main::crea_xls_ruta(std::string file)
 {
+	g_mutex_lock(&mutex);
 	try
 	{
 		rut->carga_datos(id);
@@ -2498,16 +2586,18 @@ void win_main::crea_xls_ruta()
 			ws.cell("E" + std::to_string(i + 2)).value(rut->get_tiempo_estimado()[i].c_str());
 		}
 		rut->vaciar();
-		wb.save("Rutas.xlsx");
+		wb.save(file + "/Rutas.xlsx");
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	g_mutex_unlock(&mutex);
 }
 
-void win_main::crea_xls_producto()
+void win_main::crea_xls_producto(std::string file)
 {
+	g_mutex_lock(&mutex);
 	try
 	{
 		pro->carga_datos(id);
@@ -2528,16 +2618,18 @@ void win_main::crea_xls_producto()
 		}
 		pro->vaciar();
 		pro->get_otro().clear();
-		wb.save("Productos.xlsx");
+		wb.save(file + "/Productos.xlsx");
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	g_mutex_unlock(&mutex);
 }
 
-void win_main::crea_xls_cliente()
+void win_main::crea_xls_cliente(std::string file)
 {
+	g_mutex_lock(&mutex);
 	try
 	{
 		cli->carga_datos(id);
@@ -2563,16 +2655,18 @@ void win_main::crea_xls_cliente()
 			ws.cell("H" + std::to_string(i + 2)).value(cli->get_domicilio()[i]);
 		}
 		cli->vaciar();
-		wb.save("Clientes.xlsx");
+		wb.save(file + "/Clientes.xlsx");
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	g_mutex_unlock(&mutex);
 }
 
-void win_main::crea_xls_tarifa()
+void win_main::crea_xls_tarifa(std::string file)
 {
+	g_mutex_lock(&mutex);
 	try
 	{
 		tar->carga_datos(id);
@@ -2592,105 +2686,1333 @@ void win_main::crea_xls_tarifa()
 			ws.cell("E" + std::to_string(i + 2)).value(tar->get_otro()[i]);
 		}
 		tar->vaciar();
-		wb.save("Tarifas.xlsx");
+		wb.save(file + "/Tarifas.xlsx");
 	}
 	catch (std::exception &e)
 	{
 		std::cout << e.what() << std::endl;
 	}
+	g_mutex_unlock(&mutex);
 }
 
 void win_main::on_btn_export_excel_clicked()
 {
 	if (radiobutton4->get_active())
 	{
-		hilo2 = new std::thread([this]()
-								{ 
+		if (btn_file_chooser->get_filename() != "")
+		{
+			hilo_exp = new std::thread([this]()
+									   { 
 									btn_export_excel->set_sensitive(false);
 									m_bActivityMode = true;
 									progress_view->set_text("Exportando Catálogos en Excel...");
 									progress_view->set_show_text(true);
 									progress_view->pulse();
-									std::cout << "imprime todos los catalogos" << std::endl;
-									crea_xls_tractor();
-									crea_xls_remolque();
-									crea_xls_operador();
-									crea_xls_ayudante();
-									crea_xls_poblacion();
-									crea_xls_ruta();
-									crea_xls_producto();
-									crea_xls_cliente();
-									crea_xls_tarifa();
+									crea_xls_tractor(btn_file_chooser->get_filename());
+									crea_xls_remolque(btn_file_chooser->get_filename());
+									crea_xls_operador(btn_file_chooser->get_filename());
+									crea_xls_ayudante(btn_file_chooser->get_filename());
+									crea_xls_poblacion(btn_file_chooser->get_filename());
+									crea_xls_ruta(btn_file_chooser->get_filename());
+									crea_xls_producto(btn_file_chooser->get_filename());
+									crea_xls_cliente(btn_file_chooser->get_filename());
+									crea_xls_tarifa(btn_file_chooser->get_filename());
 									btn_export_excel->set_sensitive(true);
 									progress_view->set_show_text(false);
 									progress_view->set_fraction(1.0);
-									m_bActivityMode = false; });
-
-		// delete hilo2;
-		hilo2->detach();
+									m_bActivityMode = false;
+									reveal_info->set_reveal_child(true);
+									lbl_info->set_text("Exportación de Catálogos en Excel Completada");
+									gtk_widget_error_bell(GTK_WIDGET(win_operacion->gobj())); });
+			// delete hilo2;
+			hilo_exp->detach();
+		}
+		else
+		{
+			Gtk::MessageDialog dialog(*win_operacion, "Seleccione un directorio para guardar los archivos", false, Gtk::MESSAGE_ERROR);
+			dialog.run();
+		}
 	}
 	else if (radiobutton5->get_active())
 	{
-		// imprime solo los catalogos seleccionado
-		hilo2 = new std::thread([this]()
-								{ 
-		btn_export_excel->set_sensitive(false);
+		if (ch_1->get_active() || ch_2->get_active() || ch_3->get_active() || ch_4->get_active() || ch_5->get_active() || ch_6->get_active() || ch_7->get_active() || ch_8->get_active() || ch_9->get_active())
+		{
+			if (btn_file_chooser->get_filename() != "")
+			{
+				hilo_exp = new std::thread([this]()
+										   { 
+									btn_export_excel->set_sensitive(false);
 									m_bActivityMode = true;
 									progress_view->set_text("Exportando Catálogos en Excel...");
 									progress_view->set_show_text(true);
 									progress_view->pulse();
-		std::cout << "imprime solo los catalogos seleccionado" << std::endl;
-		if (ch_1->get_active())
-		{
-			crea_xls_tractor();
-		}
-		if (ch_2->get_active())
-		{
-			crea_xls_remolque();
-		}
-		if (ch_3->get_active())
-		{
-			crea_xls_operador();
-		}
-		if (ch_4->get_active())
-		{
-			crea_xls_ayudante();
-		}
-		if (ch_5->get_active())
-		{
-			crea_xls_poblacion();
-		}
-		if (ch_6->get_active())
-		{
-			crea_xls_ruta();
-		}
-		if (ch_7->get_active())
-		{
-			crea_xls_producto();
-		}
-		if (ch_8->get_active())
-		{
-			crea_xls_cliente();
-		}
-		if (ch_9->get_active())
-		{
-			crea_xls_tarifa();
-		}
-		btn_export_excel->set_sensitive(true);
+									if (ch_1->get_active())
+									{
+										crea_xls_tractor(btn_file_chooser->get_filename());
+									}
+									if (ch_2->get_active())
+									{
+										crea_xls_remolque(btn_file_chooser->get_filename());
+									}
+									if (ch_3->get_active())
+									{
+										crea_xls_operador(btn_file_chooser->get_filename());
+									}
+									if (ch_4->get_active())
+									{
+										crea_xls_ayudante(btn_file_chooser->get_filename());
+									}
+									if (ch_5->get_active())
+									{
+										crea_xls_poblacion(btn_file_chooser->get_filename());
+									}
+									if (ch_6->get_active())
+									{
+										crea_xls_ruta(btn_file_chooser->get_filename());
+									}
+									if (ch_7->get_active())
+									{
+										crea_xls_producto(btn_file_chooser->get_filename());
+									}
+									if (ch_8->get_active())
+									{
+										crea_xls_cliente(btn_file_chooser->get_filename());
+									}
+									if (ch_9->get_active())
+									{
+										crea_xls_tarifa(btn_file_chooser->get_filename());
+									}
+									btn_export_excel->set_sensitive(true);
 									progress_view->set_show_text(false);
 									progress_view->set_fraction(1.0);
-									m_bActivityMode = false; });
+									m_bActivityMode = false; 
+									reveal_info->set_reveal_child(true);
+									lbl_info->set_text("Exportación de Catálogos en Excel Completada");
+									gtk_widget_error_bell(GTK_WIDGET(win_operacion->gobj())); });
+				hilo_exp->detach();
+			}
+			else
+			{
+				Gtk::MessageDialog dialog(*win_operacion, "Seleccione un directorio para guardar los archivos", false, Gtk::MESSAGE_ERROR);
+				dialog.run();
+			}
+		}
+		else
+		{
+			Gtk::MessageDialog dialog(*win_operacion, "Seleccione al menos un catálogo para exportar", false, Gtk::MESSAGE_ERROR);
+			dialog.set_title("Error");
+			dialog.run();
+		}
 	}
-	else if (radiobutton6->get_active())
+}
+
+void win_main::crea_pdf_tractor(std::string file)
+{
+	g_mutex_lock(&mutex);
+	tra->carga_datos(id);
+	std::string file_name = file + "/Tractores.pdf";
+	PdfStreamedDocument *document = new PoDoFo::PdfStreamedDocument(file_name.c_str());
+	PdfPainter painter;
+	PdfTable table = PoDoFo::PdfTable(6, tra->getNo_eco().size() + 1);
+	PoDoFo::PdfSimpleTableModel *tablemodel1 = new PoDoFo::PdfSimpleTableModel(6, tra->getNo_eco().size() + 1);
+
+	table.SetAutoPageBreak(
+		true,
+		[](PoDoFo::PdfRect &rect, void *pCustom) -> PoDoFo::PdfPage *
+		{
+			PoDoFo::PdfPage *pPage = ((PoDoFo::PdfStreamedDocument *)pCustom)->CreatePage(PoDoFo::PdfPage::CreateStandardPageSize(PoDoFo::ePdfPageSize_A4, true));
+			return pPage;
+		},
+		(void *)document);
+	PdfPage *pPage;
+	PdfFont *pFont;
+
+	try
 	{
-		// imprime solo el catalogo seleccionado
-		std::cout << "imprime solo el catalogo seleccionado" << std::endl;
+
+		pPage = document->CreatePage(PdfPage::CreateStandardPageSize(ePdfPageSize_A4, true));
+
+		if (!pPage)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+
+		painter.SetPage(pPage);
+
+		pFont = document->CreateFont("Arial");
+
+		if (!pFont)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+		std::time_t t = std::time(nullptr);
+		std::tm *now = std::localtime(&t);
+		std::string date = std::to_string(now->tm_mday) + "/" + std::to_string(now->tm_mon + 1) + "/" + std::to_string(now->tm_year + 1900);
+		// PoDoFo::PdfFont* pFont = document.CreateFont("Courier");
+
+		pFont->SetFontSize(10.0);
+		PdfString pString1(reinterpret_cast<const pdf_utf8 *>("Compañia:____________________________________ "
+															  "                                                                                 Sucursal:_________________________________"));
+		PdfString pString3(reinterpret_cast<const pdf_utf8 *>("Catálogo de Camiones Motrices de (2) (3) ejes."));
+		painter.SetFont(pFont);
+		painter.SetColor(0.0, 0.0, 0.0);
+		// regla vertical, regla horizontal, ancho, alto
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 44.69, pString1);
+		painter.DrawText(456.69, pPage->GetPageSize().GetHeight() - 60.69, "                                                                                 Fecha: " + date);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 76.69, pString3);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 92.69, PdfString(reinterpret_cast<const pdf_utf8 *>(" N° económico        Marca  														    Modelo           N. de Placa  		  	 Tarjeta de Circulación    	 Folio de Verificación ")));
+
+		tablemodel1->SetFont(pFont);
+		tablemodel1->SetForegroundColor(PoDoFo::PdfColor(0.0, 0.0, 0.0));
+		tablemodel1->SetBorderEnabled(true);
+		tablemodel1->SetBorderWidth(0.5);
+		tablemodel1->SetAlignment(PoDoFo::EPdfVerticalAlignment::ePdfVerticalAlignment_Center);
+		tablemodel1->SetWordWrapEnabled(true);
+
+		double col[(int)tra->getNo_eco().size() + 1];
+
+		col[0] = 80.0;
+		col[1] = 200.0;
+		col[2] = 70.0;
+		col[3] = 100.0;
+		col[4] = 100.0;
+		col[5] = 150.0;
+
+		tablemodel1->SetText(0, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("N° económico")));
+		tablemodel1->SetText(1, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Marca")));
+		tablemodel1->SetText(2, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Modelo")));
+		tablemodel1->SetText(3, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("N. de Placa")));
+		tablemodel1->SetText(4, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Tarjeta de Circulación")));
+		tablemodel1->SetText(5, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Folio de Verificación")));
+
+		double rowheight[(int)tra->getNo_eco().size() + 1];
+
+		for (size_t i = 0; i < tra->getNo_eco().size(); i++)
+		{
+			tablemodel1->SetText(0, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(tra->getNo_eco()[i].c_str())));
+			tablemodel1->SetText(1, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(tra->getmarca()[i].c_str())));
+			tablemodel1->SetText(2, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(tra->getmodelo()[i].c_str())));
+			tablemodel1->SetText(3, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(tra->getno_placas()[i].c_str())));
+			tablemodel1->SetText(4, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(tra->getno_tc()[i].c_str())));
+			tablemodel1->SetText(5, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(tra->getfo_verifica()[i].c_str())));
+			rowheight[i + 1] = 20.0;
+		}
+
+		tra->vaciar();
+		table.SetModel(tablemodel1);
+		table.SetColumnWidths(col);
+		table.SetRowHeights(rowheight);
+
+		table.Draw(56.69, pPage->GetPageSize().GetHeight() - 96, &painter);
+
+		painter.FinishPage();
+		document->GetInfo()->SetCreator(PdfString("Sistemas en Autotransporte Automatizado S.A. de C.V."));
+		document->GetInfo()->SetAuthor(PdfString("ATA"));
+		document->GetInfo()->SetTitle(PdfString("Catálogo de Camiones Motrices de (2) (3) ejes."));
+		document->GetInfo()->SetSubject(PdfString("Exportación de datos a PDF"));
+		document->GetInfo()->SetKeywords(PdfString("Test;PDF;Hello World;"));
+
+		document->Close();
 	}
-	else
+	catch (PdfError &e)
 	{
-		Gtk::MessageDialog dialog(*win_operacion, "No se ha seleccionado ningun catalogo", false, Gtk::MESSAGE_ERROR);
-		dialog.set_title("Error");
-		dialog.run();
+		try
+		{
+			painter.FinishPage();
+		}
+		catch (...)
+		{
+		}
+
+		throw e;
 	}
-	// hilo->detach();
+	g_mutex_unlock(&mutex);
+}
+
+void win_main::crea_pdf_remolque(std::string ruta)
+{
+	g_mutex_lock(&mutex);
+	remo->carga_datos(id);
+	std::string file_name = ruta + "/Remolque.pdf";
+	PdfStreamedDocument *document = new PoDoFo::PdfStreamedDocument(file_name.c_str());
+	PdfPainter painter;
+	PdfTable table = PoDoFo::PdfTable(6, remo->getNo_eco().size() + 1);
+	PoDoFo::PdfSimpleTableModel *tablemodel1 = new PoDoFo::PdfSimpleTableModel(6, remo->getNo_eco().size() + 1);
+
+	table.SetAutoPageBreak(
+		true,
+		[](PoDoFo::PdfRect &rect, void *pCustom) -> PoDoFo::PdfPage *
+		{
+			PoDoFo::PdfPage *pPage = ((PoDoFo::PdfStreamedDocument *)pCustom)->CreatePage(PoDoFo::PdfPage::CreateStandardPageSize(PoDoFo::ePdfPageSize_A4, true));
+			return pPage;
+		},
+		(void *)document);
+	PdfPage *pPage;
+	PdfFont *pFont;
+
+	try
+	{
+
+		pPage = document->CreatePage(PdfPage::CreateStandardPageSize(ePdfPageSize_A4, true));
+
+		if (!pPage)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+
+		painter.SetPage(pPage);
+
+		pFont = document->CreateFont("Arial");
+
+		if (!pFont)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+		std::time_t t = std::time(nullptr);
+		std::tm *now = std::localtime(&t);
+		std::string date = std::to_string(now->tm_mday) + "/" + std::to_string(now->tm_mon + 1) + "/" + std::to_string(now->tm_year + 1900);
+
+		pFont->SetFontSize(10.0);
+		PdfString pString1(reinterpret_cast<const pdf_utf8 *>("Compañia:____________________________________ "
+															  "                                                                                 Sucursal:_________________________________"));
+		PdfString pString3(reinterpret_cast<const pdf_utf8 *>("Catálogo de Remolques tipo: Caja ( ) Plataforma ( ) Tanque ( ) Lowboy ( ) Madrina ( ) de (2) (3) ejes. "));
+		PdfString pString4(reinterpret_cast<const pdf_utf8 *>("Póliza de seguro N°____________________ Aseguradora Cia.: ______________________________________  Vigencia:_____________\n "));
+		PdfString pString5(reinterpret_cast<const pdf_utf8 *>("Cobertura: Amplia ( ) RC ( ) _______________________ "));
+		painter.SetFont(pFont);
+		painter.SetColor(0.0, 0.0, 0.0);
+		// regla vertical, regla horizontal, ancho, alto
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 44.69, pString1);
+		painter.DrawText(456.69, pPage->GetPageSize().GetHeight() - 60.69, "                                                                                 Fecha: " + date);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 76.69, pString3);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 92.69, pString4);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 108.69, pString5);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 132.69, PdfString(reinterpret_cast<const pdf_utf8 *>(" N° económico        Marca  														    Modelo           N. de Placa  		  	 Tarjeta de Circulación    	 Folio de Verificación ")));
+
+		tablemodel1->SetFont(pFont);
+		tablemodel1->SetForegroundColor(PoDoFo::PdfColor(0.0, 0.0, 0.0));
+		tablemodel1->SetBorderEnabled(true);
+		tablemodel1->SetBorderWidth(0.5);
+		tablemodel1->SetAlignment(PoDoFo::EPdfVerticalAlignment::ePdfVerticalAlignment_Center);
+		tablemodel1->SetWordWrapEnabled(true);
+		double col[(int)remo->getNo_eco().size() + 1];
+
+		col[0] = 80.0;
+		col[1] = 200.0;
+		col[2] = 70.0;
+		col[3] = 100.0;
+		col[4] = 100.0;
+		col[5] = 150.0;
+
+		tablemodel1->SetText(0, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("N° económico")));
+		tablemodel1->SetText(1, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Marca")));
+		tablemodel1->SetText(2, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Modelo")));
+		tablemodel1->SetText(3, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("N. de Placa")));
+		tablemodel1->SetText(4, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("N° Tarjeta de Circulación")));
+		tablemodel1->SetText(5, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Folio Verificación P/D")));
+
+		double rowheight[(int)remo->getNo_eco().size() + 1];
+		for (size_t i = 0; i < remo->getNo_eco().size(); i++)
+		{
+			tablemodel1->SetText(0, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(remo->getNo_eco()[i].c_str())));
+			tablemodel1->SetText(1, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(remo->getmarca()[i].c_str())));
+			tablemodel1->SetText(2, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(remo->getmodelo()[i].c_str())));
+			tablemodel1->SetText(3, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(remo->getno_placas()[i].c_str())));
+			tablemodel1->SetText(4, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(remo->getno_tc()[i].c_str())));
+			tablemodel1->SetText(5, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(remo->getfo_verifica()[i].c_str())));
+			rowheight[i + 1] = 20.0;
+		}
+
+		remo->vaciar();
+
+		table.SetModel(tablemodel1);
+		table.SetRowHeights(rowheight);
+		table.SetColumnWidths(col);
+
+		table.Draw(56.69, pPage->GetPageSize().GetHeight() - 136, &painter);
+		painter.FinishPage();
+		document->GetInfo()->SetCreator(PdfString("Sistemas en Autotransporte Automatizado S.A. de C.V."));
+		document->GetInfo()->SetAuthor(PdfString("ATA"));
+		document->GetInfo()->SetTitle(PdfString("Catálogo de Remolques"));
+		document->GetInfo()->SetSubject(PdfString("Exportación de datos a PDF"));
+		document->GetInfo()->SetKeywords(PdfString("Test;PDF;Hello World;"));
+
+		document->Close();
+	}
+	catch (PdfError &e)
+	{
+		try
+		{
+			painter.FinishPage();
+		}
+		catch (...)
+		{
+		}
+
+		throw e;
+	}
+	g_mutex_unlock(&mutex);
+}
+
+void win_main::crea_pdf_operador(std::string ruta)
+{
+	g_mutex_lock(&mutex);
+	ope->carga_datos(id);
+	std::string file_name = ruta + "/Operadores.pdf";
+	PdfStreamedDocument *document = new PoDoFo::PdfStreamedDocument(file_name.c_str());
+	PdfPainter painter;
+	PdfTable table = PoDoFo::PdfTable(7, ope->getid().size() + 1);
+	PoDoFo::PdfSimpleTableModel *tablemodel1 = new PoDoFo::PdfSimpleTableModel(7, ope->getid().size() + 1);
+
+	table.SetAutoPageBreak(
+		true,
+		[](PoDoFo::PdfRect &rect, void *pCustom) -> PoDoFo::PdfPage *
+		{
+			PoDoFo::PdfPage *pPage = ((PoDoFo::PdfStreamedDocument *)pCustom)->CreatePage(PoDoFo::PdfPage::CreateStandardPageSize(PoDoFo::ePdfPageSize_A4, true));
+			return pPage;
+		},
+		(void *)document);
+	PdfPage *pPage;
+	PdfFont *pFont;
+
+	try
+	{
+
+		pPage = document->CreatePage(PdfPage::CreateStandardPageSize(ePdfPageSize_A4, true));
+
+		if (!pPage)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+
+		painter.SetPage(pPage);
+
+		pFont = document->CreateFont("Arial");
+
+		if (!pFont)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+		std::time_t t = std::time(nullptr);
+		std::tm *now = std::localtime(&t);
+		std::string date = std::to_string(now->tm_mday) + "/" + std::to_string(now->tm_mon + 1) + "/" + std::to_string(now->tm_year + 1900);
+
+		pFont->SetFontSize(10.0);
+		PdfString pString1(reinterpret_cast<const pdf_utf8 *>("Compañia:____________________________________ "
+															  "                                                                                 Sucursal:_________________________________"));
+		PdfString pString3(reinterpret_cast<const pdf_utf8 *>("Catálogo de Operadores:"));
+
+		painter.SetFont(pFont);
+		painter.SetColor(0.0, 0.0, 0.0);
+		// regla vertical, regla horizontal, ancho, alto
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 44.69, pString1);
+		painter.DrawText(456.69, pPage->GetPageSize().GetHeight() - 60.69, "                                                                                 Fecha: " + date);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 76.69, pString3);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 122, PdfString(reinterpret_cast<const pdf_utf8 *>(" N° ID				 Nombre Completo 										 R.F.C. 		    	    	Curp  		  		 		N° IMSS 		   		 N° Licencia		 		 Fecha Ingreso")));
+
+		tablemodel1->SetFont(pFont);
+		tablemodel1->SetForegroundColor(PoDoFo::PdfColor(0.0, 0.0, 0.0));
+		tablemodel1->SetBorderEnabled(true);
+		tablemodel1->SetBorderWidth(0.5);
+		tablemodel1->SetAlignment(PoDoFo::EPdfVerticalAlignment::ePdfVerticalAlignment_Center);
+		tablemodel1->SetWordWrapEnabled(true);
+
+		double col[(int)ope->getid().size() + 1];
+
+		col[0] = 70.0;
+		col[1] = 200.0;
+		col[2] = 100.0;
+		col[3] = 100.0;
+		col[4] = 100.0;
+		col[5] = 100.0;
+		col[6] = 60.0;
+
+		tablemodel1->SetText(0, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("N° ID")));
+		tablemodel1->SetText(1, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Nombre Completo")));
+		tablemodel1->SetText(2, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("R.F.C.")));
+		tablemodel1->SetText(3, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Curp")));
+		tablemodel1->SetText(4, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("No. IMSS")));
+		tablemodel1->SetText(5, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("No. Licencia")));
+		tablemodel1->SetText(6, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Fecha de Ingreso")));
+
+		double rowheight[(int)ope->getid().size() + 1];
+		for (size_t i = 0; i < ope->getid().size(); i++)
+		{
+			tablemodel1->SetText(0, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(ope->getid()[i].c_str())));
+			tablemodel1->SetText(1, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(ope->getnombre()[i].c_str())));
+			tablemodel1->SetText(2, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(ope->getrfc()[i].c_str())));
+			tablemodel1->SetText(3, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(ope->getcurp()[i].c_str())));
+			tablemodel1->SetText(4, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(ope->getno_imss()[i].c_str())));
+			tablemodel1->SetText(5, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(ope->getno_licensia()[i].c_str())));
+			tablemodel1->SetText(6, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(ope->getfecha()[i].c_str())));
+			if (ope->getnombre()[i].size() > 36)
+				rowheight[i + 1] = 40.0;
+			else
+				rowheight[i + 1] = 20.0;
+		}
+
+		ope->vaciar();
+
+		table.SetModel(tablemodel1);
+		table.SetRowHeights(rowheight);
+		table.SetColumnWidths(col);
+
+		table.Draw(56.69, pPage->GetPageSize().GetHeight() - 126, &painter);
+		painter.FinishPage();
+		document->GetInfo()->SetCreator(PdfString("Sistemas en Autotransporte Automatizado S.A. de C.V."));
+		document->GetInfo()->SetAuthor(PdfString("ATA"));
+		document->GetInfo()->SetTitle(PdfString("Catálogo de Operadores"));
+		document->GetInfo()->SetSubject(PdfString("Exportación de datos a PDF"));
+		document->GetInfo()->SetKeywords(PdfString("Test;PDF;Hello World;"));
+
+		document->Close();
+	}
+	catch (PdfError &e)
+	{
+		try
+		{
+			painter.FinishPage();
+		}
+		catch (...)
+		{
+		}
+
+		throw e;
+	}
+	g_mutex_unlock(&mutex);
+}
+
+void win_main::crea_pdf_ayudante(std::string file)
+{
+	g_mutex_lock(&mutex);
+	ayu->carga_datos(id);
+	std::string file_name = file + "/Ayudantes.pdf";
+	PdfStreamedDocument *document = new PoDoFo::PdfStreamedDocument(file_name.c_str());
+	PdfPainter painter;
+	PdfTable table = PoDoFo::PdfTable(5, ayu->get_id().size() + 1);
+	PoDoFo::PdfSimpleTableModel *tablemodel1 = new PoDoFo::PdfSimpleTableModel(5, ayu->get_id().size() + 1);
+
+	table.SetAutoPageBreak(
+		true,
+		[](PoDoFo::PdfRect &rect, void *pCustom) -> PoDoFo::PdfPage *
+		{
+			PoDoFo::PdfPage *pPage = ((PoDoFo::PdfStreamedDocument *)pCustom)->CreatePage(PoDoFo::PdfPage::CreateStandardPageSize(PoDoFo::ePdfPageSize_A4));
+			return pPage;
+		},
+		(void *)document);
+	PdfPage *pPage;
+	PdfFont *pFont;
+
+	try
+	{
+
+		pPage = document->CreatePage(PdfPage::CreateStandardPageSize(ePdfPageSize_A4));
+
+		if (!pPage)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+
+		painter.SetPage(pPage);
+
+		pFont = document->CreateFont("Arial");
+
+		if (!pFont)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+		std::time_t t = std::time(nullptr);
+		std::tm *now = std::localtime(&t);
+		std::string date = std::to_string(now->tm_mday) + "/" + std::to_string(now->tm_mon + 1) + "/" + std::to_string(now->tm_year + 1900);
+
+		pFont->SetFontSize(10.0);
+		PdfString pString1(reinterpret_cast<const pdf_utf8 *>("Compañia:____________________________________ Sucursal:_________________________________"));
+		PdfString pString3(reinterpret_cast<const pdf_utf8 *>("Catálogo de Ayudantes:"));
+
+		painter.SetFont(pFont);
+		painter.SetColor(0.0, 0.0, 0.0);
+		// regla vertical, regla horizontal, ancho, alto
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 44.69, pString1);
+		painter.DrawText(156.69, pPage->GetPageSize().GetHeight() - 60.69, "                                                                                 					Fecha: " + date);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 76.69, pString3);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 122, PdfString(reinterpret_cast<const pdf_utf8 *>(" N° ID				 Nombre Completo 					R.F.C. 		    	    	Curp  		  		 		Otro")));
+
+		tablemodel1->SetFont(pFont);
+		tablemodel1->SetForegroundColor(PoDoFo::PdfColor(0.0, 0.0, 0.0));
+		tablemodel1->SetBorderEnabled(true);
+		tablemodel1->SetBorderWidth(0.5);
+		tablemodel1->SetAlignment(PoDoFo::EPdfVerticalAlignment::ePdfVerticalAlignment_Center);
+		tablemodel1->SetWordWrapEnabled(true);
+
+		double col[(int)ayu->get_id().size() + 1];
+
+		col[0] = 70.0;
+		col[1] = 130.0;
+		col[2] = 100.0;
+		col[3] = 100.0;
+		col[4] = 100.0;
+		col[5] = 70.0;
+
+		tablemodel1->SetText(0, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("N° ID")));
+		tablemodel1->SetText(1, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Nombre Completo")));
+		tablemodel1->SetText(2, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("R.F.C.")));
+		tablemodel1->SetText(3, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("No. IMSS")));
+		tablemodel1->SetText(4, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Nota")));
+
+		double rowheight[(int)ayu->get_id().size() + 1];
+		for (size_t i = 0; i < ayu->get_id().size(); i++)
+		{
+			tablemodel1->SetText(0, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(ayu->get_id()[i].c_str())));
+			tablemodel1->SetText(1, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(ayu->get_nombre()[i].c_str())));
+			tablemodel1->SetText(2, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(ayu->get_rfc()[i].c_str())));
+			tablemodel1->SetText(3, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(ayu->get_no_imss()[i].c_str())));
+			tablemodel1->SetText(4, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(ayu->get_otro()[i].c_str())));
+
+			if (ayu->get_nombre()[i].size() > 36 || ayu->get_otro()[i].size() > 36)
+				rowheight[i + 1] = 40.0;
+			else
+				rowheight[i + 1] = 20.0;
+		}
+
+		ayu->vaciar();
+
+		table.SetModel(tablemodel1);
+		table.SetRowHeights(rowheight);
+		table.SetColumnWidths(col);
+
+		table.Draw(56.69, pPage->GetPageSize().GetHeight() - 126, &painter);
+		painter.FinishPage();
+		document->GetInfo()->SetCreator(PdfString("Sistemas en Autotransporte Automatizado S.A. de C.V."));
+		document->GetInfo()->SetAuthor(PdfString("ATA"));
+		document->GetInfo()->SetTitle(PdfString("Catálogo de Ayudantes"));
+		document->GetInfo()->SetSubject(PdfString("Exportación de datos a PDF"));
+		document->GetInfo()->SetKeywords(PdfString("Test;PDF;Hello World;"));
+
+		document->Close();
+	}
+	catch (PdfError &e)
+	{
+		try
+		{
+			painter.FinishPage();
+		}
+		catch (...)
+		{
+		}
+
+		throw e;
+	}
+	g_mutex_unlock(&mutex);
+}
+
+void win_main::crea_pdf_poblacion(std::string file)
+{
+	g_mutex_lock(&mutex);
+	pob->carga_datos(id);
+	std::string file_name = file + "/Poblaciones.pdf";
+	PdfStreamedDocument *document = new PoDoFo::PdfStreamedDocument(file_name.c_str());
+	PdfPainter painter;
+	PdfTable table = PoDoFo::PdfTable(4, pob->get_id().size() + 1);
+	PoDoFo::PdfSimpleTableModel *tablemodel1 = new PoDoFo::PdfSimpleTableModel(4, pob->get_id().size() + 1);
+
+	table.SetAutoPageBreak(
+		true,
+		[](PoDoFo::PdfRect &rect, void *pCustom) -> PoDoFo::PdfPage *
+		{
+			PoDoFo::PdfPage *pPage = ((PoDoFo::PdfStreamedDocument *)pCustom)->CreatePage(PoDoFo::PdfPage::CreateStandardPageSize(PoDoFo::ePdfPageSize_A4));
+			return pPage;
+		},
+		(void *)document);
+	PdfPage *pPage;
+	PdfFont *pFont;
+
+	try
+	{
+
+		pPage = document->CreatePage(PdfPage::CreateStandardPageSize(ePdfPageSize_A4));
+
+		if (!pPage)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+
+		painter.SetPage(pPage);
+
+		pFont = document->CreateFont("Arial");
+
+		if (!pFont)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+		std::time_t t = std::time(nullptr);
+		std::tm *now = std::localtime(&t);
+		std::string date = std::to_string(now->tm_mday) + "/" + std::to_string(now->tm_mon + 1) + "/" + std::to_string(now->tm_year + 1900);
+
+		pFont->SetFontSize(10.0);
+		PdfString pString1(reinterpret_cast<const pdf_utf8 *>("Compañia:____________________________________ Sucursal:_________________________________"));
+		PdfString pString3(reinterpret_cast<const pdf_utf8 *>("Catálogo de Poblaciones:"));
+
+		painter.SetFont(pFont);
+		painter.SetColor(0.0, 0.0, 0.0);
+		// regla vertical, regla horizontal, ancho, alto
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 44.69, pString1);
+		painter.DrawText(156.69, pPage->GetPageSize().GetHeight() - 60.69, "                                                                                 					Fecha: " + date);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 76.69, pString3);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 122, PdfString(reinterpret_cast<const pdf_utf8 *>(" N° ID			 Ciudad 												Estado 		    	    							Distancia(KMS)")));
+
+		tablemodel1->SetFont(pFont);
+		tablemodel1->SetForegroundColor(PoDoFo::PdfColor(0.0, 0.0, 0.0));
+		tablemodel1->SetBorderEnabled(true);
+		tablemodel1->SetBorderWidth(0.5);
+		tablemodel1->SetAlignment(PoDoFo::EPdfVerticalAlignment::ePdfVerticalAlignment_Center);
+		tablemodel1->SetWordWrapEnabled(true);
+
+		double col[(int)pob->get_id().size() + 1];
+
+		col[0] = 50.0;
+		col[1] = 180.0;
+		col[2] = 180.0;
+		col[3] = 50.0;
+
+		tablemodel1->SetText(0, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("N° ID")));
+		tablemodel1->SetText(1, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Ciuadad")));
+		tablemodel1->SetText(2, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Estado")));
+		tablemodel1->SetText(3, 0, PdfString(reinterpret_cast<const pdf_utf8 *>("Distancia (KMS)")));
+
+		double rowheight[(int)pob->get_id().size() + 1];
+		for (size_t i = 0; i < pob->get_id().size(); i++)
+		{
+			tablemodel1->SetText(0, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(pob->get_id()[i].c_str())));
+			tablemodel1->SetText(1, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(pob->get_nombre()[i].c_str())));
+			tablemodel1->SetText(2, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(pob->get_estado()[i].c_str())));
+			tablemodel1->SetText(3, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(pob->get_distancia()[i].c_str())));
+
+			if (pob->get_nombre()[i].size() > 36 || pob->get_estado()[i].size() > 36)
+				rowheight[i + 1] = 40.0;
+			else
+				rowheight[i + 1] = 20.0;
+		}
+
+		pob->vaciar();
+
+		table.SetModel(tablemodel1);
+		table.SetRowHeights(rowheight);
+		table.SetColumnWidths(col);
+
+		table.Draw(56.69, pPage->GetPageSize().GetHeight() - 126, &painter);
+		painter.FinishPage();
+		document->GetInfo()->SetCreator(PdfString("Sistemas en Autotransporte Automatizado S.A. de C.V."));
+		document->GetInfo()->SetAuthor(PdfString("ATA"));
+		document->GetInfo()->SetTitle(PdfString("Catálogo de Ayudantes"));
+		document->GetInfo()->SetSubject(PdfString("Exportación de datos a PDF"));
+		document->GetInfo()->SetKeywords(PdfString("Test;PDF;Hello World;"));
+
+		document->Close();
+	}
+	catch (PdfError &e)
+	{
+		try
+		{
+			painter.FinishPage();
+		}
+		catch (...)
+		{
+		}
+
+		throw e;
+	}
+	g_mutex_unlock(&mutex);
+}
+
+void win_main::crea_pdf_ruta(std::string file)
+{
+	g_mutex_lock(&mutex);
+	rut->carga_datos(id);
+	std::string file_name = file + "/Rutas.pdf";
+	PdfStreamedDocument *document = new PoDoFo::PdfStreamedDocument(file_name.c_str());
+	PdfPainter painter;
+	PdfTable table = PoDoFo::PdfTable(5, rut->get_id().size() + 1);
+	PoDoFo::PdfSimpleTableModel *tablemodel1 = new PoDoFo::PdfSimpleTableModel(5, rut->get_id().size() + 1);
+
+	table.SetAutoPageBreak(
+		true,
+		[](PoDoFo::PdfRect &rect, void *pCustom) -> PoDoFo::PdfPage *
+		{
+			PoDoFo::PdfPage *pPage = ((PoDoFo::PdfStreamedDocument *)pCustom)->CreatePage(PoDoFo::PdfPage::CreateStandardPageSize(PoDoFo::ePdfPageSize_A4));
+			return pPage;
+		},
+		(void *)document);
+	PdfPage *pPage;
+	PdfFont *pFont;
+
+	try
+	{
+
+		pPage = document->CreatePage(PdfPage::CreateStandardPageSize(ePdfPageSize_A4));
+
+		if (!pPage)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+
+		painter.SetPage(pPage);
+
+		pFont = document->CreateFont("Arial");
+
+		if (!pFont)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+		std::time_t t = std::time(nullptr);
+		std::tm *now = std::localtime(&t);
+		std::string date = std::to_string(now->tm_mday) + "/" + std::to_string(now->tm_mon + 1) + "/" + std::to_string(now->tm_year + 1900);
+
+		pFont->SetFontSize(10.0);
+		PdfString pString1(reinterpret_cast<const pdf_utf8 *>("Compañia:____________________________________ Sucursal:_________________________________"));
+		PdfString pString3(reinterpret_cast<const pdf_utf8 *>("Catálogo de Rutas:"));
+
+		painter.SetFont(pFont);
+		painter.SetColor(0.0, 0.0, 0.0);
+		// regla vertical, regla horizontal, ancho, alto
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 44.69, pString1);
+		painter.DrawText(156.69, pPage->GetPageSize().GetHeight() - 60.69, "                                                                                 					Fecha: " + date);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 76.69, pString3);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 122, PdfString(reinterpret_cast<const pdf_utf8 *>(" N° ID			 	Origen 										  Destino 		    	    					Distancia(KMS)  Tiempo(HRS)")));
+
+		tablemodel1->SetFont(pFont);
+		tablemodel1->SetForegroundColor(PoDoFo::PdfColor(0.0, 0.0, 0.0));
+		tablemodel1->SetBorderEnabled(true);
+		tablemodel1->SetBorderWidth(0.5);
+		tablemodel1->SetAlignment(PoDoFo::EPdfVerticalAlignment::ePdfVerticalAlignment_Center);
+		tablemodel1->SetWordWrapEnabled(true);
+
+		double col[(int)rut->get_id().size() + 1];
+
+		col[0] = 70.0;
+		col[1] = 150.0;
+		col[2] = 150.0;
+		col[3] = 50.0;
+		col[4] = 50.0;
+
+		double rowheight[(int)rut->get_id().size() + 1];
+		for (size_t i = 0; i < rut->get_id().size(); i++)
+		{
+			tablemodel1->SetText(0, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(rut->get_id()[i].c_str())));
+			tablemodel1->SetText(1, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(rut->get_origen()[i].c_str())));
+			tablemodel1->SetText(2, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(rut->get_destino()[i].c_str())));
+			tablemodel1->SetText(3, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(rut->get_distancia()[i].c_str())));
+			tablemodel1->SetText(4, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(rut->get_tiempo_estimado()[i].c_str())));
+
+			if (rut->get_origen()[i].size() > 36 || rut->get_destino()[i].size() > 36)
+				rowheight[i + 1] = 40.0;
+			else
+				rowheight[i + 1] = 20.0;
+		}
+
+		rut->vaciar();
+
+		table.SetModel(tablemodel1);
+		table.SetRowHeights(rowheight);
+		table.SetColumnWidths(col);
+
+		table.Draw(56.69, pPage->GetPageSize().GetHeight() - 126, &painter);
+		painter.FinishPage();
+		document->GetInfo()->SetCreator(PdfString("Sistemas en Autotransporte Automatizado S.A. de C.V."));
+		document->GetInfo()->SetAuthor(PdfString("ATA"));
+		document->GetInfo()->SetTitle(PdfString("Catálogo de Ayudantes"));
+		document->GetInfo()->SetSubject(PdfString("Exportación de datos a PDF"));
+		document->GetInfo()->SetKeywords(PdfString("Test;PDF;Hello World;"));
+
+		document->Close();
+	}
+	catch (PdfError &e)
+	{
+		try
+		{
+			painter.FinishPage();
+		}
+		catch (...)
+		{
+		}
+
+		throw e;
+	}
+	g_mutex_unlock(&mutex);
+}
+
+void win_main::crea_pdf_producto(std::string file)
+{
+	g_mutex_lock(&mutex);
+	pro->carga_datos(id);
+	std::string file_name = file + "/Productos.pdf";
+	PdfStreamedDocument *document = new PoDoFo::PdfStreamedDocument(file_name.c_str());
+	PdfPainter painter;
+	PdfTable table = PoDoFo::PdfTable(5, pro->get_id().size() + 1);
+	PoDoFo::PdfSimpleTableModel *tablemodel1 = new PoDoFo::PdfSimpleTableModel(5, pro->get_id().size() + 1);
+
+	table.SetAutoPageBreak(
+		true,
+		[](PoDoFo::PdfRect &rect, void *pCustom) -> PoDoFo::PdfPage *
+		{
+			PoDoFo::PdfPage *pPage = ((PoDoFo::PdfStreamedDocument *)pCustom)->CreatePage(PoDoFo::PdfPage::CreateStandardPageSize(PoDoFo::ePdfPageSize_A4));
+			return pPage;
+		},
+		(void *)document);
+	PdfPage *pPage;
+	PdfFont *pFont;
+
+	try
+	{
+
+		pPage = document->CreatePage(PdfPage::CreateStandardPageSize(ePdfPageSize_A4));
+
+		if (!pPage)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+
+		painter.SetPage(pPage);
+
+		pFont = document->CreateFont("Arial");
+
+		if (!pFont)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+		std::time_t t = std::time(nullptr);
+		std::tm *now = std::localtime(&t);
+		std::string date = std::to_string(now->tm_mday) + "/" + std::to_string(now->tm_mon + 1) + "/" + std::to_string(now->tm_year + 1900);
+
+		pFont->SetFontSize(10.0);
+		PdfString pString1(reinterpret_cast<const pdf_utf8 *>("Compañia:____________________________________ Sucursal:_________________________________"));
+		PdfString pString3(reinterpret_cast<const pdf_utf8 *>("Catálogo de Productos:"));
+
+		painter.SetFont(pFont);
+		painter.SetColor(0.0, 0.0, 0.0);
+		// regla vertical, regla horizontal, ancho, alto
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 44.69, pString1);
+		painter.DrawText(156.69, pPage->GetPageSize().GetHeight() - 60.69, "                                                                                 					Fecha: " + date);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 76.69, pString3);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 122, PdfString(reinterpret_cast<const pdf_utf8 *>(" N° ID			 	Nombre 										Tipo 		    	    		Tarifa  			 Nota")));
+
+		tablemodel1->SetFont(pFont);
+		tablemodel1->SetForegroundColor(PoDoFo::PdfColor(0.0, 0.0, 0.0));
+		tablemodel1->SetBorderEnabled(true);
+		tablemodel1->SetBorderWidth(0.5);
+		tablemodel1->SetAlignment(PoDoFo::EPdfVerticalAlignment::ePdfVerticalAlignment_Center);
+		tablemodel1->SetWordWrapEnabled(true);
+
+		double col[(int)pro->get_id().size() + 1];
+
+		col[0] = 70.0;
+		col[1] = 150.0;
+		col[2] = 100.0;
+		col[3] = 70.0;
+		col[4] = 100.0;
+
+		double rowheight[(int)pro->get_id().size() + 1];
+		for (size_t i = 0; i < pro->get_id().size(); i++)
+		{
+			tablemodel1->SetText(0, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(pro->get_id()[i].c_str())));
+			tablemodel1->SetText(1, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(pro->get_nombre()[i].c_str())));
+			tablemodel1->SetText(2, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(pro->get_unidad()[i].c_str())));
+			tablemodel1->SetText(3, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(pro->get_tarifa()[i].c_str())));
+			tablemodel1->SetText(4, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(pro->get_otro()[i].c_str())));
+
+			if (pro->get_nombre()[i].size() > 36 || pro->get_otro()[i].size() > 36)
+				rowheight[i + 1] = 40.0;
+			else
+				rowheight[i + 1] = 20.0;
+		}
+
+		pro->vaciar();
+
+		table.SetModel(tablemodel1);
+		table.SetRowHeights(rowheight);
+		table.SetColumnWidths(col);
+
+		table.Draw(56.69, pPage->GetPageSize().GetHeight() - 126, &painter);
+		painter.FinishPage();
+		document->GetInfo()->SetCreator(PdfString("Sistemas en Autotransporte Automatizado S.A. de C.V."));
+		document->GetInfo()->SetAuthor(PdfString("ATA"));
+		document->GetInfo()->SetTitle(PdfString("Catálogo de Ayudantes"));
+		document->GetInfo()->SetSubject(PdfString("Exportación de datos a PDF"));
+		document->GetInfo()->SetKeywords(PdfString("Test;PDF;Hello World;"));
+
+		document->Close();
+	}
+	catch (PdfError &e)
+	{
+		try
+		{
+			painter.FinishPage();
+		}
+		catch (...)
+		{
+		}
+
+		throw e;
+	}
+	g_mutex_unlock(&mutex);
+}
+
+void win_main::crea_pdf_cliente(std::string file)
+{
+	g_mutex_lock(&mutex);
+	cli->carga_datos(id);
+	std::string file_name = file + "/Clientes.pdf";
+	PdfStreamedDocument *document = new PoDoFo::PdfStreamedDocument(file_name.c_str());
+	PdfPainter painter;
+	PdfTable table = PoDoFo::PdfTable(8, cli->get_id().size() + 1);
+	PoDoFo::PdfSimpleTableModel *tablemodel1 = new PoDoFo::PdfSimpleTableModel(8, cli->get_id().size() + 1);
+
+	table.SetAutoPageBreak(
+		true,
+		[](PoDoFo::PdfRect &rect, void *pCustom) -> PoDoFo::PdfPage *
+		{
+			PoDoFo::PdfPage *pPage = ((PoDoFo::PdfStreamedDocument *)pCustom)->CreatePage(PoDoFo::PdfPage::CreateStandardPageSize(PoDoFo::ePdfPageSize_A4, true));
+			return pPage;
+		},
+		(void *)document);
+	PdfPage *pPage;
+	PdfFont *pFont;
+
+	try
+	{
+
+		pPage = document->CreatePage(PdfPage::CreateStandardPageSize(ePdfPageSize_A4, true));
+
+		if (!pPage)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+
+		painter.SetPage(pPage);
+
+		pFont = document->CreateFont("Arial");
+
+		if (!pFont)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+		std::time_t t = std::time(nullptr);
+		std::tm *now = std::localtime(&t);
+		std::string date = std::to_string(now->tm_mday) + "/" + std::to_string(now->tm_mon + 1) + "/" + std::to_string(now->tm_year + 1900);
+
+		pFont->SetFontSize(10.0);
+		PdfString pString1(reinterpret_cast<const pdf_utf8 *>("Compañia:____________________________________ "
+															  "                                                                                 Sucursal:_________________________________"));
+		PdfString pString3(reinterpret_cast<const pdf_utf8 *>("Catálogo de Clientes:"));
+
+		painter.SetFont(pFont);
+		painter.SetColor(0.0, 0.0, 0.0);
+		// regla vertical, regla horizontal, ancho, alto
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 44.69, pString1);
+		painter.DrawText(456.69, pPage->GetPageSize().GetHeight() - 60.69, "                                                                                 Fecha: " + date);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 76.69, pString3);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 122, PdfString(reinterpret_cast<const pdf_utf8 *>(" N° ID				Razon Social 				R.F.C. 		    	    	Giro  		  		 	Direccion Fiscal 		   		 Tarifa		 Tipo Cliente		Domicilio")));
+
+		tablemodel1->SetFont(pFont);
+		tablemodel1->SetForegroundColor(PoDoFo::PdfColor(0.0, 0.0, 0.0));
+		tablemodel1->SetBorderEnabled(true);
+		tablemodel1->SetBorderWidth(0.5);
+		tablemodel1->SetAlignment(PoDoFo::EPdfVerticalAlignment::ePdfVerticalAlignment_Center);
+		tablemodel1->SetWordWrapEnabled(true);
+
+		double col[(int)cli->get_id().size() + 1];
+
+		col[0] = 70.0;
+		col[1] = 100.0;
+		col[2] = 100.0;
+		col[3] = 100.0;
+		col[4] = 120.0;
+		col[5] = 50.0;
+		col[6] = 60.0;
+		col[7] = 100.0;
+
+		double rowheight[(int)cli->get_id().size() + 1];
+		for (size_t i = 0; i < cli->get_id().size(); i++)
+		{
+			tablemodel1->SetText(0, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(cli->get_id()[i].c_str())));
+			tablemodel1->SetText(1, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(cli->get_razon_social()[i].c_str())));
+			tablemodel1->SetText(2, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(cli->get_rfc()[i].c_str())));
+			tablemodel1->SetText(3, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(cli->get_giro()[i].c_str())));
+			tablemodel1->SetText(4, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(cli->get_direccion_fiscal()[i].c_str())));
+			tablemodel1->SetText(5, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(cli->get_tarifa()[i].c_str())));
+			tablemodel1->SetText(6, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(cli->get_tipo_cliente()[i].c_str())));
+			tablemodel1->SetText(7, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(cli->get_domicilio()[i].c_str())));
+
+			if (cli->get_direccion_fiscal()[i].size() > 40 || cli->get_domicilio()[i].size() > 40)
+				rowheight[i + 1] = 40.0;
+			else
+				rowheight[i + 1] = 20.0;
+		}
+
+		cli->vaciar();
+
+		table.SetModel(tablemodel1);
+		table.SetRowHeights(rowheight);
+		table.SetColumnWidths(col);
+
+		table.Draw(56.69, pPage->GetPageSize().GetHeight() - 126, &painter);
+		painter.FinishPage();
+		document->GetInfo()->SetCreator(PdfString("Sistemas en Autotransporte Automatizado S.A. de C.V."));
+		document->GetInfo()->SetAuthor(PdfString("ATA"));
+		document->GetInfo()->SetTitle(PdfString("Catálogo de Operadores"));
+		document->GetInfo()->SetSubject(PdfString("Exportación de datos a PDF"));
+		document->GetInfo()->SetKeywords(PdfString("Test;PDF;Hello World;"));
+
+		document->Close();
+	}
+	catch (PdfError &e)
+	{
+		try
+		{
+			painter.FinishPage();
+		}
+		catch (...)
+		{
+		}
+
+		throw e;
+	}
+	g_mutex_unlock(&mutex);
+}
+
+void win_main::crea_pdf_tarifa(std::string file)
+{
+	g_mutex_lock(&mutex);
+	tar->carga_datos(id);
+	std::string file_name = file + "/Tarifa.pdf";
+	PdfStreamedDocument *document = new PoDoFo::PdfStreamedDocument(file_name.c_str());
+	PdfPainter painter;
+	PdfTable table = PoDoFo::PdfTable(5, tar->get_id().size() + 1);
+	PoDoFo::PdfSimpleTableModel *tablemodel1 = new PoDoFo::PdfSimpleTableModel(5, tar->get_id().size() + 1);
+
+	table.SetAutoPageBreak(
+		true,
+		[](PoDoFo::PdfRect &rect, void *pCustom) -> PoDoFo::PdfPage *
+		{
+			PoDoFo::PdfPage *pPage = ((PoDoFo::PdfStreamedDocument *)pCustom)->CreatePage(PoDoFo::PdfPage::CreateStandardPageSize(PoDoFo::ePdfPageSize_A4));
+			return pPage;
+		},
+		(void *)document);
+	PdfPage *pPage;
+	PdfFont *pFont;
+
+	try
+	{
+
+		pPage = document->CreatePage(PdfPage::CreateStandardPageSize(ePdfPageSize_A4));
+
+		if (!pPage)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+
+		painter.SetPage(pPage);
+
+		pFont = document->CreateFont("Arial");
+
+		if (!pFont)
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
+		std::time_t t = std::time(nullptr);
+		std::tm *now = std::localtime(&t);
+		std::string date = std::to_string(now->tm_mday) + "/" + std::to_string(now->tm_mon + 1) + "/" + std::to_string(now->tm_year + 1900);
+
+		pFont->SetFontSize(10.0);
+		PdfString pString1(reinterpret_cast<const pdf_utf8 *>("Compañia:____________________________________ Sucursal:_________________________________"));
+		PdfString pString3(reinterpret_cast<const pdf_utf8 *>("Catálogo de Tarifas:"));
+		PdfString pString4(reinterpret_cast<const pdf_utf8 *>("Cliente:__________________________________________________________________________________"));
+		PdfString pString5(reinterpret_cast<const pdf_utf8 *>("Tipo de tarifa: Nacional ( ) Local ( ) Importación ( ) Exportación ( )"));
+		PdfString pString6(reinterpret_cast<const pdf_utf8 *>("Productos a transportar: Industrial ( ) Maquila ( ) Materia Prima ( ) Perecedero ( ) Otros:"));
+		PdfString pString7(reinterpret_cast<const pdf_utf8 *>("Producto:__________________________________ Unidad de medida kg( ) ton( ) lt ( ) pza( )"));
+		PdfString pString8(reinterpret_cast<const pdf_utf8 *>("Otro:________________ ___________________ _________________ _________________"));
+		PdfString pString9(reinterpret_cast<const pdf_utf8 *>("Tarifas:"));
+
+		painter.SetFont(pFont);
+		painter.SetColor(0.0, 0.0, 0.0);
+		// regla vertical, regla horizontal, ancho, alto
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 44.69, pString1);
+		painter.DrawText(156.69, pPage->GetPageSize().GetHeight() - 60.69, "                                                                                 					Fecha: " + date);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 76.69, pString3);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 92.69, pString4);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 108.69, pString5);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 124.69, pString6);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 140.69, pString7);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 156.69, pString8);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 172.69, pString9);
+		painter.DrawText(56.69, pPage->GetPageSize().GetHeight() - 194.69, PdfString(reinterpret_cast<const pdf_utf8 *>(" N° ID			 	Tarifa por Tonelada 			Tarifa por Litro 		   Tarifa por Viaje  			Tarifa Otro")));
+
+		tablemodel1->SetFont(pFont);
+		tablemodel1->SetForegroundColor(PoDoFo::PdfColor(0.0, 0.0, 0.0));
+		tablemodel1->SetBorderEnabled(true);
+		tablemodel1->SetBorderWidth(0.5);
+		tablemodel1->SetAlignment(PoDoFo::EPdfVerticalAlignment::ePdfVerticalAlignment_Center);
+		tablemodel1->SetWordWrapEnabled(true);
+
+		double col[(int)tar->get_id().size() + 1];
+
+		col[0] = 70.0;
+		col[1] = 100.0;
+		col[2] = 100.0;
+		col[3] = 100.0;
+		col[4] = 100.0;
+
+		double rowheight[(int)tar->get_id().size() + 1];
+		for (size_t i = 0; i < tar->get_id().size(); i++)
+		{
+			tablemodel1->SetText(0, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(tar->get_id()[i].c_str())));
+			tablemodel1->SetText(1, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(tar->get_tarifa_tonelada()[i].c_str())));
+			tablemodel1->SetText(2, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(tar->get_tarifa_litro()[i].c_str())));
+			tablemodel1->SetText(3, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(tar->get_tarifa_viaje()[i].c_str())));
+			tablemodel1->SetText(4, i + 1, PdfString(reinterpret_cast<const pdf_utf8 *>(tar->get_otro()[i].c_str())));
+
+			if (tar->get_otro()[i].size() > 36)
+				rowheight[i + 1] = 40.0;
+			else
+				rowheight[i + 1] = 20.0;
+		}
+
+		tar->vaciar();
+
+		table.SetModel(tablemodel1);
+		table.SetRowHeights(rowheight);
+		table.SetColumnWidths(col);
+
+		table.Draw(56.69, pPage->GetPageSize().GetHeight() - 196.69, &painter);
+		painter.FinishPage();
+		document->GetInfo()->SetCreator(PdfString("Sistemas en Autotransporte Automatizado S.A. de C.V."));
+		document->GetInfo()->SetAuthor(PdfString("ATA"));
+		document->GetInfo()->SetTitle(PdfString("Catálogo de Ayudantes"));
+		document->GetInfo()->SetSubject(PdfString("Exportación de datos a PDF"));
+		document->GetInfo()->SetKeywords(PdfString("Test;PDF;Hello World;"));
+
+		document->Close();
+	}
+	catch (PdfError &e)
+	{
+		try
+		{
+			painter.FinishPage();
+		}
+		catch (...)
+		{
+		}
+
+		throw e;
+	}
+	g_mutex_unlock(&mutex);
+}
+
+void win_main::on_btn_export_pdf_clicked()
+{
+	if (radiobutton4->get_active())
+	{
+		if (btn_file_chooser->get_filename() != "")
+		{
+			hilo_exp = new std::thread([this]()
+									   { 
+									btn_export_excel->set_sensitive(false);
+									m_bActivityMode = true;
+									progress_view->set_text("Exportando Catálogos en PDF...");
+									progress_view->set_show_text(true);
+									progress_view->pulse();
+									crea_pdf_tractor(btn_file_chooser->get_filename());
+									crea_pdf_remolque(btn_file_chooser->get_filename());
+									crea_pdf_operador(btn_file_chooser->get_filename());
+									crea_pdf_ayudante(btn_file_chooser->get_filename());
+									crea_pdf_poblacion(btn_file_chooser->get_filename());
+									crea_pdf_ruta(btn_file_chooser->get_filename());
+									crea_pdf_producto(btn_file_chooser->get_filename());
+									crea_pdf_cliente(btn_file_chooser->get_filename());
+									crea_pdf_tarifa(btn_file_chooser->get_filename());
+									btn_export_excel->set_sensitive(true);
+									progress_view->set_show_text(false);
+									progress_view->set_fraction(1.0);
+									m_bActivityMode = false;
+									reveal_info->set_reveal_child(true);
+									lbl_info->set_text("Exportación de Catálogos en Excel Completada");
+									gtk_widget_error_bell(GTK_WIDGET(win_operacion->gobj())); });
+			// delete hilo2;
+			hilo_exp->detach();
+		}
+		else
+		{
+			Gtk::MessageDialog dialog(*win_operacion, "Seleccione un directorio para guardar los archivos", false, Gtk::MESSAGE_ERROR);
+			dialog.run();
+		}
+	}
+	else if (radiobutton5->get_active())
+	{
+		if (ch_1->get_active() || ch_2->get_active() || ch_3->get_active() || ch_4->get_active() || ch_5->get_active() || ch_6->get_active() || ch_7->get_active() || ch_8->get_active() || ch_9->get_active())
+		{
+			if (btn_file_chooser->get_filename() != "")
+			{
+				hilo_exp = new std::thread([this]()
+										   { 
+									btn_export_excel->set_sensitive(false);
+									m_bActivityMode = true;
+									progress_view->set_text("Exportando Catálogos en PDF...");
+									progress_view->set_show_text(true);
+									progress_view->pulse();
+									if (ch_1->get_active())
+									{
+										crea_pdf_tractor(btn_file_chooser->get_filename());
+									}
+									if (ch_2->get_active())
+									{
+										crea_pdf_remolque(btn_file_chooser->get_filename());
+									}
+									if (ch_3->get_active())
+									{
+										crea_pdf_operador(btn_file_chooser->get_filename());
+									}
+									if (ch_4->get_active())
+									{
+										crea_pdf_ayudante(btn_file_chooser->get_filename());
+									}
+									if (ch_5->get_active())
+									{
+										crea_pdf_poblacion(btn_file_chooser->get_filename());
+									}
+									if (ch_6->get_active())
+									{
+										crea_pdf_ruta(btn_file_chooser->get_filename());
+									}
+									if (ch_7->get_active())
+									{
+										crea_pdf_producto(btn_file_chooser->get_filename());
+									}
+									if (ch_8->get_active())
+									{
+										crea_pdf_cliente(btn_file_chooser->get_filename());
+									}
+									if (ch_9->get_active())
+									{
+										crea_pdf_tarifa(btn_file_chooser->get_filename());
+									}
+									btn_export_excel->set_sensitive(true);
+									progress_view->set_show_text(false);
+									progress_view->set_fraction(1.0);
+									m_bActivityMode = false; 
+									reveal_info->set_reveal_child(true);
+									lbl_info->set_text("Exportación de Catálogos en PDF Completada");
+									gtk_widget_error_bell(GTK_WIDGET(win_operacion->gobj())); });
+				hilo_exp->detach();
+			}
+			else
+			{
+				Gtk::MessageDialog dialog(*win_operacion, "Seleccione un directorio para guardar los archivos", false, Gtk::MESSAGE_ERROR);
+				dialog.run();
+			}
+		}
+		else
+		{
+			Gtk::MessageDialog dialog(*win_operacion, "Seleccione al menos un catálogo para exportar", false, Gtk::MESSAGE_ERROR);
+			dialog.set_title("Error");
+			dialog.run();
+		}
+	}
 }
